@@ -5,4 +5,6 @@ Verder wordt door de sensortag ook de stabiliteit van de plateau gemeten. Zo kan
 
 In de 2 plaats is de applicate ook voor de ober zelf. Wanneer de ober even niet aandachtig is en zijn plateau nogal snel de verticale richting opzoekt gaat er een alarm af op de sensortag. 
 
-Om te bepalen of een ober bij de toog staat of aan een tafel, zal er gebruik worden gemaakt van magneten. In de toog word dan een magneet voorzien van een groot magnetisme. Wanneer de ober zijn plateau dan neerzet, weet de sensor dat hij bij de toog is. 
+Om te bepalen of een ober bij de toog staat of aan een tafel, zal er gebruik worden gemaakt van magneten. In de toog word dan een magneet voorzien van een groot magnetisme. Wanneer de ober zijn plateau dan neerzet, weet de sensor dat hij bij de toog is.
+
+![Afbeelding is momenteel niet beschikbaar](Images/architecture.png) 
