@@ -1,15 +1,24 @@
 package be.pxl.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Created by Pieter on 17/10/2016.
  */
+@Entity
 public class Greeting {
-    private final long id;
-    private final String content;
+
+    @Id
+    private long id;
+    private String content;
 
     public Greeting(long id, String content) {
         this.id = id;
         this.content = content;
+    }
+
+    public Greeting() {
     }
 
     public long getId() {
