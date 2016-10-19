@@ -7,6 +7,9 @@
   <version>1.0-SNAPSHOT</version>
   <name>pxlprojects Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
@@ -31,12 +34,21 @@
       <version>1.2</version>
     </dependency>
     <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-java8</artifactId>
+
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -44,6 +56,12 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  <repositories>
+    <repository>
+      <id>spring-releases</id>
+      <url>https://repo.spring.io/libs-release</url>
+    </repository>
+  </repositories>
   <build>
     <finalName>pxlprojects</finalName>
     <plugins>
@@ -53,4 +71,10 @@
       </plugin>
     </plugins>
   </build>
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring.releases</id>
+      <url>https://repo.spring.io/libs-release</url>
+    </pluginRepository>
+  </pluginRepositories>
 </project>
