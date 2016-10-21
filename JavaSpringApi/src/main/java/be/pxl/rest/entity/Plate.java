@@ -1,9 +1,12 @@
 package be.pxl.rest.entity;
 
+import org.hibernate.annotations.NamedQuery;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -11,17 +14,18 @@ import java.util.UUID;
  * Created by Pieter on 19/10/2016.
  */
 @Entity
-public class Plate {
+
+public class Plate implements Serializable {
 
     @Id
     @GeneratedValue
     private long id;
 
-    @Column(name = "created_on")
+    @Column
     private LocalDateTime createdOn;
 
     @Column
-    private int userId;
+    private long userId;
 
     @Column
     private double temperature;
@@ -30,7 +34,7 @@ public class Plate {
 
     }
 
-    public Plate(int userId, double temperature){
+    public Plate(long userId, double temperature){
         this.createdOn = LocalDateTime.now();
         this.userId = userId;
         this.temperature = temperature;
@@ -52,11 +56,11 @@ public class Plate {
         this.createdOn = createdOn;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

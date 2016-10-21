@@ -5,11 +5,16 @@ package be.pxl.rest.controller.input;
  */
 public class StrongPlateInput {
 
-        private int userId;
-        private double temperature;
+    private long userId;
+    private double temperature;
 
-        public int getUserId(){return userId; }
-        public double getTemperature(){return temperature;}
+    public long getUserId() {
+        return userId;
+    }
+
+    public double getTemperature() {
+        return temperature;
+    }
 
 }
 
