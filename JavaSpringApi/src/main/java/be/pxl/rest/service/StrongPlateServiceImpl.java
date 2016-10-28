@@ -21,17 +21,17 @@ public class StrongPlateServiceImpl implements StrongPlateService {
     private StrongPlateRepository strongPlateRepository;
 
     @Override
-    public void stalePlateCall(Plate plate) {
-        strongPlateRepository.save(plate);
+    public void setStrongPlateData(Plate plate) {strongPlateRepository.save(plate);
+
     }
 
     @Override
-    public Iterable<Plate> getStalePlateData() {
+    public Iterable<Plate> getStrongPlateData() {
         return strongPlateRepository.findAll();
     }
 
     @Override
-    public List<Plate> getStalePlateDataByUserId(long userId) {
+    public List<Plate> getStrongPlateDataByUserId(long userId) {
         return strongPlateRepository.getStalePlateDataByUserId(userId);
     }
 }

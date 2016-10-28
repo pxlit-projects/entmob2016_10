@@ -21,20 +21,20 @@ public class StrongPlateController {
     private StrongPlateService strongPlateService;
 
     @PostMapping("/setData")
-    public String getStalePlateData(@RequestBody StrongPlateInput strongPlateInput) {
+    public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput) {
 
-        strongPlateService.stalePlateCall(new Plate(strongPlateInput.getUserId(), strongPlateInput.getTemperature()));
+        strongPlateService.setStrongPlateData(new Plate(strongPlateInput.getUserId(), strongPlateInput.getTemperature()));
         return "Data toegevoegd aan database";
     }
     @RequestMapping(value = "/getData", method = RequestMethod.GET)
     public ResponseEntity<Collection<Plate>> getStrongPlateData() {
         System.out.println("Get all data from all users");
-        return new ResponseEntity<>((Collection<Plate>)strongPlateService.getStalePlateData(), HttpStatus.OK);
+        return new ResponseEntity<>((Collection<Plate>)strongPlateService.getStrongPlateData(), HttpStatus.OK);
     }
     @RequestMapping(value = "/getByUserId/{userId}", method = RequestMethod.GET)
     public @ResponseBody ResponseEntity<Collection<Plate>> getStrongPlateDataByUserId(@PathVariable long userId) {
         System.out.println("Get user with userId: "+userId);
-        return new ResponseEntity<>(strongPlateService.getStalePlateDataByUserId(userId), HttpStatus.OK);
+        return new ResponseEntity<>(strongPlateService.getStrongPlateDataByUserId(userId), HttpStatus.OK);
     }
 
 }

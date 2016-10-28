@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface StrongPlateService {
 
-    void stalePlateCall(Plate plate);
+    void setStrongPlateData(Plate plate);
 
-    Iterable<Plate> getStalePlateData();
+    Iterable<Plate> getStrongPlateData();
 
-    public List<Plate> getStalePlateDataByUserId(long userId);
+    public List<Plate> getStrongPlateDataByUserId(long userId);
 
 }
