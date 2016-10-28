@@ -1,3 +1,5 @@
+package be.pxl.rest.unit;
+
 import be.pxl.rest.entity.Plate;
 import be.pxl.rest.repository.StrongPlateRepository;
 import be.pxl.rest.service.StrongPlateService;
@@ -23,38 +25,21 @@ import static org.mockito.Mockito.when;
 @Configuration
 public class StrongPlateServiceTestConfig {
 
-    //@InjectMocks
-    //@Autowired
-    private StrongPlateService sService = new StrongPlateServiceImpl();
-
-
-
     @Bean
-    public StrongPlateService testPlateService(){
-        //StrongPlateService sService = Mockito.mock(strongplateServiceImpl.class);
+    public StrongPlateService testPlateService() {
+        StrongPlateService sService = Mockito.mock(StrongPlateServiceImpl.class);
         List<Plate> plates = new ArrayList<>();
-        Plate plateData1 = new Plate(1,20.6);
+        Plate plateData1 = new Plate(1, 20.6);
 
         plates.add(plateData1);
-       //return new StrongPlateServiceImpl();
-        //when(sService.setStrongPlateData(any(Plate.class))).thenReturn(false).thenReturn(plat);
-                //then(plates.add(plate)).thenReturn(false);
+
         when(sService.getStrongPlateData()).thenReturn(plates);
         when(sService.getStrongPlateDataByUserId(1)).thenReturn(plates);
+        doThrow(new RecoverableDataAccessException("Tothier")).when(sService).setStrongPlateData(anyObject());
+
         return sService;
-      // return null;
-
 
     }
-    @Bean
-    public StrongPlateRepository strongPlateRepository(){
-       List<Plate> plates = new ArrayList<>();
-        plates.add(new Plate(2, 7.0));
-        StrongPlateRepository sRepository = Mockito.mock(StrongPlateRepository.class);
-        doThrow(new RecoverableDataAccessException("oeps")).when(sRepository).save((Plate)anyObject());
-        when(sRepository.findAll()).thenReturn(plates);
-        return sRepository;
 
-    }
 
 }
