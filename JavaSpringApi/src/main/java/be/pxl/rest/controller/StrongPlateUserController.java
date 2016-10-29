@@ -37,6 +37,10 @@ public class StrongPlateUserController {
 
         return "Data toegevoegd aan database";
     }
+    @RequestMapping("/getUser")
+    public String getUser(){
+        return "getUser called";
+    }
 
 
 
