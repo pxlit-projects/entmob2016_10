@@ -27,7 +27,7 @@ public class StrongPlateServiceTestConfig {
 
     @Bean
     public StrongPlateService testPlateService() {
-        StrongPlateService sService = Mockito.mock(StrongPlateServiceImpl.class);
+       /* StrongPlateService sService = Mockito.mock(StrongPlateServiceImpl.class);
         List<Plate> plates = new ArrayList<>();
         Plate plateData1 = new Plate(1, 20.6);
 
@@ -37,7 +37,15 @@ public class StrongPlateServiceTestConfig {
         when(sService.getStrongPlateDataByUserId(1)).thenReturn(plates);
         doThrow(new RecoverableDataAccessException("Tothier")).when(sService).setStrongPlateData(anyObject());
 
-        return sService;
+        return sService;*/
+       return new StrongPlateServiceImpl();
+
+    }
+    @Bean
+    public StrongPlateRepository strongPlateRepository(){
+        StrongPlateRepository sPr = Mockito.mock(StrongPlateRepository.class);
+
+        return sPr;
 
     }
 

@@ -1,6 +1,7 @@
 package be.pxl.rest.unit;
 
 import be.pxl.rest.entity.Plate;
+import be.pxl.rest.repository.StrongPlateRepository;
 import be.pxl.rest.service.StrongPlateService;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,7 +27,10 @@ public class StrongPlateServiceTest {
     @Autowired
     private StrongPlateService testPlateService;
 
-    @Test
+    @Autowired
+    private StrongPlateRepository strongPlateRepository;
+
+   /* @Test
     public void getStalePlateDataTest() {
         List<Plate> plateList = (List<Plate>) testPlateService.getStrongPlateData();
 
@@ -46,7 +50,7 @@ public class StrongPlateServiceTest {
     public void setStrongPlateDataTest(){
         Plate p2 = new Plate(3, 18.4);
         testPlateService.setStrongPlateData(p2);
-    }
+    }*/
 
 
 }

@@ -14,7 +14,7 @@ import java.util.Collection;
  * Created by Pieter on 19/10/2016.
  */
 @RestController
-
+@RequestMapping("/Plate")
 public class StrongPlateController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class StrongPlateController {
     @PostMapping("/setData")
     public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput) {
 
-        strongPlateService.setStrongPlateData(new Plate(strongPlateInput.getUserId(), strongPlateInput.getTemperature()));
+       // strongPlateService.setStrongPlateData(new Plate(strongPlateInput.getUserId(), strongPlateInput.getTemperature()));
         return "Data toegevoegd aan database";
     }
     @RequestMapping(value = "/getData", method = RequestMethod.GET)
