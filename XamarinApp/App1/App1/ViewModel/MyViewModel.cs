@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,7 +77,10 @@ namespace App1.ViewModel
 
         public async void HandleSelectedDevice(DeviceItemViewModel device)
         {
-            
+            if (await ConnectDeviceAsync(device))
+            {
+
+            }
         }
 
         public async Task<bool> ConnectDeviceAsync(DeviceItemViewModel device)
@@ -90,6 +94,19 @@ namespace App1.ViewModel
                 // ... could not connect to device
             }
             return true;
+        }
+
+        public DeviceItemViewModel SelectedDevice
+        {
+            get { return null; }
+            set
+            {
+                if (value != null)
+                {
+                    HandleSelectedDevice(value);
+                }
+                
+            }
         }
 
         private string GetStateText()

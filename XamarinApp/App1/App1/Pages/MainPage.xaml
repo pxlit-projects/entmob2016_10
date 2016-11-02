@@ -22,7 +22,8 @@
   <Label x:Name="bleutoothStatus" Text="{Binding BleStatus}"
            VerticalOptions="Center"
            HorizontalOptions="Center" />
-  <ListView x:Name="DeviceListView" ItemTemplate="{StaticResource deviceTemplate}" ItemsSource="{Binding DeviceList}">
+  <ListView x:Name="DeviceListView" ItemTemplate="{StaticResource deviceTemplate}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+            ItemsSource="{Binding DeviceList}">
     
   </ListView>
   </StackLayout>
