@@ -1,10 +1,12 @@
 package be.pxl.rest;
 
+import be.pxl.rest.mq.Sender;
 import javafx.application.Application;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -17,7 +19,9 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class StrongPlateApplication {
     public static void main(String[] args) {
-        SpringApplication.run(StrongPlateApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(StrongPlateApplication.class, args);
+        Sender sender = ctx.getBean(Sender.class);
+        sender.sendMessage("Hello plates!");
 
     }
 
