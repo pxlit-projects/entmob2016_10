@@ -23,7 +23,8 @@ public class StrongPlateUserInput
     private double averageSpeed;
     private double averageSteadyness;
     private boolean enabled;
-    private List<Plate> platesData = new ArrayList<>();
+    private String userName;
+
 
     public int getId() {
         return id;
@@ -57,7 +58,7 @@ public class StrongPlateUserInput
         return enabled;
     }
 
-    public List<Plate> getPlatesData() {
-        return platesData;
+    public String getUserName() {
+        return userName;
     }
 }

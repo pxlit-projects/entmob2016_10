@@ -1,5 +1,8 @@
 package be.pxl.rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +13,10 @@ import java.util.List;
 @Entity
 public class User {
 
-    @Id
+
     @GeneratedValue()
-    private int id;
+    @Id
+    private long id;
 
     @Column
     private String lastName;
@@ -35,6 +39,7 @@ public class User {
     @Column
     private boolean enabled;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Plate> platesData = new ArrayList<>();
 
@@ -52,7 +57,11 @@ public class User {
     public User() {
     }
 
-    public int getId() {
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
         return id;
     }
 
@@ -123,4 +132,5 @@ public class User {
     public void setPlatesData(List<Plate> platesData) {
         this.platesData = platesData;
     }
-}
+
+   }
