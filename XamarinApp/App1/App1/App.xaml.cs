@@ -17,7 +17,7 @@ namespace App1
         {
             InitializeComponent();
 
-            MainPage = new App1.MainPage(adapter,ble);
+            MainPage = new NavigationPage(new App1.MainPage(adapter,ble));
         }
 
         protected override void OnStart()

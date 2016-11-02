@@ -79,7 +79,7 @@ namespace App1.ViewModel
         {
             if (await ConnectDeviceAsync(device))
             {
-
+                await this.Navigation.
             }
         }
 
