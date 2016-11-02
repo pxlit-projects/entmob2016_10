@@ -18,8 +18,8 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <StackLayout>
-    <Button Text="Scan" Command="{Binding StartScanCommand}" />
-  <Label Text="{Binding BleStatus}"
+    <Button x:Name="btnScan" Text="Scan" Command="{Binding StartScanCommand}" />
+  <Label x:Name="bleutoothStatus" Text="{Binding BleStatus}"
            VerticalOptions="Center"
            HorizontalOptions="Center" />
   <ListView x:Name="DeviceListView" ItemTemplate="{StaticResource deviceTemplate}" ItemsSource="{Binding DeviceList}">
