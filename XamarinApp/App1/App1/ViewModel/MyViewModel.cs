@@ -1,6 +1,7 @@
 ﻿using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
+using Plugin.BLE.Abstractions.Exceptions;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using System;
@@ -71,6 +72,24 @@ namespace App1.ViewModel
                 deviceList = value;
                 OnPropertyChanged(nameof(DeviceList));
             }
+        }
+
+        public async void HandleSelectedDevice(DeviceItemViewModel device)
+        {
+            
+        }
+
+        public async Task<bool> ConnectDeviceAsync(DeviceItemViewModel device)
+        {
+            try
+            {
+                await adapter.ConnectToDeviceAsync(device.Device);
+            }
+            catch (DeviceConnectionException e)
+            {
+                // ... could not connect to device
+            }
+            return true;
         }
 
         private string GetStateText()
