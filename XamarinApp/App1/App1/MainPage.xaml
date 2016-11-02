@@ -3,18 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App1"
              x:Class="App1.MainPage">
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <DataTemplate x:Key="deviceTemplate">
+        <ViewCell>
+          <Grid>
+            <StackLayout Orientation="Vertical" >
+              <Label Text="{Binding Name}" FontSize="Small" />
+              <Label Text="{Binding Id, StringFormat='{0}'}"  TextColor="Gray" FontSize="Small"/>
+            </StackLayout>
+          </Grid>
+        </ViewCell>
+      </DataTemplate>
+    </ResourceDictionary>
+  </ContentPage.Resources>
   <StackLayout>
     <Button Text="Scan" Command="{Binding StartScanCommand}" />
   <Label Text="{Binding BleStatus}"
            VerticalOptions="Center"
            HorizontalOptions="Center" />
-  <ListView x:Name="DeviceListView" ItemsSource="{Binding DeviceList}">
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        
-        <TextCell Text="{Binding Name}" />
-      </DataTemplate>
-    </ListView.ItemTemplate>
+  <ListView x:Name="DeviceListView" ItemTemplate="{StaticResource deviceTemplate}" ItemsSource="{Binding DeviceList}">
+    
   </ListView>
   </StackLayout>
 </ContentPage>

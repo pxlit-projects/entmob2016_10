@@ -43,6 +43,7 @@ namespace App1.ViewModel
         public Command StartScanCommand { get; }
 
         private async void StartScan() {
+            deviceList.Clear();
             try
             {
                 adapter.DeviceDiscovered += (s, a) => deviceList.Add(new DeviceItemViewModel(a.Device));
