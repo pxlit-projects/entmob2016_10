@@ -16,7 +16,7 @@ using Xamarin.Forms;
 
 namespace App1.ViewModel
 {
-    public class MyViewModel : INotifyPropertyChanged
+    public class DeviceViewModel : INotifyPropertyChanged
     {
         IBluetoothLE ble;
         IAdapter adapter;
@@ -29,7 +29,7 @@ namespace App1.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(bleStatus));
         }
 
-        public MyViewModel(IAdapter adapter, IBluetoothLE ble)
+        public DeviceViewModel(IAdapter adapter, IBluetoothLE ble)
         {
             this.ble = ble;
             this.adapter = adapter;
@@ -79,7 +79,7 @@ namespace App1.ViewModel
         {
             if (await ConnectDeviceAsync(device))
             {
-                await this.Navigation.
+                
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using Plugin.BLE;
+﻿using App1.Services;
+using App1.ViewModel;
+using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
@@ -17,8 +19,11 @@ namespace App1
         {
             InitializeComponent();
 
+
             MainPage = new NavigationPage(new App1.MainPage(adapter,ble));
+            
         }
+        
 
         protected override void OnStart()
         {
