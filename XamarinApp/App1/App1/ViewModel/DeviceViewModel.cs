@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using App1.View;
+using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Exceptions;
@@ -18,6 +19,7 @@ namespace App1.ViewModel
 {
     public class DeviceViewModel : INotifyPropertyChanged
     {
+        INavigation navigation;
         IBluetoothLE ble;
         IAdapter adapter;
         string bleStatus;
@@ -29,10 +31,11 @@ namespace App1.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(bleStatus));
         }
 
-        public DeviceViewModel(IAdapter adapter, IBluetoothLE ble)
+        public DeviceViewModel(IAdapter adapter, IBluetoothLE ble,INavigation navigation)
         {
             this.ble = ble;
             this.adapter = adapter;
+            this.navigation = navigation;
             bleStatus = GetStateText();
             ble.StateChanged += OnStateChanged;
             StartScanCommand = new Command(StartScan);
@@ -79,7 +82,7 @@ namespace App1.ViewModel
         {
             if (await ConnectDeviceAsync(device))
             {
-                
+                navigation.PushAsync(new ServiceListPage());
             }
         }
 
