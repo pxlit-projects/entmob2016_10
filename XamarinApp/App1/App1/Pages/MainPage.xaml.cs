@@ -14,7 +14,7 @@ namespace App1
         public MainPage(IAdapter adapter,IBluetoothLE ble)
         {
             InitializeComponent();
-            BindingContext = new MyViewModel(adapter,ble);
+            BindingContext = new DeviceViewModel(adapter,ble);
 
         }
     }
