@@ -13,7 +13,7 @@ public class Sender {
     private JmsTemplate jmsTemplate;
 
     public void sendMessage(final String text){
-        jmsTemplate.send("log", s->s.createTextMessage(text));
+        jmsTemplate.send("HelloQueue", s->s.createTextMessage(text));
 
     }
 }

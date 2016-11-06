@@ -68,7 +68,7 @@ public class Plate implements Serializable {
     }*/
 
     public Plate(LocalDateTime createdOn, double xG, double yG, double zG, double xS, double yS, double zS, double xUt, double yUt, double zUt, boolean magnetic, User user) {
-        this.createdOn = createdOn;
+        this.createdOn = LocalDateTime.now();
         this.xG = xG;
         this.yG = yG;
         this.zG = zG;
