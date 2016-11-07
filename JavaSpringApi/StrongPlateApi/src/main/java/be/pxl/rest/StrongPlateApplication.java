@@ -20,8 +20,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 public class StrongPlateApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(StrongPlateApplication.class, args);
-        Sender sender = ctx.getBean(Sender.class);
-        sender.sendMessage("Hello plates!");
 
     }
 

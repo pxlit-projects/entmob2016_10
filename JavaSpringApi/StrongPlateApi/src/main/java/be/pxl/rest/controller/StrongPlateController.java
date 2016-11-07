@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.Convert;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 
 /**
@@ -25,18 +27,13 @@ public class StrongPlateController {
     @Autowired
     private StrongPlateService strongPlateService;
 
+    private be.pxl.rest.entity.User userInput;
+
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
     @PostMapping("/setData")
-    public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput) {
+    public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput, @AuthenticationPrincipal User userSpring) {
 
-
-        User userSpring = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-//        System.out.println(userSpring.getUsername());
-       // userSpring.getUsername();
-//        System.out.println(userSpring.getUsername());
-
-        be.pxl.rest.entity.User userInput = new be.pxl.rest.entity.User();
-        System.out.println(userSpring.getUsername()+" meegegeven user: "+ strongPlateInput.getUserId());
+        userInput = new be.pxl.rest.entity.User();
 
 
         if((userSpring.getUsername().equals(strongPlateInput.getUserId()+""))){
@@ -65,10 +62,10 @@ public class StrongPlateController {
 
     }
 
+
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
     @RequestMapping(value = "/getData", method = RequestMethod.GET)
-    public ResponseEntity<Collection<Plate>> getStrongPlateData() {
-        System.out.println("Get all data from all users");
+    public ResponseEntity<Collection<Plate>> getStrongPlateData(@AuthenticationPrincipal User userSpring) {
         return new ResponseEntity<>((Collection<Plate>) strongPlateService.getStrongPlateData(), HttpStatus.OK);
     }
 
@@ -77,8 +74,6 @@ public class StrongPlateController {
     public
     @ResponseBody
     ResponseEntity<Collection<Plate>> getStrongPlateDataByUserId(@PathVariable int userId) {
-        System.out.println("Get user with userId: " + userId);
-
         return new ResponseEntity<>(strongPlateService.getStrongPlateDataByUserId(userId), HttpStatus.OK);
     }
 
