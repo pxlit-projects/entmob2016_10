@@ -27,36 +27,40 @@ public class StrongPlateAspect {
 
     @Around("execution(* be.pxl.rest.controller.StrongPlateController.getStrongPlateData(..))")
     public Object aroundGetStrongPlateData(ProceedingJoinPoint pjp) throws Throwable {
-        getLoggedInUser();
 
-        sender.sendMessage(LocalDateTime.now().toLocalDate() + " " + LocalDateTime.now().toLocalTime() + " User: " + userSpring.getUsername() + " aanvraag gegevens");
+        sender.sendMessage(logBuilder("Aanvraag gegevens", "info"));
         Object returnValue = pjp.proceed();
-        sender.sendMessage(LocalDateTime.now().toLocalDate() + " " + LocalDateTime.now().toLocalTime() + " User: " + userSpring.getUsername() + " aanvraag gegevens OK");
-
+        sender.sendMessage(logBuilder("Aanvraag gegevens OK", "info"));
         return returnValue;
 
     }
+
     @AfterThrowing(value = "execution(* be.pxl.rest.controller.StrongPlateController.getStrongPlateData(..))", throwing = "ex")
-    public void afterExceptionGetStrongPlateData(Exception ex){
-        sender.sendMessage(LocalDateTime.now().toLocalDate() + " " + LocalDateTime.now().toLocalTime() + " User: " + userSpring.getUsername() + " [EXCEPTION] "+ex.getMessage());
+    public void afterExceptionGetStrongPlateData(Exception ex) {
+        sender.sendMessage(logBuilder(ex.getMessage(), "exception"));
     }
 
     @Before("execution(* be.pxl.rest.controller.StrongPlateController.setStrongPlateData(..))")
-    public void beforeAddingData(){
-        getLoggedInUser();
-        sender.sendMessage(LocalDateTime.now().toLocalDate() + " " + LocalDateTime.now().toLocalTime() + " User: " + userSpring.getUsername() + " toevoegen data ");
+    public void beforeAddingData() {
+        sender.sendMessage(logBuilder("Toevoegen data", "info"));
     }
 
     @AfterReturning(value = "execution(* be.pxl.rest.controller.StrongPlateController.setStrongPlateData(..))", returning = "returnValue")
-    public void afterAddingData(String returnValue){
-        if(returnValue.equals("Data toegevoegd aan database"))
-            sender.sendMessage(LocalDateTime.now().toLocalDate() + " " + LocalDateTime.now().toLocalTime() + " User: " + userSpring.getUsername() + " toevoegen data OK ");
+    public void afterAddingData(String returnValue) {
+        if (returnValue.equals("Data toegevoegd aan database"))
+            sender.sendMessage(logBuilder("toevoegen data OK ", "info"));
         else
-            sender.sendMessage(LocalDateTime.now().toLocalDate() + " " + LocalDateTime.now().toLocalTime() + " User: " + userSpring.getUsername() + " toevoegen data NIET OK ");
-
+            sender.sendMessage(logBuilder("toevoegen data niet OK ", "error"));
 
     }
 
+    private String logBuilder(String message, String type) {
+
+        getLoggedInUser();
+        String logMessage = String.format("%s %s [%s] User: %s %s", LocalDateTime.now().toLocalDate(), LocalDateTime.now().toLocalTime(), type.toUpperCase(), userSpring.getUsername(), message);
+        return logMessage;
+
+    }
 
 
     private void getLoggedInUser() {
