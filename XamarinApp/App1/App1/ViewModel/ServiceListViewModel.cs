@@ -65,16 +65,17 @@ namespace App1.ViewModel
         }
 
 
-        private async void readTemp() {
+        private async void readTemp()
+        {
             ICharacteristic characteristic = null;
-            for (int i = 0; i < _characteristics.Count; i++) {
+            for (int i = 0; i < _characteristics.Count; i++)
+            {
                 characteristic = _characteristics[i];
             }
 
             characteristic.ValueUpdated += (o, args) =>
             {
-                byte[] bytes = args.Characteristic.Value;
-                //_temperatureData = Math.Round(ServiceConverter.AmbientTemperature(bytes), 2);
+                byte[] bytes = args.Characteristic.Value;             
                 _temperatureData = ServiceConverter.AmbientTemperature(bytes);
                 onPropertyChanged(nameof(TemperatureData));
             };

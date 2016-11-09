@@ -15,6 +15,7 @@ namespace App1.View
         {
             InitializeComponent();
             BindingContext = new ServiceListViewModel(device); 
+
         }
     }
 }
