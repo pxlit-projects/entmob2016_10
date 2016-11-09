@@ -1,5 +1,7 @@
 package be.pxl.rest.integration;
 
+import be.pxl.rest.controller.input.StrongPlateInput;
+import be.pxl.rest.entity.Plate;
 import be.pxl.rest.entity.User;
 import be.pxl.rest.service.StrongPlateService;
 import be.pxl.rest.service.StrongPlateUserService;
@@ -57,39 +59,75 @@ public class StrongPlateApiTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private RestTemplate template = new RestTemplate();
-    private User firstUser;
-    private User newUser;
-    private ObjectMapper objectMapper;
-    private String userAsJson;
-    private String reply;
-    private List<User> users;
+    private static User firstUser;
+    private static User newOber;
+    private static User firstOber;
+    private static Plate plateEnti;
+    private static ObjectMapper objectMapper;
+    private static String userAsJson;
+    private String replyUsers;
+    private String replyPlates;
+    private static List<User> users;
+    private static List<Plate> plates;
+
+    private static StrongPlateInput plate;
+
+    private static boolean defaultUserAdded;
 
 
     @Before
     public void setUpData() throws Exception {
-        objectMapper= new ObjectMapper();
-        firstUser = new User("Boss", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_BAAS", 10, 75, true);
-        newUser = new User("Oober", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
-        userAsJson = objectMapper.writeValueAsString(newUser);
+
+        if(!defaultUserAdded) {
+            objectMapper= new ObjectMapper();
+            firstUser = new User("Boss", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_BAAS", 10, 75, true);
+            newOber = new User("Ober", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
+            firstOber = new User("Ober", "The First", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
+
+            firstOber.setId(2);//Omdat deze anders nog niet gekend = kan geen plate op voorhand aanmaken
+            System.out.println("EERSTE OBER: "+firstOber.getId());
+            plate = new StrongPlateInput(20, 40, 67, 89, 12, 4, 8, 9, 4, true, 2);
+            plateEnti = new Plate(20, 40, 67, 89, 12, 4, 8, 9, 4,true, firstOber);
+
+            userAsJson = objectMapper.writeValueAsString(newOber);
+
+            strongPlateService.deleteAllStrongPlateData();
+            strongPlateUserService.deleteAllUsers();
+            strongPlateUserService.setUser(firstUser);//krijgt id 1
+            strongPlateUserService.setUser(firstOber);//krijgt id 2
+            strongPlateService.setStrongPlateData(plateEnti);
+            defaultUserAdded=true;
+        }
+
 
     }
+    /*@After
+    public void cleanDB() throws Exception {
+        /*strongPlateService.deleteAllStrongPlateData();
+        strongPlateUserService.deleteAllUsers();*/
+        //System.out.println("Have a nice day");
+   // }
 
     @Test
-    public void fullUserTest() throws Exception {
-
-        strongPlateService.deleteAllStrongPlateData();
-        strongPlateUserService.deleteAllUsers();
-
-        strongPlateUserService.setUser(firstUser);
-
+    public void bosCanAskUsersTest() throws Exception{
         //Obers kunnen worden aangevraagd door de baas
         MvcResult mockMvcResult = mockMvc.perform(get("/User/getUsers")
                 .with(httpBasic("1", "secret"))
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())/*.andDo(print())*/.andReturn();
 
-        //Obers kunnen worden toegevoegd door de baas
+        replyUsers = mockMvcResult.getResponse().getContentAsString();
+        users = objectMapper.readValue(replyUsers, new TypeReference<List<User>>() {
+
+        });
+
+        assertFalse(mockMvcResult.getResponse().getContentAsString().isEmpty());
+        assertFalse(users.isEmpty());
+
+    }
+    @Test
+    public void bosCanAddUserTest() throws Exception{
+        //Obers kunnen worden toegevoegd door de baas (user met id 1 = baas)
         this.mockMvc.perform(post("/User/addUser")
                 .content(userAsJson)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -97,7 +135,20 @@ public class StrongPlateApiTest {
                 .with(httpBasic("1", "secret")))
                 .andExpect(status().isOk());
 
-        //Obers kunnen geen obers toevoegen
+    }
+
+    @Test
+    public void getUsersPermissionTest() throws Exception {
+        //Obers kunnen geen obers opvragen (User met id 2 = ober)
+        this.mockMvc.perform(get("/User/getUsers")
+                .with(httpBasic("2", "secret"))
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isForbidden());
+
+    }
+    @Test
+    public void addUserPermissionTest() throws Exception {
+        //Obers kunnen geen obers toevoegen (User met id 2 = ober)
         this.mockMvc.perform(post("/User/addUser")
                 .content(userAsJson)
                 .contentType(MediaType.APPLICATION_JSON)
@@ -105,35 +156,50 @@ public class StrongPlateApiTest {
                 .with(httpBasic("2", "secret")))
                 .andExpect(status().isForbidden());
 
-        //Obers kunnen geen obers opvragen
-        this.mockMvc.perform(get("/User/getUsers")
-                .with(httpBasic("2", "secret"))
-                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
-                .andExpect(status().isForbidden());
+    }
+    @Test
+    public void addStrongPlateDataTest() throws Exception{
+        //Toevoegen data sensor, userID van plate komt overeen met het userId meegegeven in de httpbasic
+        MvcResult mockMvcResult = mockMvc.perform(post("/Plate/setData")
+                .content(objectMapper.writeValueAsString(plate))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
+                .with(httpBasic("2", "secret")))
+                .andExpect(status().isOk())
+                .andReturn();
 
-
-        reply = mockMvcResult.getResponse().getContentAsString();
-        users = objectMapper.readValue(reply, new TypeReference<List<User>>() {
-
-        });
-
-        assertFalse(mockMvcResult.getResponse().getContentAsString().isEmpty());
-        assertFalse(users.isEmpty());
-
+        assertEquals(mockMvcResult.getResponse().getContentAsString(), "Data toegevoegd aan database");
 
 
     }
     @Test
-    public void fullPlateTest() throws Exception {
+    public void addStrongPlateDataPermissionTest() throws Exception{
+        //Toevoegen data sensor, userID van plate (2) komt NIET overeen met het userId(1) meegegeven in de httpbasic
+        MvcResult mockMvcResult = mockMvc.perform(post("/Plate/setData")
+                .content(objectMapper.writeValueAsString(plate))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8"))
+                .with(httpBasic("1", "secret")))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        assertEquals(mockMvcResult.getResponse().getContentAsString(), "Kan geen data van iemand anders toevoegen!");
+
+    }
+    @Test
+    public void getStrongPlateDataTest() throws Exception{
+        MvcResult mockMvcResult = mockMvc.perform(get("/Plate/getData")
+                .with(httpBasic("1", "secret"))
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())/*.andDo(print())*/.andReturn();
+
+        replyPlates = mockMvcResult.getResponse().getContentAsString();
+
+        assertFalse(mockMvcResult.getResponse().getContentAsString().isEmpty());
+
 
     }
 
-    @After
-    public void cleanDB() throws Exception {
-        strongPlateService.deleteAllStrongPlateData();
-        strongPlateUserService.deleteAllUsers();
-        System.out.println("Have a nice day");
-    }
 
 
 }

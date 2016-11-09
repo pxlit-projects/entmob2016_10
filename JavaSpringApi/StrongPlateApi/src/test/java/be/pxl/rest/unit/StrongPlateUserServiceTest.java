@@ -28,7 +28,7 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext
-@Ignore
+
 public class StrongPlateUserServiceTest {
 
     @InjectMocks

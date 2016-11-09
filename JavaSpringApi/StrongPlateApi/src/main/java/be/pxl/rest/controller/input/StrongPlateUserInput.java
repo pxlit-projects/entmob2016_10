@@ -1,6 +1,8 @@
 package be.pxl.rest.controller.input;
 
 import be.pxl.rest.entity.Plate;
+import org.json.JSONObject;
+
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -56,5 +58,5 @@ public class StrongPlateUserInput
         return enabled;
     }
 
-
 }
+

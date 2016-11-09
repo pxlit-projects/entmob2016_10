@@ -34,7 +34,6 @@ import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DirtiesContext
-@Ignore
 public class StrongPlateServiceTest {
 
     @InjectMocks

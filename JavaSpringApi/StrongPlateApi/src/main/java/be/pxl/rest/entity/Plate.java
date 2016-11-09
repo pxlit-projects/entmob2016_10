@@ -57,9 +57,7 @@ public class Plate implements Serializable {
     private User user;
 
 
-    public Plate(){
 
-    }
 
     public Plate(double xG, double yG, double zG, double xS, double yS, double zS, double xUt, double yUt, double zUt, boolean magnetic, User user) {
         this.createdOn = LocalDateTime.now();
@@ -74,6 +72,9 @@ public class Plate implements Serializable {
         this.zUt = zUt;
         this.magnetic = magnetic;
         this.user = user;
+    }
+    public Plate(){
+
     }
 
     public long getId() {

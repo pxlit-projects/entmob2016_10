@@ -1,6 +1,7 @@
 package be.pxl.rest.controller.input;
 
 import be.pxl.rest.entity.User;
+import org.json.JSONObject;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +22,22 @@ public class StrongPlateInput {
     private boolean magnetic;
     private long userId;
 
+    public StrongPlateInput(double xG, double yG, double zG, double xS, double yS, double zS, double xUt, double yUt, double zUt, boolean magnetic, long userId) {
+        this.xG = xG;
+        this.yG = yG;
+        this.zG = zG;
+        this.xS = xS;
+        this.yS = yS;
+        this.zS = zS;
+        this.xUt = xUt;
+        this.yUt = yUt;
+        this.zUt = zUt;
+        this.magnetic = magnetic;
+        this.userId = userId;
+    }
+    public StrongPlateInput(){
+
+    }
 
     public double getxG() {
         return xG;
@@ -63,6 +80,7 @@ public class StrongPlateInput {
     }
 
     public long getUserId() { return userId;  }
+
 
 
 }
