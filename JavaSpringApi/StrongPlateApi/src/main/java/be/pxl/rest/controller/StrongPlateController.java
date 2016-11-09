@@ -39,7 +39,6 @@ public class StrongPlateController {
         if((userSpring.getUsername().equals(strongPlateInput.getUserId()+""))){
             userInput.setId(strongPlateInput.getUserId());
             strongPlateService.setStrongPlateData(new Plate(
-                    null,
                     strongPlateInput.getxG(),
                     strongPlateInput.getyG(),
                     strongPlateInput.getzG(),

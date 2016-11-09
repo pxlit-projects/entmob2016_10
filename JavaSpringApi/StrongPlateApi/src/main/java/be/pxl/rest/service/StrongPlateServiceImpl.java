@@ -34,4 +34,9 @@ public class StrongPlateServiceImpl implements StrongPlateService {
     public List<Plate> getStrongPlateDataByUserId(long userId) {
         return strongPlateRepository.getStalePlateDataByUserId(userId);
     }
+
+    @Override
+    public void deleteAllStrongPlateData() {
+        strongPlateRepository.deleteAll();
+    }
 }

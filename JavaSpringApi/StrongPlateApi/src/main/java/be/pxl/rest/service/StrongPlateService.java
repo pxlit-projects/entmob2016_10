@@ -14,6 +14,9 @@ public interface StrongPlateService {
 
     Iterable<Plate> getStrongPlateData();
 
-    public List<Plate> getStrongPlateDataByUserId(long userId);
+    List<Plate> getStrongPlateDataByUserId(long userId);
+
+    void deleteAllStrongPlateData();
+
 
 }

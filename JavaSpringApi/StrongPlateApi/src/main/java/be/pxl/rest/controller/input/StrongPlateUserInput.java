@@ -15,7 +15,7 @@ import java.util.List;
 public class StrongPlateUserInput
 {
 
-    private int id;
+
     private String lastName;
     private String firstName;
     private String password;
@@ -23,12 +23,10 @@ public class StrongPlateUserInput
     private double averageSpeed;
     private double averageSteadyness;
     private boolean enabled;
-    private String userName;
 
 
-    public int getId() {
-        return id;
-    }
+
+
 
     public String getLastName() {
         return lastName;
@@ -58,7 +56,5 @@ public class StrongPlateUserInput
         return enabled;
     }
 
-    public String getUserName() {
-        return userName;
-    }
+
 }

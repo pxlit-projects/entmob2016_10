@@ -27,4 +27,9 @@ public class StrongPlateUserServiceImpl implements StrongPlateUserService {
     public Iterable<User> getStrongPlateUsers() {
         return strongPlateUserRepository.findAll();
     }
+
+    @Override
+    public void deleteAllUsers() {
+        strongPlateUserRepository.deleteAll();
+    }
 }
