@@ -122,66 +122,11 @@ public class StrongPlateApiTest {
 
 
 
-        //System.out.println("USER: "+users.get(0).getFirstName());
-
-        //System.out.println("RESULTAAT:"+mockMvcResult.getResponse().getContentAsString());
-        //String content = result.getResponse().getContentAsString();
-
-        //.andExpect(model().attribute("people", expectedPeople))
-
-
-
-               /*user("admin").password("pass").accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
-               .andExpect(status().isOk());
-*/
-
-
     }
     @Test
     public void fullPlateTest() throws Exception {
 
     }
-
-    public List<User> getUsers(String username, String password) throws IOException {
-        HttpHeaders headers = createAuthenticationHeader(username, password);
-
-        ResponseEntity<String> response = template.exchange("http://localhost:8090/User/getUsers", HttpMethod.GET, new HttpEntity<String>(headers), String.class);
-
-        ObjectMapper oM = new ObjectMapper();
-        String repley = response.getBody();
-        List<User> users = new ArrayList<>();
-        users = oM.readValue(repley, new TypeReference<List<User>>() {
-
-        });
-
-        System.out.println(users.get(0).getFirstName());
-        //User u = template.getForObject("http://localhost:8090/User/getUsers",  HttpMethod.GET,new HttpEntity<String>(headers),User.class);
-
-        // List list = template.exchange(URL + "all", new HttpEntity<String>(requestHeaders()), ArrayList.class);
-        // System.out.println(u.getFirstName());
-
-        //response.getBody();
-
-        //System.out.println(response.getBody());
-
-        //template.getForEntity()
-        // System.out.println(response.getBody());
-        //return response.getBody();
-        // return new ResponseEntity<>((Collection<User>)template.getForObject("http://localhost:8090/User/getUsers", HttpMethod.GET,new HttpEntity<Collection<User>>(headers), User.class );
-        //return new ResponseEntity<>((Collection<User>)strongPlateUserService.getStrongPlateUsers(), HttpStatus.OK);
-        return null;
-    }
-
-    private HttpHeaders createAuthenticationHeader(String username, String password) {
-        String auth = username + ":" + password;
-        String encodeAuth = java.util.Base64.getEncoder().encodeToString(auth.getBytes(Charset.forName("UTF-8")));
-        String authHeader = "Basic " + encodeAuth;
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", authHeader);
-        return headers;
-    }
-
-
 
     @After
     public void cleanDB() throws Exception {
