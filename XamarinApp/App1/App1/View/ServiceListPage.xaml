@@ -5,6 +5,6 @@
   <Label Text="Hallo test tweede page" VerticalOptions="Center" HorizontalOptions="Center" />
   <StackLayout Orientation="Horizontal">
     <Label Text="Temperature : " ></Label>
-    <Label Text="{Binding TemperatureData}" ></Label>
+    <Label Text="{Binding TemperatureData , Converter={StaticResource localRoundConverter}}" ></Label>
   </StackLayout>
 </ContentPage>

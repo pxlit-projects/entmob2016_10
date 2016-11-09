@@ -10,7 +10,7 @@
           <Grid>
             <StackLayout Orientation="Vertical" >
               <Label Text="{Binding Name}" FontSize="Small" />
-              <Label Text="{Binding Id, StringFormat='{0}'}"  TextColor="Gray" FontSize="Small"/>
+              <Label Text="{Binding Id, Converter={StaticResource localStringFormatConverter}}"  TextColor="Gray" FontSize="Small"/>
             </StackLayout>
           </Grid>
         </ViewCell>

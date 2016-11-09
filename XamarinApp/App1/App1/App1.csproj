@@ -38,6 +38,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\RoundConverter.cs" />
+    <Compile Include="Converter\StringFormatConverter.cs" />
     <Compile Include="Services\ServiceConverter.cs" />
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
