@@ -19,15 +19,16 @@ namespace App1.ViewModel
 {
     public class DeviceViewModel : INotifyPropertyChanged
     {
-        INavigation navigation;
-        IBluetoothLE ble;
-        IAdapter adapter;
-        string bleStatus;
-        ObservableCollection<DeviceItemViewModel> deviceList = new ObservableCollection<DeviceItemViewModel>();
+        private INavigation navigation;
+        private IBluetoothLE ble;
+        private IAdapter adapter;
+        private string bleStatus;
+        private ObservableCollection<DeviceItemViewModel> deviceList = new ObservableCollection<DeviceItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void OnPropertyChanged(string bleStatus) {
+        void OnPropertyChanged(string bleStatus)
+        {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(bleStatus));
         }
 
@@ -47,15 +48,16 @@ namespace App1.ViewModel
         }
         public Command StartScanCommand { get; }
 
-        private async void StartScan() {
+        private async void StartScan()
+        {
             deviceList.Clear();
             try
             {
                 adapter.DeviceDiscovered += (s, a) => deviceList.Add(new DeviceItemViewModel(a.Device));
                 await adapter.StartScanningForDevicesAsync();
-            } catch
+            } catch(Exception ex)
             {
-
+                Debug.WriteLine("Error StartScan : " + ex);
             }
         }
         
@@ -93,9 +95,9 @@ namespace App1.ViewModel
             {
                 await adapter.ConnectToDeviceAsync(device.Device);
             }
-            catch (DeviceConnectionException e)
+            catch (DeviceConnectionException ex)
             {
-                // ... could not connect to device
+                Debug.WriteLine("Error ConnectDeviceAsync : " + ex);
             }
             return true;
         }
@@ -135,6 +137,5 @@ namespace App1.ViewModel
                     return "Unknown BLE state.";
             }
         }
-
     }
 }

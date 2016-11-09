@@ -6,44 +6,39 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace App1.ViewModel
 {
     public class ServiceListViewModel : INotifyPropertyChanged
     {
-        private IAdapter adapter = CrossBluetoothLE.Current.Adapter;
         private DeviceItemViewModel device;
-        private ICharacteristic configCharacteristic;
-        private ICharacteristic dataCharacteristic;
-        private Queue<ICharacteristic> _writeCharacteristics = new Queue<ICharacteristic>();
+        private IList<ICharacteristic> _writeCharacteristics = new List<ICharacteristic>();
         private IList<ICharacteristic> _characteristics = new List<ICharacteristic>();
-        private byte[] bytes;
-
         private double _temperatureData;
-        private bool writeTempOn = false;
-
-        public IList<double> TemperaturesList = new List<double>();
 
         public event PropertyChangedEventHandler PropertyChanged;
+
         public ServiceListViewModel(DeviceItemViewModel device)
         {
             this.device = device;
-            GetTempService();
-            
-
+            GetServices();
         }
-
-        private async void GetTempService() {
-
+        private async void GetServices()
+        {
+            await GetTempService();           
+            await TurnServiceOn();
+            readTemp();
+        }
+        private async Task GetTempService()
+        {
             try
             {
                 IService service = await device.Device.GetServiceAsync(Guid.Parse("f000aa00-0451-4000-b000-000000000000"));
-                dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa01-0451-4000-b000-000000000000"));
-                configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa02-0451-4000-b000-000000000000"));
-                TurnServiceOn();
+                ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa01-0451-4000-b000-000000000000"));
+                ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa02-0451-4000-b000-000000000000"));
+                _writeCharacteristics.Add(configCharacteristic);
+                _characteristics.Add(dataCharacteristic);
             }
             catch(Exception ex)
             {
@@ -51,34 +46,39 @@ namespace App1.ViewModel
             }
         }
 
-        private async void TurnServiceOn()
+        private async Task TurnServiceOn()
         {
             try
             {
-                await configCharacteristic.WriteAsync(GetBytes("1"));
-                readTemp();
+                for (int i = 0; i < _writeCharacteristics.Count; i++)
+                {               
+                    var characteristic = _writeCharacteristics[i];
+                    await characteristic.WriteAsync(new byte[] { 0x01 });   
+                                  
+                }
+                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Error TurnServiceOn :" + ex);
-                writeTempOn = false;
             }
         }
 
+
         private async void readTemp() {
-            dataCharacteristic.ValueUpdated += (o, args) =>
+            ICharacteristic characteristic = null;
+            for (int i = 0; i < _characteristics.Count; i++) {
+                characteristic = _characteristics[i];
+            }
+
+            characteristic.ValueUpdated += (o, args) =>
             {
                 byte[] bytes = args.Characteristic.Value;
                 //_temperatureData = Math.Round(ServiceConverter.AmbientTemperature(bytes), 2);
                 _temperatureData = ServiceConverter.AmbientTemperature(bytes);
                 onPropertyChanged(nameof(TemperatureData));
             };
-            await dataCharacteristic.StartUpdatesAsync();
-
-        }
-        private static byte[] GetBytes(string text)
-        {
-            return text.Split(' ').Where(token => !string.IsNullOrEmpty(token)).Select(token => Convert.ToByte(token, 16)).ToArray();
+            await characteristic.StartUpdatesAsync();
         }
 
         public double TemperatureData
@@ -91,9 +91,9 @@ namespace App1.ViewModel
             }
         }
 
-        private void onPropertyChanged(string v)
+        private void onPropertyChanged(string temperature)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(v));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(temperature));
         }
 
 

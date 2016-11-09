@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace App1.ViewModel
 {
-    public class DeviceItemViewModel : INotifyPropertyChanged
+    public class DeviceItemViewModel 
     {
         public IDevice Device { get; set; }
 
@@ -22,6 +22,5 @@ namespace App1.ViewModel
         {
             Device = device;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
