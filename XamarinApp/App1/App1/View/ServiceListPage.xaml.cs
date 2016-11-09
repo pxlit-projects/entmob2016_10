@@ -1,4 +1,5 @@
-﻿using System;
+﻿using App1.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,10 @@ namespace App1.View
 {
     public partial class ServiceListPage : ContentPage
     {
-        public ServiceListPage()
+        public ServiceListPage(DeviceItemViewModel device)
         {
             InitializeComponent();
+            BindingContext = new ServiceListViewModel(device); 
         }
     }
 }

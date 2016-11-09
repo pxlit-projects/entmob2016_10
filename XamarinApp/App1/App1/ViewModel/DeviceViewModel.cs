@@ -82,7 +82,8 @@ namespace App1.ViewModel
         {
             if (await ConnectDeviceAsync(device))
             {
-                navigation.PushAsync(new ServiceListPage());
+                await adapter.StopScanningForDevicesAsync();
+                await navigation.PushAsync(new ServiceListPage(device));
             }
         }
 
