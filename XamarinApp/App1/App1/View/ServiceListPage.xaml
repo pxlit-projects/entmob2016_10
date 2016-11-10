@@ -3,8 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App1.View.ServiceListPage">
   <Label Text="Hallo test tweede page" VerticalOptions="Center" HorizontalOptions="Center" />
+  <StackLayout>
   <StackLayout Orientation="Horizontal">
     <Label Text="Temperature : " ></Label>
-    <Label Text="{Binding TemperatureData , Converter={StaticResource localRoundConverter}}" ></Label>
+    <Label Text="{Binding TemperatureData , Converter={StaticResource localRoundConverter}}" ></Label>   
+  </StackLayout>
+    <StackLayout  >
+  <StackLayout Orientation="Horizontal">
+    <Label Text="GyroscoopX : " ></Label>
+    <Label Text="{Binding X }" ></Label>
+  </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="GyroscoopY : " ></Label>
+      <Label Text="{Binding Y }" ></Label>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="GyroscoopZ : " ></Label>
+      <Label Text="{Binding Z }" ></Label>
+    </StackLayout>
+    </StackLayout>
   </StackLayout>
 </ContentPage>

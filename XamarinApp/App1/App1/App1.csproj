@@ -40,6 +40,7 @@
     </Compile>
     <Compile Include="Converter\RoundConverter.cs" />
     <Compile Include="Converter\StringFormatConverter.cs" />
+    <Compile Include="Model\Gyroscope.cs" />
     <Compile Include="Services\ServiceConverter.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\LoginPage.xaml.cs">

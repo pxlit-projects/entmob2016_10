@@ -17,7 +17,7 @@ namespace App1.View
         public ServiceListPage()
         {
             InitializeComponent();
-            BindingContext = new ServiceListViewModel(); 
+            BindingContext = new ServiceListViewModel();
 
         }
     }

@@ -6,10 +6,25 @@ using System.Threading.Tasks;
 
 namespace App1.Services
 {
-    public class ServiceConverter
+    public class MovementService
     {
-        
-
+        public static double Gyro(byte[] bytes,string position)
+        {
+            Int16 data = BitConverter.ToInt16(bytes, 0);
+            switch (position.ToLower())
+            {
+                case "x":
+                    data = BitConverter.ToInt16(bytes, 0);
+                    break;
+                case "y":
+                    data = BitConverter.ToInt16(bytes, 2);
+                    break;
+                case "z":
+                    data = BitConverter.ToInt16(bytes, 4);
+                    break;
+            }           
+            return (data * 1.0) / (65536 / 500);
+        }
         public static double IrTemperature(byte[] bytes)
         {
             //vb array

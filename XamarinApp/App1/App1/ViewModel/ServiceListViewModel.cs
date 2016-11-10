@@ -1,4 +1,5 @@
-﻿using App1.Services;
+﻿using App1.Model;
+using App1.Services;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
@@ -32,10 +33,12 @@ namespace App1.ViewModel
         
         private async void GetServices()
         {
-            await GetTempService();           
+            await GetTempService();
+            await GetMovementService();           
             await TurnServiceOn();
             readTemp();
         }
+        
         private async Task GetTempService()
         {
             try
@@ -45,6 +48,7 @@ namespace App1.ViewModel
                 ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa02-0451-4000-b000-000000000000"));
                 _configCharacteristics.Add(configCharacteristic);
                 _characteristics.Add(dataCharacteristic);
+
             }
             catch(Exception ex)
             {
@@ -109,6 +113,47 @@ namespace App1.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(temperature));
         }
-       
+
+
+        private async Task GetMovementService()
+        {
+            try
+            {
+                IService service = await device.GetServiceAsync(Guid.Parse("f000aa80-0451-4000-b000-000000000000"));
+                ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa81-0451-4000-b000-000000000000"));
+                ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa82-0451-4000-b000-000000000000"));
+                // _configCharacteristics.Add(configCharacteristic);
+                //_characteristics.Add(dataCharacteristic);
+                await configCharacteristic.WriteAsync(new byte[] { 0xFF, 0x01 });
+                _gyro = new Gyroscope();
+                dataCharacteristic.ValueUpdated += (o, args) =>
+                {
+                    byte[] bytes = args.Characteristic.Value;
+
+                    _gyro.X = MovementService.Gyro(bytes, "x");
+                    _gyro.Y = MovementService.Gyro(bytes, "y");
+                    _gyro.Z = MovementService.Gyro(bytes, "z");
+                };
+                await dataCharacteristic.StartUpdatesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Error GetMovementService: " + ex);
+            }
+        }
+
+        private Gyroscope _gyro;
+
+        public Gyroscope Gyro
+        {
+            get { return _gyro; }
+            set
+            {
+                _gyro = value;
+                onPropertyChanged(nameof(Gyro));
+            }
+        }
+
     }
 }
