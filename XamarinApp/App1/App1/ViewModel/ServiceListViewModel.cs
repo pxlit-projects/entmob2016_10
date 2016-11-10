@@ -82,7 +82,7 @@ namespace App1.ViewModel
             characteristic.ValueUpdated += (o, args) =>
             {
                 byte[] bytes = args.Characteristic.Value;             
-                _temperatureData = ServiceConverter.AmbientTemperature(bytes);
+                _temperatureData = AmbientTemperature(bytes);
                 onPropertyChanged(nameof(TemperatureData));
             };
             await characteristic.StartUpdatesAsync();
@@ -98,12 +98,17 @@ namespace App1.ViewModel
             }
         }
 
+        public double AmbientTemperature(byte[] bytes)
+        {
+
+            var ambientTemp = BitConverter.ToUInt16(bytes, 2) / 128.0;
+            return ambientTemp;
+        }
+
         private void onPropertyChanged(string temperature)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(temperature));
         }
-
-
        
     }
 }

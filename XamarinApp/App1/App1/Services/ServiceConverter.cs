@@ -8,14 +8,7 @@ namespace App1.Services
 {
     public class ServiceConverter
     {
-        public static double AmbientTemperature(byte[] bytes)
-        {
-            //vb array
-            //byte[] bytes = new byte[] { 0x04, 0x0A, 0x04, 0x0C };
-
-            var ambientTemp = BitConverter.ToUInt16(bytes, 2) / 128.0;
-            return ambientTemp;
-        }
+        
 
         public static double IrTemperature(byte[] bytes)
         {

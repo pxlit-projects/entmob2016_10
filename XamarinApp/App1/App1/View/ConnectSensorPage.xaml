@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:App1"
-             x:Class="App1.MainPage">
+             x:Class="App1.ConnectSensorPage">
   <ContentPage.Resources>
     <ResourceDictionary>
       <DataTemplate x:Key="deviceTemplate">
@@ -19,10 +19,10 @@
   </ContentPage.Resources>
   <StackLayout>
     <Button x:Name="btnScan" Text="Scan" Command="{Binding StartScanCommand}" />
-  <Label x:Name="bleutoothStatus" Text="{Binding BleStatus}"
+    <Label x:Name="bleutoothStatus" Text="{Binding BleStatus}"
            VerticalOptions="Center"
            HorizontalOptions="Center" />
-  <ListView x:Name="DeviceListView" ItemTemplate="{StaticResource deviceTemplate}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
+    <ListView x:Name="DeviceListView" ItemTemplate="{StaticResource deviceTemplate}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}"
             ItemsSource="{Binding DeviceList}">
     
   </ListView>

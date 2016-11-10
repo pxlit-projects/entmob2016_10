@@ -25,6 +25,8 @@ namespace App1.ViewModel
         private string _bleStatus;
         private ObservableCollection<DeviceItemViewModel> _deviceList = new ObservableCollection<DeviceItemViewModel>();
 
+        public Command StartScanCommand { get; }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         void OnPropertyChanged(string bleStatus)
@@ -46,7 +48,6 @@ namespace App1.ViewModel
         {
             BleStatus = GetStateText();
         }
-        public Command StartScanCommand { get; }
 
         private async void StartScan()
         {
@@ -88,7 +89,10 @@ namespace App1.ViewModel
                     MessagingCenter.Send(device, "connectdevice");
                 });
                 await adapter.StopScanningForDevicesAsync();
-                await navigation.PushAsync(new ServiceListPage());
+                await navigation.PushAsync(new ServiceListPage()
+                {
+                    Title = "StrongPlate"
+                });
                 
             }
         }

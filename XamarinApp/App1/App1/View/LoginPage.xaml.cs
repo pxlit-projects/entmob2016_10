@@ -1,9 +1,7 @@
 ﻿using App1.ViewModel;
-using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +10,13 @@ using Xamarin.Forms;
 
 namespace App1.View
 {
-    public partial class ServiceListPage : ContentPage
+    public partial class LoginPage : ContentPage
     {
-        public ServiceListPage()
+
+        public LoginPage(IAdapter adapter, IBluetoothLE ble)
         {
             InitializeComponent();
-            BindingContext = new ServiceListViewModel(); 
-
+            BindingContext = new LoginViewModel(adapter,ble,Navigation);
         }
     }
 }

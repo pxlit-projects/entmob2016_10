@@ -1,4 +1,5 @@
 ﻿using App1.Services;
+using App1.View;
 using App1.ViewModel;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
@@ -18,8 +19,11 @@ namespace App1
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new App1.MainPage(adapter,ble));
-            
+            NavigationPage navigation = new NavigationPage(new LoginPage(adapter, ble)
+            {
+                Title = "StrongPlate"
+            });
+            MainPage = navigation;
         }
         
 

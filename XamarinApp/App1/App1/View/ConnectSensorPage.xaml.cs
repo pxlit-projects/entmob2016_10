@@ -3,6 +3,7 @@ using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +11,15 @@ using Xamarin.Forms;
 
 namespace App1
 {
-    public partial class MainPage : ContentPage
+    public partial class ConnectSensorPage : ContentPage
     {
-        private ObservableCollection<DeviceItemViewModel> devices;
-        public MainPage(IAdapter adapter,IBluetoothLE ble)
+        public ConnectSensorPage(IAdapter adapter,IBluetoothLE ble)
         {
             InitializeComponent();
             DeviceViewModel deviceViewModel = new DeviceViewModel(adapter, ble, this.Navigation);
             BindingContext = deviceViewModel;
 
         }
+   
     }
 }
