@@ -22,8 +22,8 @@ namespace App1.ViewModel
         private INavigation navigation;
         private IBluetoothLE ble;
         private IAdapter adapter;
-        private string bleStatus;
-        private ObservableCollection<DeviceItemViewModel> deviceList = new ObservableCollection<DeviceItemViewModel>();
+        private string _bleStatus;
+        private ObservableCollection<DeviceItemViewModel> _deviceList = new ObservableCollection<DeviceItemViewModel>();
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -37,7 +37,7 @@ namespace App1.ViewModel
             this.ble = ble;
             this.adapter = adapter;
             this.navigation = navigation;
-            bleStatus = GetStateText();
+            _bleStatus = GetStateText();
             ble.StateChanged += OnStateChanged;
             StartScanCommand = new Command(StartScan);
             
@@ -50,10 +50,10 @@ namespace App1.ViewModel
 
         private async void StartScan()
         {
-            deviceList.Clear();
+            _deviceList.Clear();
             try
             {
-                adapter.DeviceDiscovered += (s, a) => deviceList.Add(new DeviceItemViewModel(a.Device));
+                adapter.DeviceDiscovered += (s, a) => _deviceList.Add(new DeviceItemViewModel(a.Device));
                 await adapter.StartScanningForDevicesAsync();
             } catch(Exception ex)
             {
@@ -63,19 +63,19 @@ namespace App1.ViewModel
         
         public string BleStatus
         {
-            get { return bleStatus; }
+            get { return _bleStatus; }
             set
             {
-                bleStatus = value;
+                _bleStatus = value;
                 OnPropertyChanged(nameof(BleStatus));
             }
         }
         public ObservableCollection<DeviceItemViewModel> DeviceList
         {
-            get { return deviceList; }
+            get { return _deviceList; }
             set
             {
-                deviceList = value;
+                _deviceList = value;
                 OnPropertyChanged(nameof(DeviceList));
             }
         }
@@ -84,8 +84,12 @@ namespace App1.ViewModel
         {
             if (await ConnectDeviceAsync(device))
             {
+                MessagingCenter.Subscribe<string>(this, "senddevice", (arg) => {
+                    MessagingCenter.Send(device, "connectdevice");
+                });
                 await adapter.StopScanningForDevicesAsync();
-                await navigation.PushAsync(new ServiceListPage(device));
+                await navigation.PushAsync(new ServiceListPage());
+                
             }
         }
 

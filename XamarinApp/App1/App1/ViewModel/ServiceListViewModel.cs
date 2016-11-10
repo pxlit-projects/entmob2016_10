@@ -7,23 +7,29 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace App1.ViewModel
 {
     public class ServiceListViewModel : INotifyPropertyChanged
     {
-        private DeviceItemViewModel device;
-        private IList<ICharacteristic> _writeCharacteristics = new List<ICharacteristic>();
+        private IDevice device;
+        private IList<ICharacteristic> _configCharacteristics = new List<ICharacteristic>();
         private IList<ICharacteristic> _characteristics = new List<ICharacteristic>();
         private double _temperatureData;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ServiceListViewModel(DeviceItemViewModel device)
-        {
-            this.device = device;
-            GetServices();
+        public ServiceListViewModel()
+        {           
+            MessagingCenter.Subscribe<DeviceItemViewModel>(this, "connectdevice", (arg) =>
+            {
+                this.device = arg.Device;
+                GetServices();
+            });
+            MessagingCenter.Send("true", "senddevice");
         }
+        
         private async void GetServices()
         {
             await GetTempService();           
@@ -34,10 +40,10 @@ namespace App1.ViewModel
         {
             try
             {
-                IService service = await device.Device.GetServiceAsync(Guid.Parse("f000aa00-0451-4000-b000-000000000000"));
+                IService service = await device.GetServiceAsync(Guid.Parse("f000aa00-0451-4000-b000-000000000000"));
                 ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa01-0451-4000-b000-000000000000"));
                 ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa02-0451-4000-b000-000000000000"));
-                _writeCharacteristics.Add(configCharacteristic);
+                _configCharacteristics.Add(configCharacteristic);
                 _characteristics.Add(dataCharacteristic);
             }
             catch(Exception ex)
@@ -50,9 +56,9 @@ namespace App1.ViewModel
         {
             try
             {
-                for (int i = 0; i < _writeCharacteristics.Count; i++)
+                for (int i = 0; i < _configCharacteristics.Count; i++)
                 {               
-                    var characteristic = _writeCharacteristics[i];
+                    var characteristic = _configCharacteristics[i];
                     await characteristic.WriteAsync(new byte[] { 0x01 });   
                                   
                 }

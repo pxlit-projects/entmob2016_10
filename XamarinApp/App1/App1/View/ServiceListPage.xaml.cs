@@ -11,10 +11,10 @@ namespace App1.View
 {
     public partial class ServiceListPage : ContentPage
     {
-        public ServiceListPage(DeviceItemViewModel device)
+        public ServiceListPage()
         {
             InitializeComponent();
-            BindingContext = new ServiceListViewModel(device); 
+            BindingContext = new ServiceListViewModel(); 
 
         }
     }
