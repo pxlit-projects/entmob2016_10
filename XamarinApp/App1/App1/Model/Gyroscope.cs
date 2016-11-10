@@ -23,7 +23,6 @@ namespace App1.Model
             set
             {
                 x = value;
-                //OnPropertyChanged(nameof(X));
             }
         }
 
@@ -37,7 +36,6 @@ namespace App1.Model
             set
             {
                 y = value;
-                //OnPropertyChanged(nameof(Y));
             }
         }
 
@@ -51,15 +49,7 @@ namespace App1.Model
             set
             {
                 z = value;
-                //OnPropertyChanged(nameof(Z));
             }
         }
-
-       /* public event PropertyChangedEventHandler PropertyChanged;
-
-        void OnPropertyChanged(string gryo)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(gryo));
-        }*/
     }
 }

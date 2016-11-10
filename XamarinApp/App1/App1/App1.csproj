@@ -40,9 +40,10 @@
     </Compile>
     <Compile Include="Converter\RoundConverter.cs" />
     <Compile Include="Converter\StringFormatConverter.cs" />
+    <Compile Include="Model\Accelerometer.cs" />
     <Compile Include="Model\Gyroscope.cs" />
     <Compile Include="Model\Magnetometer.cs" />
-    <Compile Include="Services\ServiceConverter.cs" />
+    <Compile Include="Services\MovementService.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
@@ -51,7 +52,7 @@
       <DependentUpon>ConnectSensorPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\DeviceItemViewModel.cs" />
+    <Compile Include="Model\DeviceItem.cs" />
     <Compile Include="ViewModel\DeviceViewModel.cs" />
     <Compile Include="ViewModel\ServiceListViewModel.cs" />
     <Compile Include="View\ServiceListPage.xaml.cs">

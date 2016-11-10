@@ -8,16 +8,48 @@ using Xamarin.Forms;
 
 namespace App1.Model
 {
-    public class Accelerometer : ContentPage
+    public class Accelerometer
     {
-        public Accelerometer()
+        
+        double x, y, z;
+
+        public double X
         {
-            Content = new StackLayout
+            get
             {
-                Children = {
-                    new Label { Text = "Hello Page" }
-                }
-            };
+                return x;
+            }
+
+            set
+            {
+                x = value;
+            }
+        }
+
+        public double Y
+        {
+            get
+            {
+                return y;
+            }
+
+            set
+            {
+                y = value;
+            }
+        }
+
+        public double Z
+        {
+            get
+            {
+                return z;
+            }
+
+            set
+            {
+                z = value;
+            }
         }
     }
 }
