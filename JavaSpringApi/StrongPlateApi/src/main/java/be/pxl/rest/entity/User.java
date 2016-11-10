@@ -1,8 +1,6 @@
 package be.pxl.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.context.annotation.Primary;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,6 @@ import java.util.List;
  */
 @Entity
 public class User {
-
 
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Id
@@ -64,7 +61,6 @@ public class User {
     public long getId() {
         return id;
     }
-
 
     public String getLastName() {
         return lastName;

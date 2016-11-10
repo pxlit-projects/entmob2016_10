@@ -55,7 +55,7 @@
         </repository>
     </repositories>
     <build>
-        <finalName>pxlprojects</finalName>
+        <finalName>JMSReceiver</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

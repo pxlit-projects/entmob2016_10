@@ -1,12 +1,9 @@
 package be.pxl.rest.aspect;
 
 import be.pxl.rest.mq.Sender;
-import org.aopalliance.intercept.Joinpoint;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
@@ -22,17 +19,14 @@ public class StrongPlateAspect {
 
     @Autowired
     private Sender sender;
-
     private User userSpring;
 
     @Around("execution(* be.pxl.rest.controller.StrongPlateController.getStrongPlateData(..))")
     public Object aroundGetStrongPlateData(ProceedingJoinPoint pjp) throws Throwable {
-
         sender.sendMessage(logBuilder("Aanvraag gegevens", "info"));
         Object returnValue = pjp.proceed();
         sender.sendMessage(logBuilder("Aanvraag gegevens OK", "info"));
         return returnValue;
-
     }
 
     @AfterThrowing(value = "execution(* be.pxl.rest.controller.StrongPlateController.getStrongPlateData(..))", throwing = "ex")
@@ -55,13 +49,10 @@ public class StrongPlateAspect {
     }
 
     private String logBuilder(String message, String type) {
-
         getLoggedInUser();
         String logMessage = String.format("%s %s [%s] User: %s %s", LocalDateTime.now().toLocalDate(), LocalDateTime.now().toLocalTime(), type.toUpperCase(), userSpring.getUsername(), message);
         return logMessage;
-
     }
-
 
     private void getLoggedInUser() {
         userSpring = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

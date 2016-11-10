@@ -1,8 +1,6 @@
 package be.pxl.rest.service;
 
 import be.pxl.rest.entity.Plate;
-import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 
 /**

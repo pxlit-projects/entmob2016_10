@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>be.pxl</groupId>
     <artifactId>pxlprojects</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>pxlprojects Maven Webapp</name>
     <url>http://maven.apache.org</url>
@@ -16,6 +16,11 @@
         <version>1.4.1.RELEASE</version>
     </parent>
     <dependencies>
+        <dependency>
+            <groupId>javax.interceptor</groupId>
+            <artifactId>javax.interceptor-api</artifactId>
+            <version>1.2</version>
+        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -92,7 +97,7 @@
         </repository>
     </repositories>
     <build>
-        <finalName>pxlprojects</finalName>
+        <finalName>StrongPlateApi</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

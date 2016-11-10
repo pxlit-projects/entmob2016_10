@@ -1,23 +1,10 @@
 package be.pxl.rest.controller.input;
 
-import be.pxl.rest.entity.Plate;
-import org.json.JSONObject;
-
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Pieter on 28/10/2016.
  */
 public class StrongPlateUserInput
 {
-
-
     private String lastName;
     private String firstName;
     private String password;
@@ -25,9 +12,6 @@ public class StrongPlateUserInput
     private double averageSpeed;
     private double averageSteadyness;
     private boolean enabled;
-
-
-
 
 
     public String getLastName() {

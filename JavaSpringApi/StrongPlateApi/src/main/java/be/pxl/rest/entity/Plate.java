@@ -1,12 +1,9 @@
 package be.pxl.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.NamedQuery;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 /**
  * Created by Pieter on 19/10/2016.
@@ -22,7 +19,7 @@ public class Plate implements Serializable {
     private LocalDateTime createdOn;
 
     @Column
-    private double xG;//gkracht?
+    private double xG;
 
     @Column
     private double yG;
@@ -31,7 +28,7 @@ public class Plate implements Serializable {
     private double zG;
 
     @Column
-    private double xS;//graden
+    private double xS;
 
     @Column
     private double yS;
@@ -40,7 +37,7 @@ public class Plate implements Serializable {
     private double zS;
 
     @Column
-    private double xUt;//uT
+    private double xUt;
 
     @Column
     private double yUt;
@@ -51,13 +48,9 @@ public class Plate implements Serializable {
     @Column
     private boolean magnetic;
 
-
     @JsonIgnore
     @ManyToOne
     private User user;
-
-
-
 
     public Plate(double xG, double yG, double zG, double xS, double yS, double zS, double xUt, double yUt, double zUt, boolean magnetic, User user) {
         this.createdOn = LocalDateTime.now();
@@ -73,7 +66,8 @@ public class Plate implements Serializable {
         this.magnetic = magnetic;
         this.user = user;
     }
-    public Plate(){
+
+    public Plate() {
 
     }
 

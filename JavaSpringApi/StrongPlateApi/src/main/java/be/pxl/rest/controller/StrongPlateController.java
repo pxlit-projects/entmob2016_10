@@ -1,7 +1,6 @@
 package be.pxl.rest.controller;
 
 import be.pxl.rest.controller.input.StrongPlateInput;
-import be.pxl.rest.controller.input.StrongPlateUserInput;
 import be.pxl.rest.entity.Plate;
 import be.pxl.rest.service.StrongPlateService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
-
-import javax.persistence.Convert;
-import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 
 /**
@@ -29,12 +24,15 @@ public class StrongPlateController {
 
     private be.pxl.rest.entity.User userInput;
 
+    /**
+     * Gaat de strongPlateInput gebruiken voor de gegevens die binnenkomen.
+     */
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
     @PostMapping("/setData")
-    public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput, @AuthenticationPrincipal User userSpring) {
+    public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput,
+                                     @AuthenticationPrincipal User userSpring) {
 
         userInput = new be.pxl.rest.entity.User();
-
 
         if((userSpring.getUsername().equals(strongPlateInput.getUserId()+""))){
             userInput.setId(strongPlateInput.getUserId());
@@ -50,7 +48,6 @@ public class StrongPlateController {
                     strongPlateInput.getzUt(),
                     strongPlateInput.isMagnetic(),
                     userInput
-
             ));
             return "Data toegevoegd aan database";
         }else{
@@ -60,7 +57,6 @@ public class StrongPlateController {
 
 
     }
-
 
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
     @RequestMapping(value = "/getData", method = RequestMethod.GET)

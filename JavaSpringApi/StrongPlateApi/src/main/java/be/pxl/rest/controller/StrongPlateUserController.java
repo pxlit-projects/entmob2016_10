@@ -1,17 +1,14 @@
 package be.pxl.rest.controller;
 
-import be.pxl.rest.controller.input.StrongPlateInput;
+
 import be.pxl.rest.controller.input.StrongPlateUserInput;
-import be.pxl.rest.entity.Plate;
 import be.pxl.rest.entity.User;
-import be.pxl.rest.service.StrongPlateService;
 import be.pxl.rest.service.StrongPlateUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Collection;
 
 /**
@@ -27,8 +24,6 @@ public class StrongPlateUserController {
     @Secured({"ROLE_BAAS"})
     @PostMapping("/addUser")
     public String setStrongPlateUser(@RequestBody StrongPlateUserInput strongPlateUserInput) {
-
-        // strongPlateService.setStrongPlateData(new Plate(strongPlateInput.getUserId(), strongPlateInput.getTemperature()));
         strongPlateUserService.setUser(new User(
                 strongPlateUserInput.getLastName(),
                 strongPlateUserInput.getFirstName(),
@@ -38,17 +33,13 @@ public class StrongPlateUserController {
                 strongPlateUserInput.getAverageSteadyness(),
                 strongPlateUserInput.isEnabled()
         ));
-
-
         return "Data toegevoegd aan database";
     }
+
     @Secured({"ROLE_BAAS"})
     @RequestMapping(value ="/getUsers", method = RequestMethod.GET)
     public ResponseEntity<Collection<User>> getUser(){
-
         return new ResponseEntity<>((Collection<User>)strongPlateUserService.getStrongPlateUsers(),HttpStatus.OK);
-//        return new ResponseEntity<>((Collection<User>)strongPlateUserService.getStrongPlateUsers(), HttpStatus.OK);
-//        return "getUser called";
     }
 
 

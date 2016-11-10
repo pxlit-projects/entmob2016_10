@@ -1,10 +1,5 @@
 package be.pxl.rest.controller.input;
 
-import be.pxl.rest.entity.User;
-import org.json.JSONObject;
-
-import java.time.LocalDateTime;
-
 /**
  * Created by Pieter on 19/10/2016.
  */

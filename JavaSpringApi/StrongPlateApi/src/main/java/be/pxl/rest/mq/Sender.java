@@ -12,8 +12,8 @@ public class Sender {
     @Autowired
     private JmsTemplate jmsTemplate;
 
-    public void sendMessage(final String text){
-        jmsTemplate.send("StalePlateQueue", s->s.createTextMessage(text));
+    public void sendMessage(final String text) {
+        jmsTemplate.send("StalePlateQueue", s -> s.createTextMessage(text));
 
     }
 }
