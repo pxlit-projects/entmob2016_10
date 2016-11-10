@@ -8,18 +8,18 @@
     <Label Text="Temperature : " ></Label>
     <Label Text="{Binding TemperatureData , Converter={StaticResource localRoundConverter}}" ></Label>   
   </StackLayout>
-    <StackLayout  >
+    <StackLayout >
   <StackLayout Orientation="Horizontal">
     <Label Text="GyroscoopX : " ></Label>
-    <Label Text="{Binding X }" ></Label>
+    <Label Text="{Binding Gyro.X , Converter={StaticResource localRoundConverter}}" ></Label>
   </StackLayout>
     <StackLayout Orientation="Horizontal">
       <Label Text="GyroscoopY : " ></Label>
-      <Label Text="{Binding Y }" ></Label>
+      <Label Text="{Binding Gyro.Y , Converter={StaticResource localRoundConverter}}" ></Label>
     </StackLayout>
     <StackLayout Orientation="Horizontal">
       <Label Text="GyroscoopZ : " ></Label>
-      <Label Text="{Binding Z }" ></Label>
+      <Label Text="{Binding Gyro.Z , Converter={StaticResource localRoundConverter}}" ></Label>
     </StackLayout>
     </StackLayout>
   </StackLayout>

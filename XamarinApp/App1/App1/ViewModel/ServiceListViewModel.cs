@@ -23,7 +23,7 @@ namespace App1.ViewModel
 
         public ServiceListViewModel()
         {           
-            MessagingCenter.Subscribe<DeviceItemViewModel>(this, "connectdevice", (arg) =>
+            MessagingCenter.Subscribe<DeviceItem>(this, "connectdevice", (arg) =>
             {
                 this.device = arg.Device;
                 GetServices();
@@ -35,8 +35,8 @@ namespace App1.ViewModel
         {
             await GetTempService();
             await GetMovementService();           
-            await TurnServiceOn();
-            readTemp();
+            //await TurnServiceOn();
+            //readTemp();
         }
         
         private async Task GetTempService()
@@ -46,8 +46,18 @@ namespace App1.ViewModel
                 IService service = await device.GetServiceAsync(Guid.Parse("f000aa00-0451-4000-b000-000000000000"));
                 ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa01-0451-4000-b000-000000000000"));
                 ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa02-0451-4000-b000-000000000000"));
-                _configCharacteristics.Add(configCharacteristic);
-                _characteristics.Add(dataCharacteristic);
+                //_configCharacteristics.Add(configCharacteristic);
+                //_characteristics.Add(dataCharacteristic);
+
+                await configCharacteristic.WriteAsync(new byte[] { 0x01 });
+
+                dataCharacteristic.ValueUpdated += (o, args) =>
+                {
+                    byte[] bytes = args.Characteristic.Value;
+                    _temperatureData = AmbientTemperature(bytes);
+                    onPropertyChanged(nameof(TemperatureData));
+                };
+                await dataCharacteristic.StartUpdatesAsync();
 
             }
             catch(Exception ex)
@@ -63,8 +73,8 @@ namespace App1.ViewModel
                 for (int i = 0; i < _configCharacteristics.Count; i++)
                 {               
                     var characteristic = _configCharacteristics[i];
-                    await characteristic.WriteAsync(new byte[] { 0x01 });   
-                                  
+                    await characteristic.WriteAsync(new byte[] { 0x01 });
+
                 }
                 
             }
@@ -128,11 +138,13 @@ namespace App1.ViewModel
                 _gyro = new Gyroscope();
                 dataCharacteristic.ValueUpdated += (o, args) =>
                 {
+                    
                     byte[] bytes = args.Characteristic.Value;
 
                     _gyro.X = MovementService.Gyro(bytes, "x");
                     _gyro.Y = MovementService.Gyro(bytes, "y");
                     _gyro.Z = MovementService.Gyro(bytes, "z");
+                    onPropertyChanged(nameof(Gyro));
                 };
                 await dataCharacteristic.StartUpdatesAsync();
 
@@ -151,7 +163,6 @@ namespace App1.ViewModel
             set
             {
                 _gyro = value;
-                onPropertyChanged(nameof(Gyro));
             }
         }
 

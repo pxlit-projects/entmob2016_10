@@ -23,7 +23,7 @@ namespace App1.ViewModel
         private IBluetoothLE ble;
         private IAdapter adapter;
         private string _bleStatus;
-        private ObservableCollection<DeviceItemViewModel> _deviceList = new ObservableCollection<DeviceItemViewModel>();
+        private ObservableCollection<DeviceItem> _deviceList = new ObservableCollection<DeviceItem>();
 
         public Command StartScanCommand { get; }
 
@@ -54,7 +54,7 @@ namespace App1.ViewModel
             _deviceList.Clear();
             try
             {
-                adapter.DeviceDiscovered += (s, a) => _deviceList.Add(new DeviceItemViewModel(a.Device));
+                adapter.DeviceDiscovered += (s, a) => _deviceList.Add(new DeviceItem(a.Device));
                 await adapter.StartScanningForDevicesAsync();
             } catch(Exception ex)
             {
@@ -71,7 +71,7 @@ namespace App1.ViewModel
                 OnPropertyChanged(nameof(BleStatus));
             }
         }
-        public ObservableCollection<DeviceItemViewModel> DeviceList
+        public ObservableCollection<DeviceItem> DeviceList
         {
             get { return _deviceList; }
             set
@@ -81,7 +81,7 @@ namespace App1.ViewModel
             }
         }
 
-        public async void HandleSelectedDevice(DeviceItemViewModel device)
+        public async void HandleSelectedDevice(DeviceItem device)
         {
             if (await ConnectDeviceAsync(device))
             {
@@ -97,7 +97,7 @@ namespace App1.ViewModel
             }
         }
 
-        public async Task<bool> ConnectDeviceAsync(DeviceItemViewModel device)
+        public async Task<bool> ConnectDeviceAsync(DeviceItem device)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace App1.ViewModel
             return true;
         }
 
-        public DeviceItemViewModel SelectedDevice
+        public DeviceItem SelectedDevice
         {
             get { return null; }
             set
