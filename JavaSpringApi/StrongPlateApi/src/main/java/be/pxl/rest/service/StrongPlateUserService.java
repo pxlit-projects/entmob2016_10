@@ -13,5 +13,7 @@ public interface StrongPlateUserService {
 
     void deleteAllUsers();
 
+    User getStrongPlateUserById(long userId);
+
 
 }

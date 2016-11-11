@@ -42,6 +42,12 @@ public class StrongPlateUserController {
         return new ResponseEntity<>((Collection<User>)strongPlateUserService.getStrongPlateUsers(),HttpStatus.OK);
     }
 
+    @Secured({"ROLE_OBER", "ROLE_BAAS"})
+    @RequestMapping(value ="/getUserById/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<User> getUserById(@PathVariable long userId){
+        return new ResponseEntity<>(strongPlateUserService.getStrongPlateUserById(userId),HttpStatus.OK);
+    }
+
 
 
 }

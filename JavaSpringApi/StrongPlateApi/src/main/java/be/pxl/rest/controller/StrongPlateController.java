@@ -68,7 +68,7 @@ public class StrongPlateController {
     @RequestMapping(value = "/getDataByUserId/{userId}", method = RequestMethod.GET)
     public
     @ResponseBody
-    ResponseEntity<Collection<Plate>> getStrongPlateDataByUserId(@PathVariable int userId) {
+    ResponseEntity<Collection<Plate>> getStrongPlateDataByUserId(@PathVariable long userId) {
         return new ResponseEntity<>(strongPlateService.getStrongPlateDataByUserId(userId), HttpStatus.OK);
     }
 

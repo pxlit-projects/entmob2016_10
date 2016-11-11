@@ -101,6 +101,15 @@ public class StrongPlateApiTest {
         assertFalse(mockMvcResult.getResponse().getContentAsString().isEmpty());
         assertFalse(users.isEmpty());
     }
+    @Test
+    public void getUserByIdTest()throws Exception{
+        MvcResult mockMvcResult = mockMvc.perform(get("/User/getUserById/1")
+                .with(httpBasic("1", "secret"))
+                .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
+                .andExpect(status().isOk())/*.andDo(print())*/.andReturn();
+        User incomingUser = objectMapper.readValue(mockMvcResult.getResponse().getContentAsString(), User.class);
+        assertEquals(firstUser.getId(), incomingUser.getId());
+    }
 
     @Test
     public void bosCanAddUserTest() throws Exception{

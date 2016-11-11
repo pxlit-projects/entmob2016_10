@@ -40,6 +40,7 @@ public class StrongPlateUserServiceTest {
     @Before
     public void setUpData(){
         user = new User("Peeters", "Jaak", "secret", "ROLE_OBER", 20, 30, true);
+        user.setId(1);
         userList = new ArrayList<>();
         userList.add(user);
     }
@@ -55,5 +56,11 @@ public class StrongPlateUserServiceTest {
         when(strongPlateUserRepository.findAll()).thenReturn(userList);
         List<User> users = (List<User>)testPlateUserService.getStrongPlateUsers();
         Assert.assertFalse(users.isEmpty());
+    }
+    @Test
+    public void getStrongPlateUserByIdTest(){
+        when(strongPlateUserRepository.getStalePlateUserById(user.getId())).thenReturn(user);
+        User incomingUser =  testPlateUserService.getStrongPlateUserById(user.getId());
+        Assert.assertEquals(incomingUser.getId(), 1);
     }
 }

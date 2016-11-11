@@ -30,4 +30,9 @@ public class StrongPlateUserServiceImpl implements StrongPlateUserService {
     @Override
     public void deleteAllUsers() {strongPlateUserRepository.deleteAll();
     }
+
+    @Override
+    public User getStrongPlateUserById(long userId) {
+        return strongPlateUserRepository.getStalePlateUserById(userId);
+    }
 }

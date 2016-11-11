@@ -12,6 +12,6 @@ import java.util.UUID;
  */
 @Repository
 public interface StrongPlateUserRepository extends CrudRepository<User, UUID> {
-    List<Plate> getStalePlateUserById(long userId);
+    User getStalePlateUserById(long userId);
 
 }
