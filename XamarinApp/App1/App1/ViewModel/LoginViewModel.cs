@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Diagnostics;
 using System.ComponentModel;
+using PCLCrypto;
 
 namespace App1.ViewModel
 {
@@ -44,7 +45,13 @@ namespace App1.ViewModel
             users =  await GetUsers();
         }
 
-        
+        private string getSha256(string data) {
+            byte[] byteData = Encoding.UTF8.GetBytes(data);
+            var hasher = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256);
+            byte[] hash = hasher.HashData(byteData);
+            string hashBase64 = Convert.ToBase64String(hash);
+            return hashBase64;
+        }
 
         private async void Login()
         {
@@ -55,7 +62,8 @@ namespace App1.ViewModel
                 {
                     if (users[i].FirstName == _username)
                     {
-                        string password = _password;
+                        
+                        string password = getSha256(_password);
                         Debug.WriteLine("ApiPass = " + users[i].Password);
                         Debug.WriteLine("XamPass = " + password);
                         if (users[i].Password == password)
