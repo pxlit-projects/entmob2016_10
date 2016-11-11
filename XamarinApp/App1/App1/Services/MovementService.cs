@@ -26,6 +26,24 @@ namespace App1.Services
             return (data * 1.0) / (65536 / 500);
         }
 
+        public static double Acc(byte[] bytes, string position)
+        {
+            Int16 data = BitConverter.ToInt16(bytes, 0);
+            switch (position.ToLower())
+            {
+                case "x":
+                    data = BitConverter.ToInt16(bytes, 6);
+                    break;
+                case "y":
+                    data = BitConverter.ToInt16(bytes, 8);
+                    break;
+                case "z":
+                    data = BitConverter.ToInt16(bytes, 10);
+                    break;
+            }
+            return (data * 1.0) / (32768 / 2);
+        }
+
         public static double Mag(byte[] bytes, string position)
         {
             Int16 data = BitConverter.ToInt16(bytes, 0);
@@ -43,6 +61,8 @@ namespace App1.Services
             }
             return 1.0 * data;
         }
+
+        
         public static double IrTemperature(byte[] bytes)
         {
             //vb array

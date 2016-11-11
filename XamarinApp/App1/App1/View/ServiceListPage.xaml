@@ -8,7 +8,7 @@
     <Label Text="Temperature : " ></Label>
     <Label Text="{Binding TemperatureData , Converter={StaticResource localRoundConverter}}" ></Label>   
   </StackLayout>
-    <StackLayout >
+
   <StackLayout Orientation="Horizontal">
     <Label Text="GyroscoopX : " ></Label>
     <Label Text="{Binding Gyro.X , Converter={StaticResource localRoundConverter}}" ></Label>
@@ -21,6 +21,31 @@
       <Label Text="GyroscoopZ : " ></Label>
       <Label Text="{Binding Gyro.Z , Converter={StaticResource localRoundConverter}}" ></Label>
     </StackLayout>
+
+    <StackLayout Orientation="Horizontal">
+      <Label Text="MagnetometerX : " ></Label>
+      <Label Text="{Binding Mag.X , Converter={StaticResource localRoundConverter}}" ></Label>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="MagnetometerY : " ></Label>
+      <Label Text="{Binding Mag.Y , Converter={StaticResource localRoundConverter}}" ></Label>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="MagnetometerZ : " ></Label>
+      <Label Text="{Binding Mag.Z , Converter={StaticResource localRoundConverter}}" ></Label>
+    </StackLayout>
+
+    <StackLayout Orientation="Horizontal">
+      <Label Text="AccelerometerX : " ></Label>
+      <Label Text="{Binding Acc.X , Converter={StaticResource localRoundConverter}}" ></Label>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="AccelerometerY : " ></Label>
+      <Label Text="{Binding Acc.Y , Converter={StaticResource localRoundConverter}}" ></Label>
+    </StackLayout>
+    <StackLayout Orientation="Horizontal">
+      <Label Text="AccelerometerZ : " ></Label>
+      <Label Text="{Binding Acc.Z , Converter={StaticResource localRoundConverter}}" ></Label>
     </StackLayout>
   </StackLayout>
 </ContentPage>

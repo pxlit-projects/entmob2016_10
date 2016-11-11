@@ -136,15 +136,16 @@ namespace App1.ViewModel
                 //_characteristics.Add(dataCharacteristic);
                 await configCharacteristic.WriteAsync(new byte[] { 0x7F, 0x00 });
                 _gyro = new Gyroscope();
+                _acc = new Accelerometer();
+                _mag = new Magnetometer();
                 dataCharacteristic.ValueUpdated += (o, args) =>
                 {
                     
                     byte[] bytes = args.Characteristic.Value;
 
-                    _gyro.X = MovementService.Gyro(bytes, "x");
-                    _gyro.Y = MovementService.Gyro(bytes, "y");
-                    _gyro.Z = MovementService.Gyro(bytes, "z");
-                    onPropertyChanged(nameof(Gyro));
+                    SetGyro(bytes);
+                    SetAcc(bytes);
+                    SetMag(bytes);
                 };
                 await dataCharacteristic.StartUpdatesAsync();
 
@@ -155,40 +156,29 @@ namespace App1.ViewModel
             }
         }
 
-        private async Task GetGyroscoopData()
-        {
-            //morgen verder
+        private void SetGyro(byte[] bytes) {
+            _gyro.X = MovementService.Gyro(bytes, "x");
+            _gyro.Y = MovementService.Gyro(bytes, "y");
+            _gyro.Z = MovementService.Gyro(bytes, "z");
+            onPropertyChanged(nameof(Gyro));
         }
 
-        private async Task GetMagnetometerService()
+        private void SetMag(byte[] bytes)
         {
-            try
-            {
-                IService service = await device.GetServiceAsync(Guid.Parse("f000aa80-0451-4000-b000-000000000000"));
-                ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa81-0451-4000-b000-000000000000"));
-                ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa82-0451-4000-b000-000000000000"));
-                // _configCharacteristics.Add(configCharacteristic);
-                //_characteristics.Add(dataCharacteristic);
-                await configCharacteristic.WriteAsync(new byte[] { 0x7F, 0x00 });
-                _gyro = new Gyroscope();
-                dataCharacteristic.ValueUpdated += (o, args) =>
-                {
-
-                    byte[] bytes = args.Characteristic.Value;
-
-                    _gyro.X = MovementService.Gyro(bytes, "x");
-                    _gyro.Y = MovementService.Gyro(bytes, "y");
-                    _gyro.Z = MovementService.Gyro(bytes, "z");
-                    onPropertyChanged(nameof(Gyro));
-                };
-                await dataCharacteristic.StartUpdatesAsync();
-
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Error GetMovementService: " + ex);
-            }
+            _mag.X = MovementService.Mag(bytes, "x");
+            _mag.Y = MovementService.Mag(bytes, "y");
+            _mag.Z = MovementService.Mag(bytes, "z");
+            onPropertyChanged(nameof(Mag));
         }
+
+        private void SetAcc(byte[] bytes)
+        {
+            _acc.X = MovementService.Acc(bytes, "x");
+            _acc.Y = MovementService.Acc(bytes, "y");
+            _acc.Z = MovementService.Acc(bytes, "z");
+            onPropertyChanged(nameof(Acc));
+        }
+
 
         private Gyroscope _gyro;
 
@@ -201,9 +191,20 @@ namespace App1.ViewModel
             }
         }
 
-        private Gyroscope _mag;
+        private Accelerometer _acc;
 
-        public Gyroscope Mag
+        public Accelerometer Acc
+        {
+            get { return _acc; }
+            set
+            {
+                _acc = value;
+            }
+        }
+
+        private Magnetometer _mag;
+
+        public Magnetometer Mag
         {
             get { return _mag; }
             set
