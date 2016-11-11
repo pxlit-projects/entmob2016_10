@@ -27,13 +27,14 @@ namespace App1.ViewModel
 
         public Command StartScanCommand { get; }
 
+        #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
 
-        void OnPropertyChanged(string bleStatus)
+        private void OnPropertyChanged(string property)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(bleStatus));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
-
+        #endregion
         public DeviceViewModel(IAdapter adapter, IBluetoothLE ble,INavigation navigation)
         {
             this.ble = ble;

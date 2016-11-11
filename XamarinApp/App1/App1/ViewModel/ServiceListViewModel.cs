@@ -19,8 +19,14 @@ namespace App1.ViewModel
         private IList<ICharacteristic> _characteristics = new List<ICharacteristic>();
         private double _temperatureData;
 
+        #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private void onPropertyChanged(string property)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+        #endregion
         public ServiceListViewModel()
         {           
             MessagingCenter.Subscribe<DeviceItem>(this, "connectdevice", (arg) =>
@@ -35,8 +41,6 @@ namespace App1.ViewModel
         {
             await GetTempService();
             await GetMovementService();           
-            //await TurnServiceOn();
-            //readTemp();
         }
         
         private async Task GetTempService()
@@ -46,8 +50,6 @@ namespace App1.ViewModel
                 IService service = await device.GetServiceAsync(Guid.Parse("f000aa00-0451-4000-b000-000000000000"));
                 ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa01-0451-4000-b000-000000000000"));
                 ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa02-0451-4000-b000-000000000000"));
-                //_configCharacteristics.Add(configCharacteristic);
-                //_characteristics.Add(dataCharacteristic);
 
                 await configCharacteristic.WriteAsync(new byte[] { 0x01 });
 
@@ -117,12 +119,7 @@ namespace App1.ViewModel
 
             var ambientTemp = BitConverter.ToUInt16(bytes, 2) / 128.0;
             return ambientTemp;
-        }
-
-        private void onPropertyChanged(string temperature)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(temperature));
-        }
+        }       
 
 
         private async Task GetMovementService()
@@ -212,7 +209,5 @@ namespace App1.ViewModel
                 _mag = value;
             }
         }
-
-
     }
 }

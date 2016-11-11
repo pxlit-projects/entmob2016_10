@@ -5,6 +5,7 @@
   <ContentPage.Content>
     <StackLayout>
     <Label FontSize="35" HorizontalTextAlignment="Center" Text="Login"/>
+    <Label Text="{Binding LoginStatus}"/>
     <Grid>
       <Grid.RowDefinitions>
         <RowDefinition Height="*" />
@@ -16,11 +17,12 @@
       </Grid.ColumnDefinitions>
       <Label Text="Username" Grid.Row="0" Grid.Column="0"  />
       <Label Text="Password" Grid.Row="1" Grid.Column="0"  />
-      <Entry Grid.Row="0" Grid.Column="1"  />
-      <Entry IsPassword="true" Grid.Row="1" Grid.Column="1"  />
+      <Entry Text="{Binding Path=Username, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"  />
+      <Entry Text="{Binding Path=Password, Mode=TwoWay}" IsPassword="true" Grid.Row="1" Grid.Column="1"  />
     
     </Grid >
       <Button x:Name="btnLogin" Text="Login" Command="{Binding LoginCommand}" />
+      
     </StackLayout>
   </ContentPage.Content>
 </ContentPage>
