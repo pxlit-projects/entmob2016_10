@@ -49,8 +49,7 @@ namespace App1.ViewModel
             byte[] byteData = Encoding.UTF8.GetBytes(data);
             var hasher = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256);
             byte[] hash = hasher.HashData(byteData);
-            string hashBase64 = Convert.ToBase64String(hash);
-            return hashBase64;
+            return BitConverter.ToString(hash).Replace("-", "").ToLower();
         }
 
         private async void Login()
@@ -132,7 +131,7 @@ namespace App1.ViewModel
         private async Task<List<User>> GetUsers()
         {
             
-            var baseUri = "http://192.168.1.105:8090/User/getUsers";
+            var baseUri = "http://192.168.1.108:8090/User/getUsers";
 
             string json = await JsonApiClientGetRequest(baseUri);
             if (json != null)
