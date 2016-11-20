@@ -6,9 +6,6 @@ namespace App1.Tests.ViewModel
     [TestClass]
     public class ServiceListViewModelTests
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+        
     }
 }

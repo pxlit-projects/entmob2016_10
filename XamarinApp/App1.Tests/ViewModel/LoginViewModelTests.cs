@@ -1,5 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using App1.ViewModel;
+using App1.Model;
+using System.Net.Http;
+using System.Collections.Generic;
 
 namespace App1.Tests.ViewModel
 {
@@ -7,7 +10,7 @@ namespace App1.Tests.ViewModel
     public class LoginViewModelTests
     {
 
-        LoginViewModel loginViewModel;
+        private LoginViewModel loginViewModel;
 
         [TestMethod]
         public void TestIfReturnedSha256IsRightLength()
@@ -16,6 +19,19 @@ namespace App1.Tests.ViewModel
             string data = "Hello";
             string result = loginViewModel.getSha256(data);
             Assert.AreEqual(64, result.Length);
+        }
+
+        [TestMethod]
+        public async void TestIfListOfUsersIsReturned()
+        {
+            //arrange
+            loginViewModel = new LoginViewModel();
+
+            //action
+            List<User> users = await loginViewModel.GetUsers();
+
+            //test
+            CollectionAssert.AllItemsAreInstancesOfType(users, typeof(User));
         }
     }
 }

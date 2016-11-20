@@ -43,6 +43,7 @@
     <Compile Include="Model\Accelerometer.cs" />
     <Compile Include="Model\Gyroscope.cs" />
     <Compile Include="Model\Magnetometer.cs" />
+    <Compile Include="Model\MyHttpMessageHandler.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Services\MovementService.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />

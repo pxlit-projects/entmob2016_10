@@ -131,7 +131,7 @@ namespace App1.ViewModel
             }
         }
 
-        private async Task<List<User>> GetUsers()
+        public async Task<List<User>> GetUsers()
         {
             
             var baseUri = "http://192.168.1.108:8090/User/getUsers";
@@ -152,7 +152,7 @@ namespace App1.ViewModel
             string password = "secret";
             try
             {
-                using (var client = new HttpClient())
+                using (var client = new System.Net.Http.HttpClient())
                 {
                     client.BaseAddress = new Uri(baseUri);
                     client.DefaultRequestHeaders.Accept.Clear();                   
