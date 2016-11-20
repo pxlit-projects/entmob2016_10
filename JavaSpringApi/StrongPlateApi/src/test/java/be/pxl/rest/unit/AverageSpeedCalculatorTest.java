@@ -32,7 +32,6 @@ public class AverageSpeedCalculatorTest {
         creationTime[4] = LocalDateTime.of(2016, Month.APRIL, 6, 10, 10, 25);
         creationTime[5] = LocalDateTime.of(2016, Month.APRIL, 6, 10, 10, 50);
         creationTime[6] = LocalDateTime.of(2016, Month.APRIL, 6, 10, 10, 45);
-
         for (int i = 0; i < 7; i++) {
             d = new Plate(20, 30, 21, 100, 89, 23, 20, 48, 10, true, null);
             d.setCreatedOn(creationTime[i]);
@@ -40,14 +39,13 @@ public class AverageSpeedCalculatorTest {
         }
         plateList.get(6).setMagnetic(false);
 
-        double average = AverageSpeedCalculator.CalculateAverageSpeed(plateList);
-        Assert.assertEquals(22.5, average, 0.1);
 
     }
 
     @Test
     public void calculateAverageTest() {
-
+        double average = AverageSpeedCalculator.CalculateAverageSpeed(plateList);
+        Assert.assertEquals(22.5, average, 0.1);
     }
 
 
