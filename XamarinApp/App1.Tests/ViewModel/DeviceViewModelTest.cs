@@ -18,24 +18,47 @@ namespace App1.Tests.ViewModel
     {
 
         private DeviceViewModel deviceViewModel;
+        private Mock<IAdapter> adapter;
+        private Mock<IBluetoothLE> ble;
+        private Mock<INavigation> navigation;
+
+
+        [TestInitialize]
+        public void Init()
+        {
+            adapter = new Mock<IAdapter>();
+            ble = new Mock<IBluetoothLE>();
+            navigation = new Mock<INavigation>();
+        }
 
 
         [TestMethod]
         public void TestBLEStateIsNotAvailable()
         {
-            //Arrange 
-            var adaper = new Mock<IAdapter>();
-            var ble = new Mock<IBluetoothLE>();
-            var navigation = new Mock<INavigation>();
+            //Arrange
             ble.Setup(c => c.State).Returns(BluetoothState.Unavailable);
-            deviceViewModel = new DeviceViewModel(adaper.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
 
             //Actual
-            string bleState = "BLE is not available on this device.";
+            string ExpectedBleState = "BLE is not available on this device.";
 
-            Assert.AreEqual(bleState, deviceViewModel.BleStatus);
-
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
 
         }
+
+        [TestMethod]
+        public void TestBLEStateIsOn()
+        {
+            //Arrange 
+            ble.Setup(c => c.State).Returns(BluetoothState.On);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+
+            //Actual
+            string ExpectedBleState = "BLE is on.";
+
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+
+        }
+
     }
 }
