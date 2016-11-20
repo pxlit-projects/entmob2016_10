@@ -39,6 +39,7 @@ public class StrongPlateServiceImpl implements StrongPlateService {
 
     @Override
     public double calculateAverageSpeed(List<Plate> plateList) {
-        return AverageSpeedCalculator.CalculateAverageSpeed(plateList);
+        AverageSpeedCalculator averageSpeedCalculator = new AverageSpeedCalculator();
+        return averageSpeedCalculator.CalculateAverageSpeed(plateList);
     }
 }

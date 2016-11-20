@@ -3,7 +3,6 @@ package be.pxl.rest.unit;
 import be.pxl.rest.entity.Plate;
 import be.pxl.rest.entity.User;
 import be.pxl.rest.repository.StrongPlateRepository;
-import be.pxl.rest.service.StrongPlateService;
 import be.pxl.rest.service.StrongPlateServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
