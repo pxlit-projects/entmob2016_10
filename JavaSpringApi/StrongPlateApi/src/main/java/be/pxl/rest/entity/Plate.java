@@ -1,6 +1,7 @@
 package be.pxl.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -79,6 +80,10 @@ public class Plate implements Serializable {
         return createdOn;
     }
 
+    public void setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+    }
+
     public double getxG() {
         return xG;
     }
@@ -117,6 +122,10 @@ public class Plate implements Serializable {
 
     public boolean isMagnetic() {
         return magnetic;
+    }
+
+    public void setMagnetic(boolean magnetic) {
+        this.magnetic = magnetic;
     }
 
     public User getUser() {

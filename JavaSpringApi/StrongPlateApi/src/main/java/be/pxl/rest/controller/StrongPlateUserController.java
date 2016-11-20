@@ -1,6 +1,5 @@
 package be.pxl.rest.controller;
 
-
 import be.pxl.rest.controller.input.StrongPlateUserInput;
 import be.pxl.rest.entity.User;
 import be.pxl.rest.service.StrongPlateUserService;
@@ -47,6 +46,7 @@ public class StrongPlateUserController {
     public ResponseEntity<User> getUserById(@PathVariable long userId){
         return new ResponseEntity<>(strongPlateUserService.getStrongPlateUserById(userId),HttpStatus.OK);
     }
+
 
 
 

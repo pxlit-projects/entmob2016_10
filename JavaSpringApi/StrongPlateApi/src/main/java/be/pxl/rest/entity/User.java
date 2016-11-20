@@ -82,6 +82,9 @@ public class User {
         return averageSpeed;
     }
 
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
+    }
     public double getAverageSteadyness() {
         return averageSteadyness;
     }

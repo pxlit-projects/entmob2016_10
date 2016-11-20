@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 public class StrongPlateServiceTest {
 
     @InjectMocks
-    private StrongPlateService testPlateService = new StrongPlateServiceImpl();
+    private StrongPlateServiceImpl testPlateService;
 
     @Mock
     private StrongPlateRepository strongPlateRepository;
@@ -38,7 +38,7 @@ public class StrongPlateServiceTest {
     private Plate plate;
 
     @Before
-    public void setUpData() {
+    public void setUpData() throws Exception {
         user = new User();
         plateList = new ArrayList<>();
         plate = new Plate(20, 30, 21, 100, 89, 23, 20, 48, 10, true, user);

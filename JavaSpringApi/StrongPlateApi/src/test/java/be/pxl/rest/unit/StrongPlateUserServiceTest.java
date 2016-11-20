@@ -10,11 +10,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +32,7 @@ import java.util.List;
 public class StrongPlateUserServiceTest {
 
     @InjectMocks
-    private StrongPlateUserService testPlateUserService = new StrongPlateUserServiceImpl();
+    private StrongPlateUserServiceImpl testPlateUserService;
 
     @Mock
     private StrongPlateUserRepository strongPlateUserRepository;
@@ -38,7 +41,7 @@ public class StrongPlateUserServiceTest {
     private List<User> userList;
 
     @Before
-    public void setUpData(){
+    public void setUpData() throws Exception {
         user = new User("Peeters", "Jaak", "secret", "ROLE_OBER", 20, 30, true);
         user.setId(1);
         userList = new ArrayList<>();
@@ -46,21 +49,30 @@ public class StrongPlateUserServiceTest {
     }
 
     @Test
-    public void setUserTest(){
+    public void setUserTest() {
         testPlateUserService.setUser(user);
         verify(strongPlateUserRepository).save(any(User.class));
     }
 
     @Test
-    public void getStrongPlateUsersTest(){
+    public void getStrongPlateUsersTest() {
         when(strongPlateUserRepository.findAll()).thenReturn(userList);
-        List<User> users = (List<User>)testPlateUserService.getStrongPlateUsers();
+        List<User> users = (List<User>) testPlateUserService.getStrongPlateUsers();
         Assert.assertFalse(users.isEmpty());
     }
+
     @Test
-    public void getStrongPlateUserByIdTest(){
+    public void getStrongPlateUserByIdTest() {
         when(strongPlateUserRepository.getStalePlateUserById(user.getId())).thenReturn(user);
-        User incomingUser =  testPlateUserService.getStrongPlateUserById(user.getId());
+        User incomingUser = testPlateUserService.getStrongPlateUserById(user.getId());
         Assert.assertEquals(incomingUser.getId(), 1);
+    }
+
+    @Test
+    public void updateAverageSpeedUserTest() {
+        when(strongPlateUserRepository.getStalePlateUserById(user.getId())).thenReturn(user);
+        testPlateUserService.updateAverageSpeedUser(user.getId(), 12.5);
+        verify(strongPlateUserRepository).save(user);
+
     }
 }

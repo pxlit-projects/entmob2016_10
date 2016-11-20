@@ -4,12 +4,13 @@ import be.pxl.rest.entity.User;
 import be.pxl.rest.repository.StrongPlateUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
+import java.util.OptionalDouble;
 
 /**
  * Created by Pieter on 28/10/2016.
  */
-
 @Service
 @Transactional
 public class StrongPlateUserServiceImpl implements StrongPlateUserService {
@@ -19,7 +20,7 @@ public class StrongPlateUserServiceImpl implements StrongPlateUserService {
 
     @Override
     public void setUser(User user) {
-       strongPlateUserRepository.save(user);
+        strongPlateUserRepository.save(user);
     }
 
     @Override
@@ -28,11 +29,21 @@ public class StrongPlateUserServiceImpl implements StrongPlateUserService {
     }
 
     @Override
-    public void deleteAllUsers() {strongPlateUserRepository.deleteAll();
+    public void deleteAllUsers() {
+        strongPlateUserRepository.deleteAll();
     }
 
     @Override
     public User getStrongPlateUserById(long userId) {
         return strongPlateUserRepository.getStalePlateUserById(userId);
     }
+
+    @Override
+    public void updateAverageSpeedUser(long userId, double average) {
+        User u = strongPlateUserRepository.getStalePlateUserById(userId);
+        u.setAverageSpeed(average);
+        strongPlateUserRepository.save(u);
+    }
+
+
 }

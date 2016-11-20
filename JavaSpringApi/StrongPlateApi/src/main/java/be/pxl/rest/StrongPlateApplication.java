@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 /**
  * Created by Pieter on 19/10/2016.
  */
-
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class StrongPlateApplication {

@@ -177,6 +177,7 @@ public class StrongPlateApiTest {
                 .accept(MediaType.parseMediaType("application/json;charset=UTF-8")))
                 .andExpect(status().isOk())/*.andDo(print())*/.andReturn();
         replyPlates = mockMvcResult.getResponse().getContentAsString();
+        System.out.println(replyPlates);
         assertFalse(replyPlates.length()<2);
     }
 
