@@ -31,6 +31,9 @@ namespace App1.ViewModel
         #endregion
 
         public Command LoginCommand { get; }
+
+        public LoginViewModel() {}
+
         public LoginViewModel(IAdapter adapter,IBluetoothLE ble,INavigation navigation)
         {
             this.adapter = adapter;
@@ -45,7 +48,7 @@ namespace App1.ViewModel
             users =  await GetUsers();
         }
 
-        private string getSha256(string data) {
+        public string getSha256(string data) {
             byte[] byteData = Encoding.UTF8.GetBytes(data);
             var hasher = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256);
             byte[] hash = hasher.HashData(byteData);
