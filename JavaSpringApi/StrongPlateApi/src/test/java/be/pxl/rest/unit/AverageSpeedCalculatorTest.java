@@ -5,9 +5,6 @@ import be.pxl.rest.repository.AverageSpeedCalculator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.internal.util.collections.Iterables;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -17,13 +14,13 @@ import java.util.List;
  * Created by Pieter on 20/11/2016.
  */
 public class AverageSpeedCalculatorTest {
-    private List<Plate> plateList;
+    private List<Plate> plateListAv;
     private LocalDateTime[] creationTime;
     private Plate d;
 
     @Before
     public void setUp() throws Exception {
-        plateList = new ArrayList<>();
+        plateListAv = new ArrayList<>();
         creationTime = new LocalDateTime[7];
         creationTime[0] = LocalDateTime.of(2016, Month.APRIL, 5, 10, 10, 30);
         creationTime[1] = LocalDateTime.of(2016, Month.APRIL, 5, 10, 10, 50);
@@ -35,16 +32,14 @@ public class AverageSpeedCalculatorTest {
         for (int i = 0; i < 7; i++) {
             d = new Plate(20, 30, 21, 100, 89, 23, 20, 48, 10, true, null);
             d.setCreatedOn(creationTime[i]);
-            plateList.add(d);
+            plateListAv.add(d);
         }
-        plateList.get(6).setMagnetic(false);
-
-
+        plateListAv.get(6).setMagnetic(false);
     }
 
     @Test
     public void calculateAverageTest() {
-        double average = AverageSpeedCalculator.CalculateAverageSpeed(plateList);
+        double average = AverageSpeedCalculator.CalculateAverageSpeed(plateListAv);
         Assert.assertEquals(22.5, average, 0.1);
     }
 
