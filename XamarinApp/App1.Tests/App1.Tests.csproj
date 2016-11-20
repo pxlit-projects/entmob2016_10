@@ -121,9 +121,10 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ViewModel\DeviceViewModelTests.cs" />
+    <Compile Include="Converters\RoundConverterTest.cs" />
     <Compile Include="ViewModel\LoginViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ServiceListViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App1\App1\App1.csproj">
