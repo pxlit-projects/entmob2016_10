@@ -17,5 +17,7 @@ public interface StrongPlateUserService {
 
     void updateAverageSpeedUser(long userId, double averageSpeed);
 
+    void updateUser(User user);
+
 
 }

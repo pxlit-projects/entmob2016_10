@@ -18,6 +18,7 @@ import static org.mockito.Mockito.when;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +53,18 @@ public class StrongPlateUserServiceTest {
     public void setUserTest() {
         testPlateUserService.setUser(user);
         verify(strongPlateUserRepository).save(any(User.class));
+    }
+    @Test
+    public void updateUserTest() {
+        when(strongPlateUserRepository.getStalePlateUserById(1)).thenReturn(user);
+
+
+        user.setEnabled(false);
+        testPlateUserService.updateUser(user);
+        User userFromDb = testPlateUserService.getStrongPlateUserById(1);
+
+        verify(strongPlateUserRepository).save(any(User.class));
+        Assert.assertTrue(userFromDb.isEnabled()==user.isEnabled());
     }
 
     @Test

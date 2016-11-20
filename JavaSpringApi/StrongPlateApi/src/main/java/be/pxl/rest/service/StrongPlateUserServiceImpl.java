@@ -40,10 +40,13 @@ public class StrongPlateUserServiceImpl implements StrongPlateUserService {
 
     @Override
     public void updateAverageSpeedUser(long userId, double average) {
-        User u = strongPlateUserRepository.getStalePlateUserById(userId);
-        u.setAverageSpeed(average);
-        strongPlateUserRepository.save(u);
+        User userToUpdateSpeed = strongPlateUserRepository.getStalePlateUserById(userId);
+        userToUpdateSpeed.setAverageSpeed(average);
+        strongPlateUserRepository.save(userToUpdateSpeed);
     }
 
-
+    @Override
+    public void updateUser(User user) {
+       strongPlateUserRepository.save(user);
+    }
 }

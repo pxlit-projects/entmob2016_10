@@ -93,6 +93,10 @@ public class User {
         return enabled;
     }
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public List<Plate> getPlatesData() {
         return platesData;
     }

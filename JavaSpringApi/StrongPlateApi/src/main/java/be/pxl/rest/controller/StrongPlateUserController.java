@@ -32,7 +32,7 @@ public class StrongPlateUserController {
                 strongPlateUserInput.getAverageSteadyness(),
                 strongPlateUserInput.isEnabled()
         ));
-        return "Data toegevoegd aan database";
+        return "User toegevoegd aan database";
     }
 
     @Secured({"ROLE_BAAS"})
@@ -45,6 +45,23 @@ public class StrongPlateUserController {
     @RequestMapping(value ="/getUserById/{userId}", method = RequestMethod.GET)
     public ResponseEntity<User> getUserById(@PathVariable long userId){
         return new ResponseEntity<>(strongPlateUserService.getStrongPlateUserById(userId),HttpStatus.OK);
+    }
+
+    @Secured({"ROLE_BAAS"})
+    @PutMapping(value = "/editUser/{userId}")
+    public String updateUserValues(@RequestBody StrongPlateUserInput strongPlateUserInput, @PathVariable long userId){
+        User user = new User(
+                strongPlateUserInput.getLastName(),
+                strongPlateUserInput.getFirstName(),
+                strongPlateUserInput.getPassword(),
+                strongPlateUserInput.getRole(),
+                strongPlateUserInput.getAverageSpeed(),
+                strongPlateUserInput.getAverageSteadyness(),
+                strongPlateUserInput.isEnabled());
+        user.setId(userId);
+        strongPlateUserService.updateUser(user);
+        return "User bewerkt";
+
     }
 
 
