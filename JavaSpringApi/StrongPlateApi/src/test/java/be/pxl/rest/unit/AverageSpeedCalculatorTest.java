@@ -2,14 +2,11 @@ package be.pxl.rest.unit;
 
 import be.pxl.rest.entity.Plate;
 import be.pxl.rest.repository.AverageSpeedCalculator;
-import org.junit.Ignore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -22,7 +19,7 @@ import java.util.List;
 public class AverageSpeedCalculatorTest {
     private List<Plate> plateListAv;
     private LocalDateTime[] creationTime;
-    private Plate d;
+    private Plate plate;
     private AverageSpeedCalculator averageSpeedCalculator;
 
     @Before
@@ -38,9 +35,9 @@ public class AverageSpeedCalculatorTest {
         creationTime[5] = LocalDateTime.of(2016, Month.APRIL, 6, 10, 10, 50);
         creationTime[6] = LocalDateTime.of(2016, Month.APRIL, 6, 10, 10, 45);
         for (int i = 0; i < 7; i++) {
-            d = new Plate(20, 30, 21, 100, 89, 23, 20, 48, 10, true, null);
-            d.setCreatedOn(creationTime[i]);
-            plateListAv.add(d);
+            plate = new Plate(20, 30, 21, 100, 89, 23, 20, 48, 10, true, null);
+            plate.setCreatedOn(creationTime[i]);
+            plateListAv.add(plate);
         }
         plateListAv.get(6).setMagnetic(false);
     }
