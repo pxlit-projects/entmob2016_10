@@ -13,10 +13,8 @@ public class AverageSpeedCalculator {
     private LocalDateTime tempValue = null;
     private NavigableSet<String> datesWorked = new TreeSet<>();
     private List<Long> results = new ArrayList<>();
-    private int VISITORCOUNTER;
 
     public double CalculateAverageSpeed(List<Plate> plateList) {
-        VISITORCOUNTER++;
         plateList.forEach(e -> datesWorked.add(formatDate(e.getCreatedOn())));
         for (String day : datesWorked) {
             plateList.stream().filter((s) -> s.isMagnetic() && day.equals(formatDate(s.getCreatedOn()))).forEach(e -> results.add(doCalculation(e.getCreatedOn())));
@@ -26,8 +24,6 @@ public class AverageSpeedCalculator {
         }
         results = deleteZeros(results);
         OptionalDouble avarage = results.stream().mapToLong(x -> x).average();
-        results.forEach(s -> System.out.println("BASTARD: " + s));
-        System.out.println("I HAD " + VISITORCOUNTER + " VISITORS!");
         if (avarage.isPresent()) {
             return avarage.getAsDouble();
         } else {
