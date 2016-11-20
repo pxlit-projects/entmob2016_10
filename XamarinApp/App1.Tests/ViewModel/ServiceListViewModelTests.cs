@@ -9,6 +9,7 @@ namespace App1.Tests.ViewModel
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
