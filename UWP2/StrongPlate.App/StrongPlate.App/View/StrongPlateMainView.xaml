@@ -1,0 +1,214 @@
+﻿<Page
+    x:Class="StrongPlate.App.View.StrongPlateMainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StrongPlate.App.View"
+    xmlns:converters="using:StrongPlate.App.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    DataContext="{Binding Source={StaticResource ViewModelLocatorKey},  Path=StrongPlateMainViewModel}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <converters:ImageConverter x:Key="localImageConverter"></converters:ImageConverter>
+        <converters:AgeConverter x:Key="localAgeConverter"></converters:AgeConverter>
+        <converters:SpeedConverter x:Key="localSpeedConverter"></converters:SpeedConverter>
+    </UserControl.Resources>
+
+    <RelativePanel Background="#185776">
+        <Image x:Name="logoImage" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" Source="ms-appx:///Images/logo.png" MaxWidth="200" MaxHeight="300" Margin="0, 20, 10, 0"/>
+        <TextBlock x:Name="titleTextBlock" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Text="Strong Plate" FontSize="50" Margin="20, 20, 0, 0" Foreground="#FFCA00"/>
+        <TextBlock x:Name="cafeTextBlock" RelativePanel.Below="titleTextBlock" Text="PXL Pub" Margin="20, 10, 0, 0" FontSize="40" Foreground="White"/>
+        <TextBox x:Name="searchTextBox" RelativePanel.Below="titleTextBlock" Margin="30, 200, 0, 0" Height="40" Width="150" PlaceholderText="Zoeken..." FontSize="20" Foreground="White" Text="{Binding searchText}"/>
+        <Button x:Name="searchButton" RelativePanel.RightOf="searchTextBox" RelativePanel.AlignBottomWith="searchTextBox" Margin="10, 0, 0, 0" Height="40" Width="90" Content="Zoeken" FontSize="20" Foreground="White" Command="{Binding SearchCommand}"/>
+        <Button x:Name="speedButton" RelativePanel.Below="searchTextBox" Margin="30, 100, 0, 0" Height="40" Width="250" Content="Top 5 snelste obers" FontSize="20" Command="{Binding SpeedCommand}" Foreground="White"/>
+        <Button x:Name="steadyButton" RelativePanel.Below="speedButton" Margin="30, 30, 0, 0" Height="40" Width="250" Content="Top 5 met de vaste hand" FontSize="20" Command="{Binding SteadynessCommand}" Foreground="White"/>
+
+        <ListView x:Name="employeesListView" RelativePanel.RightOf="searchButton" RelativePanel.AlignTopWith="searchButton" Height="400" Width="200" Margin="30, 0, 30, 30" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Employees}" Foreground="White">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding FullName}" Foreground="White"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <TextBlock x:Name="fullNameTitleTextBlock" RelativePanel.RightOf="employeesListView" Text="Naam: " Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="fullNameTextBlock" RelativePanel.RightOf="fullNameTitleTextBlock" RelativePanel.AlignBottomWith="fullNameTitleTextBlock" Text="{Binding SelectedEmployee.FullName}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="ageTitleTextBlock" RelativePanel.Below="fullNameTitleTextBlock" Text="Leeftijd: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="ageTextBlock" RelativePanel.RightOf="ageTitleTextBlock" RelativePanel.AlignBottomWith="ageTitleTextBlock" Text="{Binding SelectedEmployee.Age, Converter={StaticResource localAgeConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="speedTitleTextBlock" RelativePanel.Below="ageTitleTextBlock" Text="Gemiddelde snelheid: " Margin="10,30,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="speedTextBlock" RelativePanel.RightOf="speedTitleTextBlock" RelativePanel.AlignBottomWith="speedTitleTextBlock" Text="{Binding SelectedEmployee.AverageSpeed, Converter={StaticResource localSpeedConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="steadyTitleTextBlock" RelativePanel.Below="speedTitleTextBlock" Text="Gemiddelde vastheid: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="steadyTextBlock" RelativePanel.RightOf="steadyTitleTextBlock" RelativePanel.AlignBottomWith="steadyTitleTextBlock" Text="{Binding SelectedEmployee.AverageSteadyness}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <Image x:Name="genderImage" RelativePanel.Below="steadyTextBlock" Source="{Binding SelectedEmployee.Gender, Converter={StaticResource localImageConverter}}" MaxWidth="150" MaxHeight="200" Margin="10, 60, 0, 0"/>
+    
+
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="Screenstates">
+                <!--PhoneAndSmallDevices-->
+                <VisualState x:Name="PhoneAndSmallDevices">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="320"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <Setter Target="logoImage.MaxWidth" Value="100"/>
+                        <Setter Target="logoImage.MaxHeight" Value="100"/>
+
+                        <Setter Target="titleTextBlock.FontSize" Value="40"/>
+                        <Setter Target="cafeTextBlock.FontSize" Value="30"/>
+
+                        <Setter Target="searchTextBox.Height" Value="20"/>
+                        <Setter Target="searchTextBox.Width" Value="100"/>
+                        <Setter Target="searchTextBox.FontSize" Value="13"/>
+                        <Setter Target="searchTextBox.Margin" Value="30, 100, 0, 0"/>
+
+                        <Setter Target="searchButton.Height" Value="30"/>
+                        <Setter Target="searchButton.Width" Value="65"/>
+                        <Setter Target="searchButton.FontSize" Value="13"/>
+
+                        <Setter Target="speedButton.Height" Value="30"/>
+                        <Setter Target="speedButton.Width" Value="175"/>
+                        <Setter Target="speedButton.FontSize" Value="13"/>
+                        <Setter Target="speedButton.Margin" Value="30, 60, 0, 0"/>
+
+                        <Setter Target="steadyButton.Height" Value="30"/>
+                        <Setter Target="steadyButton.Width" Value="175"/>
+                        <Setter Target="steadyButton.FontSize" Value="13"/>
+                        <Setter Target="steadyButton.Margin" Value="30, 10, 0, 0"/>
+
+                        <Setter Target="employeesListView.Height" Value="200"/>
+                        <Setter Target="employeesListView.Width" Value="200"/>
+
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="steadyButton"/>
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.Below)" Value="employeesListView"/>
+                        <Setter Target="fullNameTitleTextBlock.Margin" Value="50, 20, 10, 0"/>
+                        <Setter Target="fullNameTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="fullNameTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.Below)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="ageTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
+                        <Setter Target="ageTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="ageTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="speedTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="ageTitleTextBlock"/>
+                        <Setter Target="speedTitleTextBlock.(RelativePanel.Below)" Value="ageTitleTextBlock"/>
+                        <Setter Target="speedTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
+                        <Setter Target="speedTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="speedTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="steadyTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="speedTitleTextBlock"/>
+                        <Setter Target="steadyTitleTextBlock.(RelativePanel.Below)" Value="speedTitleTextBlock"/>
+                        <Setter Target="steadyTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
+                        <Setter Target="steadyTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="steadyTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="genderImage.(RelativePanel.AlignLeftWith)" Value="steadyTitleTextBlock"/>
+                        <Setter Target="genderImage.(RelativePanel.Below)" Value="steadyTitleTextBlock"/>
+                        <Setter Target="genderImage.Margin" Value="50, 20, 0, 0"/>
+                        <Setter Target="genderImage.MaxWidth" Value="50"/>
+                        <Setter Target="genderImage.MaxHeight" Value="100"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <!--TabletsAndMediumlDevices-->
+                <VisualState x:Name="TabletsAndMediumlDevices">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+
+                        <Setter Target="logoImage.MaxWidth" Value="150"/>
+                        <Setter Target="logoImage.MaxHeight" Value="150"/>
+
+                        <Setter Target="titleTextBlock.FontSize" Value="45"/>
+                        <Setter Target="cafeTextBlock.FontSize" Value="35"/>
+
+                        <Setter Target="searchTextBox.Height" Value="30"/>
+                        <Setter Target="searchTextBox.Width" Value="125"/>
+                        <Setter Target="searchTextBox.FontSize" Value="15"/>
+                        <Setter Target="searchTextBox.Margin" Value="30, 150, 0, 0"/>
+
+                        <Setter Target="searchButton.Height" Value="30"/>
+                        <Setter Target="searchButton.Width" Value="70"/>
+                        <Setter Target="searchButton.FontSize" Value="15"/>
+
+                        <Setter Target="speedButton.Height" Value="30"/>
+                        <Setter Target="speedButton.Width" Value="205"/>
+                        <Setter Target="speedButton.FontSize" Value="15"/>
+                        <Setter Target="speedButton.Margin" Value="30, 80, 0, 0"/>
+
+                        <Setter Target="steadyButton.Height" Value="30"/>
+                        <Setter Target="steadyButton.Width" Value="205"/>
+                        <Setter Target="steadyButton.FontSize" Value="15"/>
+                        <Setter Target="steadyButton.Margin" Value="30, 20, 0, 0"/>
+
+                        <Setter Target="employeesListView.Height" Value="300"/>
+                        <Setter Target="employeesListView.Width" Value="150"/>
+
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="steadyButton"/>
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.Below)" Value="employeesListView"/>
+                        <Setter Target="fullNameTitleTextBlock.Margin" Value="50, 20, 10, 0"/>
+                        <Setter Target="fullNameTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="fullNameTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.Below)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="ageTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
+                        <Setter Target="ageTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="ageTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="speedTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="ageTitleTextBlock"/>
+                        <Setter Target="speedTitleTextBlock.(RelativePanel.Below)" Value="ageTitleTextBlock"/>
+                        <Setter Target="speedTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
+                        <Setter Target="speedTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="speedTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="steadyTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="speedTitleTextBlock"/>
+                        <Setter Target="steadyTitleTextBlock.(RelativePanel.Below)" Value="speedTitleTextBlock"/>
+                        <Setter Target="steadyTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
+                        <Setter Target="steadyTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="steadyTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="genderImage.(RelativePanel.RightOf)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="genderImage.(RelativePanel.Below)" Value="employeesListView"/>
+                        <Setter Target="genderImage.Margin" Value="50, 20, 0, 0"/>
+                        <Setter Target="genderImage.MaxWidth" Value="75"/>
+                        <Setter Target="genderImage.MaxHeight" Value="125"/>
+
+                    </VisualState.Setters>
+                </VisualState>
+                <!--DesktopsAndBigDevices-->
+                <VisualState x:Name="DesktopsAndBigDevices">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.AlignTopWith)" Value="employeesListView"/>
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.RightOf)" Value="employeesListView"/>
+                        <Setter Target="speedTitleTextBlock.(RelativePanel.RightOf)" Value="employeesListView"/>
+                        <Setter Target="steadyTitleTextBlock.(RelativePanel.RightOf)" Value="employeesListView"/>
+                        <Setter Target="genderImage.(RelativePanel.RightOf)" Value="employeesListView"/>
+                        
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </RelativePanel>
+</Page>
