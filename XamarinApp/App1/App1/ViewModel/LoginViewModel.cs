@@ -1,5 +1,4 @@
-﻿using App1.Model;
-using Plugin.BLE.Abstractions.Contracts;
+﻿using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,6 +10,7 @@ using System.Net.Http.Headers;
 using System.Diagnostics;
 using System.ComponentModel;
 using PCLCrypto;
+using App1.Domain;
 
 namespace App1.ViewModel
 {

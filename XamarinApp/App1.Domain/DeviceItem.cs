@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App1.ViewModel
+namespace App1.Domain
 {
     public class DeviceItem 
     {

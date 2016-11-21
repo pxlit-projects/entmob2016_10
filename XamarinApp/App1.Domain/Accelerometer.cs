@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace App1.Model
+namespace App1.Domain
 {
-    public class Gyroscope 
+    public class Accelerometer
     {
+        
         double x, y, z;
-
-        public Gyroscope() { }
 
         public double X
         {

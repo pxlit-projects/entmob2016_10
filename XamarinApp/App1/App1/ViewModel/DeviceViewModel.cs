@@ -1,4 +1,5 @@
-﻿using App1.View;
+﻿using App1.Domain;
+using App1.View;
 using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;

@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App1.Model
+namespace App1.Domain
 {
-    public class Magnetometer
+    public class Gyroscope 
     {
         double x, y, z;
+
+        public Gyroscope() { }
 
         public double X
         {

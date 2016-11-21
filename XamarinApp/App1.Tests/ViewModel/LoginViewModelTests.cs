@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using App1.ViewModel;
-using App1.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using App1.Domain;
 
 namespace App1.Tests.ViewModel
 {

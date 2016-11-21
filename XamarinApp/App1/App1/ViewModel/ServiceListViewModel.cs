@@ -1,4 +1,4 @@
-﻿using App1.Model;
+﻿using App1.Domain;
 using App1.Services;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
