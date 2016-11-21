@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using StrongPlate.App.Services;
 using StrongPlate.App.ViewModel;
 using StrongPlate.Domain;
