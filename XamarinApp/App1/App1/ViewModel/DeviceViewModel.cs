@@ -1,18 +1,12 @@
 ﻿using App1.Domain;
 using App1.View;
-using MvvmCross.Core.ViewModels;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
 using Plugin.BLE.Abstractions.Exceptions;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
