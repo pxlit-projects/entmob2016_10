@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace StrongPlate.Tests
 {
     [TestClass]
-    class StrongPlateSteadynessViewModelTest
+    public class StrongPlateSteadynessViewModelTest
     {
         private IStrongPlateService strongPlateService;
 

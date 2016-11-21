@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using StrongPlate.App.Services;
 using StrongPlate.App.ViewModel;
 using StrongPlate.Domain;
@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace StrongPlate.Tests
 {
     [TestClass]
-    class StrongPlateMainViewModelTest
+    public class StrongPlateMainViewModelTest
     {
         private IStrongPlateService strongPlateService;
         private IFrameNavigationService frameNavigationService;
