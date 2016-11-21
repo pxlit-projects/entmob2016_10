@@ -16,7 +16,7 @@ namespace App1.Tests.ViewModel
         [TestInitialize]
         public async void Initialize()
         {
-            users = await TaskUser();
+            
         }
 
         [TestMethod]
@@ -28,15 +28,6 @@ namespace App1.Tests.ViewModel
             Assert.AreEqual(64, result.Length);
         }
 
-        private Task<List<User>> TaskUser()
-        {
-           
-            return Task.Run(async () =>
-            {
-                List<User> users = await loginViewModel.GetUsers();
-                return users;
-            });
-        }
 
         [TestMethod]
         public void TestIfListOfUsersIsReturned()

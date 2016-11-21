@@ -20,8 +20,8 @@ namespace App1.ViewModel
         private IAdapter adapter;
         private IBluetoothLE ble;
         private INavigation navigation;
-        private List<User> users = null;
         private User user = null;
+        
         private App1Repository db;
         
 
@@ -44,13 +44,13 @@ namespace App1.ViewModel
             this.ble = ble;
             this.navigation = navigation;
             db = new App1Repository();
-            WaitGetUsers();
+            
             LoginCommand = new Command(Login);
         }
 
-        private async void WaitGetUsers()
+        private async void WaitGetUsers(int id)
         {
-            users =  await db.GetUsers();
+            user =  await db.GetUserById(id);
         }
 
         public string getSha256(string data) {
@@ -62,18 +62,16 @@ namespace App1.ViewModel
 
         private async void Login()
         {
-            Debug.WriteLine("Name " + _username + " Pass " + _password);
-            if (users != null)
+            WaitGetUsers(_id);
+            Debug.WriteLine("Name " + _id + " Pass " + _password);
+            if (user != null)
             {
-                for (int i = 0; i < users.Count; i++)
-                {
-                    if (users[i].FirstName == _username)
+                
+                    if (user.Id == _id)
                     {
                         
                         string password = getSha256(_password);
-                        Debug.WriteLine("ApiPass = " + users[i].Password);
-                        Debug.WriteLine("XamPass = " + password);
-                        if (users[i].Password == password)
+                        if (user.Password == password)
                         {
                             await navigation.PushAsync(new ConnectSensorPage(adapter, ble)
                             {
@@ -92,11 +90,12 @@ namespace App1.ViewModel
                         _loginStatus = "Username not found!";
                         onPropertyChanged(nameof(LoginStatus));
                     }
-                }
+                
             }
             else
             {
-                _loginStatus = "Wait for users are loaded!";
+
+                _loginStatus = "Wait for good internet connection";
                 onPropertyChanged(nameof(LoginStatus));
             }
             
@@ -113,14 +112,14 @@ namespace App1.ViewModel
             }
         }
 
-        private string _username;
+        private int _id;
 
-        public string Username
+        public int Id
         {
-            get { return _username; }
+            get { return _id; }
             set
             {
-                _username = value;
+                _id = value;
             }
         }
 
