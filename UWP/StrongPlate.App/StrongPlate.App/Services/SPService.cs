@@ -19,11 +19,8 @@ namespace StrongPlate.App.Services
 
         public List<Employee> GetAllEmployees()
         {
-<<<<<<< HEAD
             return repository.GetAllEmployees(); 
-=======
-            return repository.GetAllEmployees();
->>>>>>> master
+
         }
 
         public Employee GetEmployeeByID(int ID)
