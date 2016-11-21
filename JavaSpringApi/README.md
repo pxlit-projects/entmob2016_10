@@ -17,7 +17,7 @@ De database moet een gebruiker "root" hebben met een paswoord "Pxl" met alle pri
 #-----Project Runnen-----
 Jar bestand : java -jar StrongPlateApi.jar
 1e keer moet je een gebruiker via sql in phpmyadmin zelf toevoegen
-sql statement: INSERT INTO `user`(`average_speed`, `average_steadyness`, `enabled`, `first_name`, `last_name`, `password`, `role`) VALUES (5, 98, true, "The", "Boss", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_BAAS");
+sql statement: INSERT INTO `user`(`age`, `average_speed`, `average_steadyness`, `enabled`, `first_name`, `gender`, `last_name`, `password`, `role`) VALUES (20, 20, 20, true, "The", true, "Boss", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_BAAS");
 Gebruiker met Id: 1 en paswoord "secret" is dan aangemaakt.
 
 #-----Javadoc openen-----
