@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StrongPlate.Domain;
+<<<<<<< HEAD
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
+=======
+>>>>>>> master
 using System.Net.Http;
 
 namespace StrongPlate.Tests.Mocks
@@ -15,6 +18,7 @@ namespace StrongPlate.Tests.Mocks
     {
         public List<Employee> GetAllEmployees()
         {
+<<<<<<< HEAD
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
             client.DefaultRequestHeaders.Accept.Clear();
@@ -30,10 +34,21 @@ namespace StrongPlate.Tests.Mocks
             {
                 return null;
             }
+=======
+            string apiEmployees = "http://localhost:8090/User/getUsers";
+            var uri = new Uri(String.Format("{0}?format=json", apiEmployees));
+            var client = new HttpClient();
+            var response = Task.Run(() => client.GetAsync(uri)).Result;
+            response.EnsureSuccessStatusCode();
+            var result = Task.Run(() => response.Content.ReadAsStringAsync()).Result;
+            var root = JsonConvert.DeserializeObject<RootObject<Employee>>(result);
+            return root.results;
+>>>>>>> master
         }
 
         public Employee GetEmployeeByID(int ID)
         {
+<<<<<<< HEAD
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
             client.DefaultRequestHeaders.Accept.Clear();
@@ -49,6 +64,15 @@ namespace StrongPlate.Tests.Mocks
             {
                 return null;
             }
+=======
+            string apiEmployees = "http://localhost:8090/User/getUserById/" + ID;
+            var uri = new Uri(String.Format("{0}?format=json", apiEmployees));
+            var client = new HttpClient();
+            var response = Task.Run(() => client.GetAsync(uri)).Result;
+            response.EnsureSuccessStatusCode();
+            var result = Task.Run(() => response.Content.ReadAsStringAsync()).Result;
+            return JsonConvert.DeserializeObject<Employee>(result);
+>>>>>>> master
         }
 
         public List<Employee> GetTopSpeed()
@@ -76,6 +100,19 @@ namespace StrongPlate.Tests.Mocks
 
             return top;
         }
+<<<<<<< HEAD
     }
 }
 
+=======
+
+        class RootObject<T>
+        {
+            public int count { get; set; }
+            public object next { get; set; }
+            public object previous { get; set; }
+            public List<T> results { get; set; }
+        }
+    }
+}
+>>>>>>> master

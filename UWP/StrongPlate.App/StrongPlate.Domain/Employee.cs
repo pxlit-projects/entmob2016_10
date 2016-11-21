@@ -13,9 +13,14 @@ namespace StrongPlate.Domain
         public int ID { get; set; }
         public string LastName { get; set; }
         public string FirstName { get; set; }
+<<<<<<< HEAD
         public string FullName { get; set; }
         public int Age { get; set; }
         public bool Gender { get; set; }
+=======
+        public int Age { get; set; }
+        public bool Male { get; set; }
+>>>>>>> master
         public string Password { get; set; }
 
         public double averageSpeed;

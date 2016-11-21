@@ -1,0 +1,8 @@
+be.pxl.rest
+be.pxl.rest.aspect
+be.pxl.rest.controller
+be.pxl.rest.controller.input
+be.pxl.rest.entity
+be.pxl.rest.mq
+be.pxl.rest.repository
+be.pxl.rest.service

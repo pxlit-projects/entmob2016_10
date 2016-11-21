@@ -13,7 +13,10 @@
         <converters:AgeConverter x:Key="localAgeConverter"></converters:AgeConverter>
         <converters:ImageConverter x:Key="localImageConverter"></converters:ImageConverter>
         <converters:NameConverter x:Key="localNameConverter"></converters:NameConverter>
+<<<<<<< HEAD
         <converters:SpeedConverter x:Key="localSpeedConverter"></converters:SpeedConverter>
+=======
+>>>>>>> master
     </UserControl.Resources>
 
     <RelativePanel Background="#185776">
@@ -24,12 +27,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
+<<<<<<< HEAD
                         <TextBlock Text="{Binding FullName}" Foreground="White"/>
+=======
+                        <TextBlock  Text="{Binding Employee.LastName}" />
+                        <TextBlock  Text="{Binding Employee.FirstName}" />
+>>>>>>> master
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+<<<<<<< HEAD
         <TextBlock x:Name="fullNameTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.AlignTopWith="employeesListView" Text="Naam: " Margin="10,150,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="fullNameTextBlock" RelativePanel.RightOf="fullNameTitleTextBlock" RelativePanel.AlignBottomWith="fullNameTitleTextBlock" Text="{Binding SelectedEmployee.FullName, Converter={StaticResource localNameConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
 
@@ -38,6 +47,17 @@
 
         <TextBlock x:Name="speedTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.Below="ageTitleTextBlock" Text="Gemiddelde snelheid: " Margin="10,30,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="speedTextBlock" RelativePanel.RightOf="speedTitleTextBlock" RelativePanel.AlignBottomWith="speedTitleTextBlock" Text="{Binding SelectedEmployee.AverageSpeed, Converter={StaticResource localSpeedConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+=======
+        <TextBlock x:Name="lastNameTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.AlignTopWith="employeesListView" Text="Naam: " Margin="10,150,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="lastNameTextBlock" RelativePanel.RightOf="lastNameTitleTextBlock" RelativePanel.AlignBottomWith="lastNameTitleTextBlock" Text="{Binding SelectedEmployee.LastName, Converter={StaticResource localNameConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+        <TextBlock x:Name="firstNameTextBlock" RelativePanel.RightOf="lastNameTextBlock" RelativePanel.AlignBottomWith="lastNameTitleTextBlock" Text="{Binding SelectedEmployee.FirstName}" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="ageTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.Below="lastNameTitleTextBlock" Text="Leeftijd: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="ageTextBlock" RelativePanel.RightOf="ageTitleTextBlock" RelativePanel.AlignBottomWith="ageTitleTextBlock" Text="{Binding SelectedEmployee.Age, Converter={StaticResource localAgeConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="speedTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.Below="ageTitleTextBlock" Text="Gemiddelde snelheid: " Margin="10,30,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="speedTextBlock" RelativePanel.RightOf="speedTitleTextBlock" RelativePanel.AlignBottomWith="speedTitleTextBlock" Text="{Binding SelectedEmployee.AverageSpeed}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+>>>>>>> master
 
         <TextBlock x:Name="steadyTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.Below="speedTitleTextBlock" Text="Gemiddelde vastheid: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="steadyTextBlock" RelativePanel.RightOf="steadyTitleTextBlock" RelativePanel.AlignBottomWith="steadyTitleTextBlock" Text="{Binding SelectedEmployee.AverageSteadyness}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
@@ -62,9 +82,16 @@
 
                         <Setter Target="titleTextBlock.FontSize" Value="30"/>
 
+<<<<<<< HEAD
                         <Setter Target="fullNameTitleTextBlock.FontSize" Value="15"/>
 
                         <Setter Target="fullNameTextBlock.FontSize" Value="15"/>
+=======
+                        <Setter Target="lastNameTitleTextBlock.FontSize" Value="15"/>
+
+                        <Setter Target="lastNameTextBlock.FontSize" Value="15"/>
+                        <Setter Target="firstNameTextBlock.FontSize" Value="15"/>
+>>>>>>> master
 
                         <Setter Target="ageTitleTextBlock.FontSize" Value="15"/>
 
@@ -99,9 +126,16 @@
 
                         <Setter Target="titleTextBlock.FontSize" Value="30"/>
 
+<<<<<<< HEAD
                         <Setter Target="fullNameTitleTextBlock.FontSize" Value="17"/>
 
                         <Setter Target="fullNameTextBlock.FontSize" Value="17"/>
+=======
+                        <Setter Target="lastNameTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="lastNameTextBlock.FontSize" Value="17"/>
+                        <Setter Target="firstNameTextBlock.FontSize" Value="17"/>
+>>>>>>> master
 
                         <Setter Target="ageTitleTextBlock.FontSize" Value="17"/>
 
