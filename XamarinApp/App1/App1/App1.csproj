@@ -167,6 +167,10 @@
     <Folder Include="Model\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\App1.DAL\App1.DAL.csproj">
+      <Project>{c4b45f86-2947-4730-af18-b48273b2d163}</Project>
+      <Name>App1.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\App1.Domain\App1.Domain.csproj">
       <Project>{63d8dd03-25ec-4e71-9fa1-b54827bcb907}</Project>
       <Name>App1.Domain</Name>

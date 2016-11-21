@@ -12,7 +12,7 @@ namespace App1.DAL
 {
     public class App1Repository : IApp1Repository
     {
-        private string baseUri = "http://192.168.1.108:8090/";
+        private string baseUri = "http://192.168.43.253:8090/";
         private User user;
         private List<User> users;
 
@@ -20,7 +20,7 @@ namespace App1.DAL
         {
             var url = baseUri + "User/getUserById/{id}";
 
-            string json = await JsonApiClientGetRequest(baseUri);
+            string json = await JsonApiClientGetRequest(url);
             if (json != null)
             {
                 user = JsonConvert.DeserializeObject<User>(json);
@@ -33,7 +33,7 @@ namespace App1.DAL
         {
             var url = baseUri + "User/getUsers";
 
-            string json = await JsonApiClientGetRequest(baseUri);
+            string json = await JsonApiClientGetRequest(url);
             if (json != null)
             {
                 users = JsonConvert.DeserializeObject<List<User>>(json);
