@@ -15,6 +15,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -28,7 +29,7 @@ import java.util.List;
  * Created by pieterswennen on 08/11/2016.
  */
 
-@RunWith(SpringRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @DirtiesContext
 public class StrongPlateUserServiceTest {
 
