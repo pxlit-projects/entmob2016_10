@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -16,7 +17,7 @@ import java.util.List;
 /**
  * Created by Pieter on 20/11/2016.
  */
-@RunWith(SpringRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class StrongPlateUserRepositoryIntegrationTest {
 
@@ -30,7 +31,6 @@ public class StrongPlateUserRepositoryIntegrationTest {
     @Before
     public void setUp() throws Exception {
         newOber = new User("Ober", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
-        newOber.setId(1);
         strongPlateUserRepository.save(newOber);
     }
 
