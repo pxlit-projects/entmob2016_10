@@ -10,6 +10,10 @@ namespace App1.Domain
         public string LastName { get; set; }
         [JsonProperty("firstName")]
         public string FirstName { get; set; }
+        [JsonProperty("gender")]
+        public bool Gender { get; set; }
+        [JsonProperty("age")]
+        public int Age { get; set; }
         [JsonProperty("password")]
         public string Password { get; set; }
         [JsonProperty("role")]
