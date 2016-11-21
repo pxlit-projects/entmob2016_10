@@ -14,3 +14,4 @@ D:\GitRepos\EnterpriseMobile_SensorTag\entmob2016_10\JavaSpringApi\StrongPlateAp
 D:\GitRepos\EnterpriseMobile_SensorTag\entmob2016_10\JavaSpringApi\StrongPlateApi\src\main\java\be\pxl\rest\controller\StrongPlateController.java
 D:\GitRepos\EnterpriseMobile_SensorTag\entmob2016_10\JavaSpringApi\StrongPlateApi\src\main\java\be\pxl\rest\entity\Plate.java
 D:\GitRepos\EnterpriseMobile_SensorTag\entmob2016_10\JavaSpringApi\StrongPlateApi\src\main\java\be\pxl\rest\controller\input\StrongPlateInput.java
+D:\GitRepos\EnterpriseMobile_SensorTag\entmob2016_10\JavaSpringApi\StrongPlateApi\src\main\java\be\pxl\rest\repository\AverageSpeedCalculator.java
