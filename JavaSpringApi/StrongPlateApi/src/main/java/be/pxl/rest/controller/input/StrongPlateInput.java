@@ -31,7 +31,6 @@ public class StrongPlateInput {
         this.userId = userId;
     }
     public StrongPlateInput(){
-
     }
 
     public double getxG() {

@@ -1,11 +1,11 @@
 package be.pxl.rest.service;
 
 import be.pxl.rest.entity.User;
+import java.util.OptionalDouble;
 
 /**
  * Created by Pieter on 28/10/2016.
  */
-
 public interface StrongPlateUserService {
     void setUser(User user);
 
@@ -14,6 +14,10 @@ public interface StrongPlateUserService {
     void deleteAllUsers();
 
     User getStrongPlateUserById(long userId);
+
+    void updateAverageSpeedUser(long userId, double averageSpeed);
+
+    void updateUser(User user);
 
 
 }

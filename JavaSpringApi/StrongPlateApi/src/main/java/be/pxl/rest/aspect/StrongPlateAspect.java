@@ -45,7 +45,6 @@ public class StrongPlateAspect {
             sender.sendMessage(logBuilder("toevoegen data OK ", "info"));
         else
             sender.sendMessage(logBuilder("toevoegen data niet OK ", "error"));
-
     }
 
     private String logBuilder(String message, String type) {
@@ -57,6 +56,4 @@ public class StrongPlateAspect {
     private void getLoggedInUser() {
         userSpring = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
-
-
 }

@@ -3,7 +3,6 @@ package be.pxl.rest.unit;
 import be.pxl.rest.entity.Plate;
 import be.pxl.rest.entity.User;
 import be.pxl.rest.repository.StrongPlateRepository;
-import be.pxl.rest.service.StrongPlateService;
 import be.pxl.rest.service.StrongPlateServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -13,6 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.mockito.Matchers.any;
@@ -22,13 +23,12 @@ import static org.mockito.Mockito.when;
 /**
  * Created by Pieter on 21/10/2016.
  */
-
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @DirtiesContext
 public class StrongPlateServiceTest {
 
     @InjectMocks
-    private StrongPlateService testPlateService = new StrongPlateServiceImpl();
+    private StrongPlateServiceImpl testPlateService;
 
     @Mock
     private StrongPlateRepository strongPlateRepository;
@@ -38,7 +38,7 @@ public class StrongPlateServiceTest {
     private Plate plate;
 
     @Before
-    public void setUpData() {
+    public void setUpData() throws Exception {
         user = new User();
         plateList = new ArrayList<>();
         plate = new Plate(20, 30, 21, 100, 89, 23, 20, 48, 10, true, user);

@@ -82,12 +82,19 @@ public class User {
         return averageSpeed;
     }
 
+    public void setAverageSpeed(double averageSpeed) {
+        this.averageSpeed = averageSpeed;
+    }
     public double getAverageSteadyness() {
         return averageSteadyness;
     }
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<Plate> getPlatesData() {

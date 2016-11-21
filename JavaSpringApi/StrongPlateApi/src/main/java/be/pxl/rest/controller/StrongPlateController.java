@@ -3,6 +3,7 @@ package be.pxl.rest.controller;
 import be.pxl.rest.controller.input.StrongPlateInput;
 import be.pxl.rest.entity.Plate;
 import be.pxl.rest.service.StrongPlateService;
+import be.pxl.rest.service.StrongPlateUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Pieter on 19/10/2016.
@@ -22,11 +24,12 @@ public class StrongPlateController {
     @Autowired
     private StrongPlateService strongPlateService;
 
+    @Autowired
+    private StrongPlateUserService strongPlateUserService;
+
     private be.pxl.rest.entity.User userInput;
 
-    /**
-     * Gaat de strongPlateInput gebruiken voor de gegevens die binnenkomen.
-     */
+
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
     @PostMapping("/setData")
     public String setStrongPlateData(@RequestBody StrongPlateInput strongPlateInput,
@@ -34,7 +37,7 @@ public class StrongPlateController {
 
         userInput = new be.pxl.rest.entity.User();
 
-        if((userSpring.getUsername().equals(strongPlateInput.getUserId()+""))){
+        if ((userSpring.getUsername().equals(strongPlateInput.getUserId() + ""))) {
             userInput.setId(strongPlateInput.getUserId());
             strongPlateService.setStrongPlateData(new Plate(
                     strongPlateInput.getxG(),
@@ -49,13 +52,11 @@ public class StrongPlateController {
                     strongPlateInput.isMagnetic(),
                     userInput
             ));
+            calcAverageUser(strongPlateInput.getUserId());
             return "Data toegevoegd aan database";
-        }else{
+        } else {
             return "Kan geen data van iemand anders toevoegen!";
         }
-
-
-
     }
 
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
@@ -66,10 +67,13 @@ public class StrongPlateController {
 
     @Secured({"ROLE_OBER", "ROLE_BAAS"})
     @RequestMapping(value = "/getDataByUserId/{userId}", method = RequestMethod.GET)
-    public
-    @ResponseBody
-    ResponseEntity<Collection<Plate>> getStrongPlateDataByUserId(@PathVariable long userId) {
+    public ResponseEntity<Collection<Plate>> getStrongPlateDataByUserId(@PathVariable long userId) {
         return new ResponseEntity<>(strongPlateService.getStrongPlateDataByUserId(userId), HttpStatus.OK);
+    }
+
+    private void calcAverageUser(long userId) {
+        List<Plate> list = strongPlateService.getStrongPlateDataByUserId(userId);
+        strongPlateUserService.updateAverageSpeedUser(userId, strongPlateService.calculateAverageSpeed(list));
     }
 
 }
