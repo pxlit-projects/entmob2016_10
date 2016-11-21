@@ -1,12 +1,12 @@
 ﻿using StrongPlate.App.Services;
+using StrongPlate.DAL;
+using StrongPlate.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StrongPlate.Domain;
-using StrongPlate.DAL;
-using System.Collections.ObjectModel;
 
 namespace StrongPlate.Tests.Mocks
 {

@@ -1,14 +1,14 @@
-﻿using StrongPlate.DAL;
+﻿using Newtonsoft.Json;
+using StrongPlate.DAL;
+using StrongPlate.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using StrongPlate.Domain;
-using Newtonsoft.Json;
-using System.Net.Http.Headers;
-using System.Net.Http;
-using System.Collections.ObjectModel;
 
 namespace StrongPlate.Tests.Mocks
 {

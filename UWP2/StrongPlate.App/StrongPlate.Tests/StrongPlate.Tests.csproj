@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{1B1A6BB6-7B4C-4EF8-9A43-A699309E750F}</ProjectGuid>
+    <ProjectGuid>{68DA2EA6-0E3F-46FC-9F68-556AAAAE7DA7}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StrongPlate.Tests</RootNamespace>
@@ -141,9 +141,6 @@
       <Project>{d32330ef-fe85-45cf-b2eb-26d16d4ec3d5}</Project>
       <Name>StrongPlate.Domain</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
