@@ -42,7 +42,7 @@
         <TextBlock x:Name="steadyTitleTextBlock" RelativePanel.RightOf="employeesListView" RelativePanel.Below="speedTitleTextBlock" Text="Gemiddelde vastheid: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="steadyTextBlock" RelativePanel.RightOf="steadyTitleTextBlock" RelativePanel.AlignBottomWith="steadyTitleTextBlock" Text="{Binding SelectedEmployee.AverageSteadyness}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
 
-        <Image x:Name="genderImage" RelativePanel.Below="steadyTextBlock" RelativePanel.RightOf="employeesListView" Source="{Binding SelectedEmployee.Gender, Converter={StaticResource localImageConverter}}" MaxWidth="150" MaxHeight="200" Margin="10, 60, 0, 0" />
+        <Image x:Name="genderImage" RelativePanel.Below="steadyTextBlock" RelativePanel.RightOf="employeesListView" Source="{Binding SelectedEmployee.Male, Converter={StaticResource localImageConverter}}" MaxWidth="150" MaxHeight="200" Margin="10, 60, 0, 0" />
 
         <Button x:Name="backButton" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignRightWithPanel="True" Margin="0, 0, 30, 30" Height="40" Width="150" Content="Terug" FontSize="20" Command="{Binding BackCommand}" Foreground="White"/>
         
