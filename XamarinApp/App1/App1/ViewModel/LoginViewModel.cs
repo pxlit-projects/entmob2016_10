@@ -20,6 +20,7 @@ namespace App1.ViewModel
         private IBluetoothLE ble;
         private INavigation navigation;
         private List<User> users = null;
+        private User user = null;
 
         #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
@@ -141,6 +142,20 @@ namespace App1.ViewModel
             {
                 users = JsonConvert.DeserializeObject<List<User>>(json);
                 return users;       
+            }
+            return null;
+        }
+
+        public async Task<User> GetUserById(int id)
+        {
+
+            var baseUri = "http://192.168.1.108:8090/User/getUserById/{id}";
+
+            string json = await JsonApiClientGetRequest(baseUri);
+            if (json != null)
+            {
+                user = JsonConvert.DeserializeObject<User>(json);
+                return user;
             }
             return null;
         }
