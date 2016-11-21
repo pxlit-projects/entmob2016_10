@@ -45,7 +45,7 @@ namespace App1.ViewModel
             this.navigation = navigation;
             db = new App1Repository();
             
-            LoginCommand = new Command(Login);
+            LoginCommand = new Command(FastLogin);
         }
 
         private async void WaitGetUsers(int id)
@@ -58,6 +58,14 @@ namespace App1.ViewModel
             var hasher = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256);
             byte[] hash = hasher.HashData(byteData);
             return BitConverter.ToString(hash).Replace("-", "").ToLower();
+        }
+
+        private async void FastLogin()
+        {
+            await navigation.PushAsync(new ConnectSensorPage(adapter, ble)
+            {
+                Title = "StrongPlate"
+            });
         }
 
         private async void Login()
@@ -132,6 +140,14 @@ namespace App1.ViewModel
             {
                 _password = value;
                 onPropertyChanged(nameof(Password));
+            }
+        }
+
+        public ImageSource LogoImage
+        {
+            get
+            {
+                return ImageSource.FromFile("Assets/strongplate.png");
             }
         }
 

@@ -4,10 +4,6 @@
              x:Class="App1.View.ServiceListPage">
   <Label Text="Hallo test tweede page" VerticalOptions="Center" HorizontalOptions="Center" />
   <StackLayout>
-  <StackLayout Orientation="Horizontal">
-    <Label Text="Temperature : " ></Label>
-    <Label Text="{Binding TemperatureData , Converter={StaticResource localRoundConverter}}" ></Label>   
-  </StackLayout>
 
   <StackLayout Orientation="Horizontal">
     <Label Text="GyroscoopX : " ></Label>
