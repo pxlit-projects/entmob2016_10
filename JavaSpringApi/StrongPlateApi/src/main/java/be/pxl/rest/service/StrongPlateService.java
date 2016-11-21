@@ -2,7 +2,6 @@ package be.pxl.rest.service;
 
 import be.pxl.rest.entity.Plate;
 import java.util.List;
-import java.util.OptionalDouble;
 
 /**
  * Created by Pieter on 19/10/2016.

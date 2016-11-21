@@ -1,6 +1,7 @@
 package be.pxl.rest.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
 @Entity
 public class User {
 
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
 
@@ -20,6 +21,12 @@ public class User {
 
     @Column
     private String firstName;
+
+    @Column
+    private boolean gender;
+
+    @Column
+    private int age;
 
     @Column
     private String password;
@@ -40,9 +47,11 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Plate> platesData = new ArrayList<>();
 
-    public User(String lastName, String firstName, String password, String role, double averageSpeed, double averageSteadyness, boolean enabled) {
+    public User(String lastName, String firstName, int age, boolean gender, String password, String role, double averageSpeed, double averageSteadyness, boolean enabled) {
         this.lastName = lastName;
         this.firstName = firstName;
+        this.age = age;
+        this.gender = gender;
         this.password = password;
         this.role = role;
         this.averageSpeed = averageSpeed;
@@ -70,6 +79,14 @@ public class User {
         return firstName;
     }
 
+    public boolean isGender() {
+        return gender;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -85,6 +102,7 @@ public class User {
     public void setAverageSpeed(double averageSpeed) {
         this.averageSpeed = averageSpeed;
     }
+
     public double getAverageSteadyness() {
         return averageSteadyness;
     }

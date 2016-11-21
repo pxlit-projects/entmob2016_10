@@ -4,9 +4,7 @@ import be.pxl.rest.entity.User;
 import be.pxl.rest.repository.StrongPlateUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
-import java.util.OptionalDouble;
 
 /**
  * Created by Pieter on 28/10/2016.

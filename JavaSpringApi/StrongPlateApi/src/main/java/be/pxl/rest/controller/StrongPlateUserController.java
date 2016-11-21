@@ -26,6 +26,8 @@ public class StrongPlateUserController {
         strongPlateUserService.setUser(new User(
                 strongPlateUserInput.getLastName(),
                 strongPlateUserInput.getFirstName(),
+                strongPlateUserInput.getAge(),
+                strongPlateUserInput.isGender(),
                 strongPlateUserInput.getPassword(),
                 strongPlateUserInput.getRole(),
                 strongPlateUserInput.getAverageSpeed(),
@@ -53,6 +55,8 @@ public class StrongPlateUserController {
         User user = new User(
                 strongPlateUserInput.getLastName(),
                 strongPlateUserInput.getFirstName(),
+                strongPlateUserInput.getAge(),
+                strongPlateUserInput.isGender(),
                 strongPlateUserInput.getPassword(),
                 strongPlateUserInput.getRole(),
                 strongPlateUserInput.getAverageSpeed(),

@@ -7,6 +7,8 @@ public class StrongPlateUserInput
 {
     private String lastName;
     private String firstName;
+    private int age ;
+    private boolean gender;
     private String password;
     private String role;
     private double averageSpeed;
@@ -20,6 +22,14 @@ public class StrongPlateUserInput
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public boolean isGender() {
+        return gender;
     }
 
     public String getPassword() {

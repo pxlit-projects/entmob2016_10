@@ -16,7 +16,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class StrongPlateApplication {
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(StrongPlateApplication.class, args);
+        SpringApplication.run(StrongPlateApplication.class, args);
     }
 
     @Autowired

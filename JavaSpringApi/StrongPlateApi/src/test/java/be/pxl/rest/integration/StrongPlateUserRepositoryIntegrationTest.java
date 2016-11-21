@@ -30,13 +30,13 @@ public class StrongPlateUserRepositoryIntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        newOber = new User("Ober", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
+        newOber = new User("Ober", "The", 20,true, "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
         strongPlateUserRepository.save(newOber);
     }
 
     @Test
     public void canAddUser()throws Exception{
-        User newOber2 = new User("Ober", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
+        User newOber2 = new User("Ober", "The", 20,true, "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
         strongPlateUserRepository.save(newOber2);
         List<User> userList = (List<User>) strongPlateUserRepository.findAll();
         Assert.assertTrue(userList.get(1).getId()==2);

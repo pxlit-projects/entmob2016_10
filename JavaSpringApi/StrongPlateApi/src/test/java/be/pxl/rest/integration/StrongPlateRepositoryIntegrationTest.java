@@ -31,7 +31,7 @@ public class StrongPlateRepositoryIntegrationTest {
     @Before
     public void setUp() throws Exception {
         try{
-        newOber = new User("Ober", "The", "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
+        newOber = new User("Ober", "The", 20,true, "2bb80d537b1da3e38bd30361aa855686bde0eacd7162fef6a25fe97bf527a25b", "ROLE_OBER", 10, 96, true);
         newOber.setId(1);
 
             strongPlateUserRepository.save(newOber);

@@ -1,7 +1,6 @@
 package be.pxl.rest.service;
 
 import be.pxl.rest.entity.User;
-import java.util.OptionalDouble;
 
 /**
  * Created by Pieter on 28/10/2016.

@@ -43,7 +43,7 @@ public class StrongPlateUserServiceTest {
 
     @Before
     public void setUpData() throws Exception {
-        user = new User("Peeters", "Jaak", "secret", "ROLE_OBER", 20, 30, true);
+        user = new User("Peeters", "Jaak", 20,true, "secret", "ROLE_OBER", 20, 30, true);
         user.setId(1);
         userList = new ArrayList<>();
         userList.add(user);
