@@ -2,6 +2,7 @@
 using App1.ViewModel;
 using App1.Model;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace App1.Tests.ViewModel
 {
@@ -10,6 +11,13 @@ namespace App1.Tests.ViewModel
     {
 
         private LoginViewModel loginViewModel;
+        private List<User> users;
+
+        [TestInitialize]
+        public async void Initialize()
+        {
+            users = await TaskUser();
+        }
 
         [TestMethod]
         public void TestIfReturnedSha256IsRightLength()
@@ -20,14 +28,25 @@ namespace App1.Tests.ViewModel
             Assert.AreEqual(64, result.Length);
         }
 
+        private Task<List<User>> TaskUser()
+        {
+           
+            return Task.Run(async () =>
+            {
+                List<User> users = await loginViewModel.GetUsers();
+                return users;
+            });
+        }
+
         [TestMethod]
-        public async void TestIfListOfUsersIsReturned()
+        public void TestIfListOfUsersIsReturned()
         {
             //arrange
             loginViewModel = new LoginViewModel();
 
             //action
-            List<User> users = await loginViewModel.GetUsers();
+            
+            
 
             //test
             CollectionAssert.AllItemsAreInstancesOfType(users, typeof(User));
