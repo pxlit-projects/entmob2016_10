@@ -15,9 +15,6 @@ namespace App1.ViewModel
     public class ServiceListViewModel : INotifyPropertyChanged
     {
         private IDevice device;
-        private IList<ICharacteristic> _configCharacteristics = new List<ICharacteristic>();
-        private IList<ICharacteristic> _characteristics = new List<ICharacteristic>();
-        private double _temperatureData;
 
         #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
@@ -31,7 +28,7 @@ namespace App1.ViewModel
         {           
             MessagingCenter.Subscribe<DeviceItem>(this, "connectdevice", (arg) =>
             {
-                this.device = arg.Device;
+                device = arg.Device;
                 GetServices();
             });
             MessagingCenter.Send("true", "senddevice");
@@ -49,8 +46,6 @@ namespace App1.ViewModel
                 IService service = await device.GetServiceAsync(Guid.Parse("f000aa80-0451-4000-b000-000000000000"));
                 ICharacteristic dataCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa81-0451-4000-b000-000000000000"));
                 ICharacteristic configCharacteristic = await service.GetCharacteristicAsync(Guid.Parse("f000aa82-0451-4000-b000-000000000000"));
-                // _configCharacteristics.Add(configCharacteristic);
-                //_characteristics.Add(dataCharacteristic);
                 await configCharacteristic.WriteAsync(new byte[] { 0x7F, 0x00 });
                 _gyro = new Gyroscope();
                 _acc = new Accelerometer();
