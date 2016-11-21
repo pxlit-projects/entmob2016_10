@@ -41,7 +41,7 @@ Authentication op "Basic Auth" zetten en aanmelden met userId en wachtwoord
 
 Meegeven data postrequest: 
     body op raw zetten en JSON(application/Json)
-        setData: 
+        //setData: 
                 {
 	                "xG":12.5,
                         "yG":4.5,
