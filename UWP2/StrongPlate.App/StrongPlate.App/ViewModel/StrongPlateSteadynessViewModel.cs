@@ -3,6 +3,7 @@ using StrongPlate.App.Utility;
 using StrongPlate.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -20,11 +21,11 @@ namespace StrongPlate.App.ViewModel
 
         private IFrameNavigationService frameNavigationService;
 
-        private List<Employee> topEmployees;
+        private ObservableCollection<Employee> topEmployees;
 
         public ICommand BackCommand { get; set; }
 
-        public List<Employee> TopEmployees
+        public ObservableCollection<Employee> TopEmployees
         {
             get { return topEmployees; }
             set
@@ -61,10 +62,10 @@ namespace StrongPlate.App.ViewModel
             //LoadData();
             LoadCommands();
 
-            Messenger.Default.Register<List<Employee>>(this, OnEmployeesReceived);
+            Messenger.Default.Register<ObservableCollection<Employee>>(this, OnEmployeesReceived);
         }
 
-        private void OnEmployeesReceived(List<Employee> employees)
+        private void OnEmployeesReceived(ObservableCollection<Employee> employees)
         {
             topEmployees = employees;
             selectedEmployee = topEmployees.First();

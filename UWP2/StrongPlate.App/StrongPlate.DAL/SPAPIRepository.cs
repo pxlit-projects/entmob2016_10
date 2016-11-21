@@ -7,32 +7,44 @@ using StrongPlate.Domain;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Collections.ObjectModel;
 
 namespace StrongPlate.DAL
 {
     public class SPAPIRepository : IStrongPlateRepository
     {
-        public List<Employee> GetAllEmployees()
+        public ObservableCollection<Employee> GetAllEmployees()
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("1:secret")));
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress.AbsoluteUri).Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var result = response.Content.ReadAsStringAsync().Result;
-                List<Employee> employees = JsonConvert.DeserializeObject<List<Employee>>(result);
-                return GetFullName(employees);
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("1:secret")));
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress.AbsoluteUri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    ObservableCollection<Employee> employees = JsonConvert.DeserializeObject<ObservableCollection<Employee>>(result);
+                    return GetFullName(employees);
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return null;
+                ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
+                Employee employee = new Employee();
+                employee.FullName = "Verbind met de API (API aanzetten)";
+                employees.Add(employee);
+                return employees;
             }
         }
 
-        private List<Employee> GetFullName(List<Employee> employees)
+        private ObservableCollection<Employee> GetFullName(ObservableCollection<Employee> employees)
         {
             foreach (Employee e in employees)
             {
@@ -44,47 +56,83 @@ namespace StrongPlate.DAL
 
         public Employee GetEmployeeByID(int ID)
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("1:secret")));
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress.AbsoluteUri).Result;
-            if (response.IsSuccessStatusCode)
+            try
             {
-                var result = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<Employee>(result);
+                var client = new HttpClient();
+                client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("1:secret")));
+                HttpResponseMessage response = client.GetAsync(client.BaseAddress.AbsoluteUri).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    var result = response.Content.ReadAsStringAsync().Result;
+                    return JsonConvert.DeserializeObject<Employee>(result);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch(Exception ex)
+            {
+                Employee employee = new Employee();
+                employee.FullName = "Verbind met de API (API aanzetten)";
+                return employee;
+            }
+        }
+
+        public ObservableCollection<Employee> GetTopSpeed()
+        {
+            List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSpeed).ToList();
+            ObservableCollection<Employee> top = new ObservableCollection<Employee>();
+            if(ordered.Count < 5)
+            {
+                for (int i = 0; i < ordered.Count; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
+
+                return top;
             }
             else
             {
-                return null;
+                for (int i = 0; i < 5; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
+
+                return top;
             }
+            
         }
 
-        public List<Employee> GetTopSpeed()
-        {
-            List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSpeed).ToList();
-            List<Employee> top = new List<Employee>();
-            for (int i = 0; i < ordered.Count; i++)
-            {
-                top.Add(ordered.ElementAt(i));
-                top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
-            }
-
-            return top;
-        }
-
-        public List<Employee> GetTopSteadyness()
+        public ObservableCollection<Employee> GetTopSteadyness()
         {
             List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSteadyness).ToList();
-            List<Employee> top = new List<Employee>();
-            for (int i = 0; i < ordered.Count; i++)
+            ObservableCollection<Employee> top = new ObservableCollection<Employee>();
+            if (ordered.Count < 5)
             {
-                top.Add(ordered.ElementAt(i));
-                top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
-            }
+                for (int i = 0; i < ordered.Count; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
 
-            return top;
+                return top;
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
+
+                return top;
+            }
         }
     }
 }

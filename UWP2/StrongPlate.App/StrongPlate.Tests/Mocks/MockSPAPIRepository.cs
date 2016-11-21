@@ -8,12 +8,13 @@ using StrongPlate.Domain;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
+using System.Collections.ObjectModel;
 
 namespace StrongPlate.Tests.Mocks
 {
     class MockSPAPIRepository : IStrongPlateRepository
     {
-        public List<Employee> GetAllEmployees()
+        public ObservableCollection<Employee> GetAllEmployees()
         {
             var client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
@@ -24,7 +25,7 @@ namespace StrongPlate.Tests.Mocks
             if (response.IsSuccessStatusCode)
             {
                 var result = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<List<Employee>>(result);
+                return JsonConvert.DeserializeObject<ObservableCollection<Employee>>(result);
             }
             else
             {
@@ -51,10 +52,10 @@ namespace StrongPlate.Tests.Mocks
             }
         }
 
-        public List<Employee> GetTopSpeed()
+        public ObservableCollection<Employee> GetTopSpeed()
         {
             List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSpeed).ToList();
-            List<Employee> top = new List<Employee>();
+            ObservableCollection<Employee> top = new ObservableCollection<Employee>();
             for (int i = 0; i < 5; i++)
             {
                 top.Add(ordered.ElementAt(i));
@@ -64,10 +65,10 @@ namespace StrongPlate.Tests.Mocks
             return top;
         }
 
-        public List<Employee> GetTopSteadyness()
+        public ObservableCollection<Employee> GetTopSteadyness()
         {
             List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSteadyness).ToList();
-            List<Employee> top = new List<Employee>();
+            ObservableCollection<Employee> top = new ObservableCollection<Employee>();
             for (int i = 0; i < 5; i++)
             {
                 top.Add(ordered.ElementAt(i));

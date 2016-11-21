@@ -20,7 +20,7 @@
         <Image x:Name="logoImage" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" Source="ms-appx:///Images/logo.png" MaxWidth="200" MaxHeight="300" Margin="0, 20, 10, 0"/>
         <TextBlock x:Name="titleTextBlock" Text="Top 5 snelste obers" Margin="50,50,0,0" FontSize="40" Foreground="#FFCA00"/>
 
-        <ListView x:Name="employeesListView" RelativePanel.Below="titleTextBlock" RelativePanel.AlignLeftWith="titleTextBlock" RelativePanel.AlignBottomWithPanel="True" Width="200" Margin="50, 40, 30, 30" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding TopEmployees}" Foreground="White">
+        <ListView x:Name="employeesListView" RelativePanel.Below="titleTextBlock" RelativePanel.AlignLeftWith="titleTextBlock" RelativePanel.AlignBottomWithPanel="True" Width="200" Margin="50, 40, 30, 30" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding TopEmployees}" Foreground="White" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

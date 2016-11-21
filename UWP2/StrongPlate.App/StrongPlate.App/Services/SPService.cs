@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StrongPlate.Domain;
 using StrongPlate.DAL;
+using System.Collections.ObjectModel;
 
 namespace StrongPlate.App.Services
 {
@@ -17,7 +18,7 @@ namespace StrongPlate.App.Services
             this.repository = repository;
         }
 
-        public List<Employee> GetAllEmployees()
+        public ObservableCollection<Employee> GetAllEmployees()
         {
             return repository.GetAllEmployees(); 
         }
@@ -27,12 +28,12 @@ namespace StrongPlate.App.Services
             return repository.GetEmployeeByID(ID);
         }
 
-        public List<Employee> GetTopSpeed()
+        public ObservableCollection<Employee> GetTopSpeed()
         {
             return repository.GetTopSpeed();
         }
 
-        public List<Employee> GetTopSteadyness()
+        public ObservableCollection<Employee> GetTopSteadyness()
         {
             return repository.GetTopSteadyness();
         }

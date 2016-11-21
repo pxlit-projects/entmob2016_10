@@ -5,6 +5,7 @@ using StrongPlate.Domain;
 using StrongPlate.Tests.Mocks;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,8 +34,8 @@ namespace StrongPlate.Tests
         public void GetEmployees()
         {
             // Arrange
-            List<Employee> employees;
-            List<Employee> expectedEmployees = strongPlateService.GetAllEmployees();
+            ObservableCollection<Employee> employees;
+            ObservableCollection<Employee> expectedEmployees = strongPlateService.GetAllEmployees();
 
             // Act
             StrongPlateMainViewModel viewModel = GetViewModel();

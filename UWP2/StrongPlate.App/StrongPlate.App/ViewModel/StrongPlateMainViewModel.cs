@@ -4,12 +4,14 @@ using StrongPlate.App.View;
 using StrongPlate.Domain;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Xaml;
 
 namespace StrongPlate.App.ViewModel
 {
@@ -20,13 +22,13 @@ namespace StrongPlate.App.ViewModel
         private IStrongPlateService strongPlateService;
         private IFrameNavigationService frameNavigationService;
 
-        private List<Employee> employees;
+        private ObservableCollection<Employee> employees;
 
         public ICommand SpeedCommand { get; set; }
         public ICommand SteadynessCommand { get; set; }
-        public ICommand SearchCommand { get; set; }
+        //public ICommand SearchCommand { get; set; }
 
-        public List<Employee> Employees
+        public ObservableCollection<Employee> Employees
         {
             get { return employees; }
             set
@@ -48,7 +50,7 @@ namespace StrongPlate.App.ViewModel
             }
         }
 
-        private string searchText;
+        /*private string searchText;
 
         public string SearchText
         {
@@ -58,7 +60,7 @@ namespace StrongPlate.App.ViewModel
                 searchText = value;
                 RaisePropertyChanged();
             }
-        }
+        }*/
 
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
@@ -78,7 +80,7 @@ namespace StrongPlate.App.ViewModel
 
         private void LoadData()
         {
-            employees = new List<Employee>(strongPlateService.GetAllEmployees());
+            employees = new ObservableCollection<Employee>(strongPlateService.GetAllEmployees());
             selectedEmployee = employees.First();
         }
 
@@ -86,7 +88,7 @@ namespace StrongPlate.App.ViewModel
         {
             SpeedCommand = new CustomCommand(OpenSpeedView, CanOpenView);
             SteadynessCommand = new CustomCommand(OpenSteadynessView, CanOpenView);
-            SearchCommand = new CustomCommand(SearchEmployee, CanSearch);
+            //SearchCommand = new CustomCommand(SearchEmployee, CanSearch);
         }
 
         private bool CanOpenView(object obj)
@@ -96,17 +98,17 @@ namespace StrongPlate.App.ViewModel
 
         private void OpenSpeedView(object view)
         {
-            Messenger.Default.Send<List<Employee>>(strongPlateService.GetTopSpeed());
+            Messenger.Default.Send<ObservableCollection<Employee>>(strongPlateService.GetTopSpeed());
             frameNavigationService.NavigateToFrame(typeof(StrongPlateSpeedView));
         }
 
         private void OpenSteadynessView(object view)
         {
-            Messenger.Default.Send<List<Employee>>(strongPlateService.GetTopSteadyness());
+            Messenger.Default.Send<ObservableCollection<Employee>>(strongPlateService.GetTopSteadyness());
             frameNavigationService.NavigateToFrame(typeof(StrongPlateSteadynessView));
         }
 
-        private bool CanSearch(object obj)
+        /*private bool CanSearch(object obj)
         {
             return true;
         }
@@ -116,10 +118,10 @@ namespace StrongPlate.App.ViewModel
             if (searchText != null)
             {
 
-                List<Employee> searchedEmployees = new List<Employee>();
+                ObservableCollection<Employee> searchedEmployees = new ObservableCollection<Employee>();
                 foreach (Employee e in employees)
                 {
-                    if (e.LastName.Contains(searchText) || e.FirstName.Contains(searchText))
+                    if (e.FullName.ToLower().Contains(searchText.ToLower()))
                         searchedEmployees.Add(e);
                 }
 
@@ -130,6 +132,8 @@ namespace StrongPlate.App.ViewModel
             {
                 LoadData();
             }
-        }
+
+            RaisePropertyChanged("employees");
+        }*/
     }
 }

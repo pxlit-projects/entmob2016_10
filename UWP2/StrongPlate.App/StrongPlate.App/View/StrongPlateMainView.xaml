@@ -24,7 +24,7 @@
         <Button x:Name="speedButton" RelativePanel.Below="searchTextBox" Margin="30, 100, 0, 0" Height="40" Width="250" Content="Top 5 snelste obers" FontSize="20" Command="{Binding SpeedCommand}" Foreground="White"/>
         <Button x:Name="steadyButton" RelativePanel.Below="speedButton" Margin="30, 30, 0, 0" Height="40" Width="250" Content="Top 5 met de vaste hand" FontSize="20" Command="{Binding SteadynessCommand}" Foreground="White"/>
 
-        <ListView x:Name="employeesListView" RelativePanel.RightOf="searchButton" RelativePanel.AlignTopWith="searchButton" Height="400" Width="200" Margin="30, 0, 30, 30" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Employees}" Foreground="White">
+        <ListView x:Name="employeesListView" RelativePanel.RightOf="searchButton" RelativePanel.AlignTopWith="searchButton" Height="400" Width="200" Margin="30, 0, 30, 30" ScrollViewer.HorizontalScrollBarVisibility="Auto" ItemsSource="{Binding Employees, Mode=TwoWay}" Foreground="White" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
@@ -93,8 +93,8 @@
 
                         <Setter Target="fullNameTextBlock.FontSize" Value="17"/>
 
-                        <Setter Target="ageTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="lastNameTitleTextBlock"/>
-                        <Setter Target="ageTitleTextBlock.(RelativePanel.Below)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="fullNameTitleTextBlock"/>
+                        <Setter Target="ageTitleTextBlock.(RelativePanel.Below)" Value="fullNameTitleTextBlock"/>
                         <Setter Target="ageTitleTextBlock.Margin" Value="50, 10, 10, 0"/>
                         <Setter Target="ageTitleTextBlock.FontSize" Value="17"/>
 
@@ -185,7 +185,7 @@
 
                         <Setter Target="steadyTextBlock.FontSize" Value="17"/>
 
-                        <Setter Target="genderImage.(RelativePanel.RightOf)" Value="lastNameTitleTextBlock"/>
+                        <Setter Target="genderImage.(RelativePanel.RightOf)" Value="fullNameTitleTextBlock"/>
                         <Setter Target="genderImage.(RelativePanel.Below)" Value="employeesListView"/>
                         <Setter Target="genderImage.Margin" Value="50, 20, 0, 0"/>
                         <Setter Target="genderImage.MaxWidth" Value="75"/>

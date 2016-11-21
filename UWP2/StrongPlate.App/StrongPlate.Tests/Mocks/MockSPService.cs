@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using StrongPlate.Domain;
 using StrongPlate.DAL;
+using System.Collections.ObjectModel;
 
 namespace StrongPlate.Tests.Mocks
 {
@@ -18,7 +19,7 @@ namespace StrongPlate.Tests.Mocks
             this.repository = new MockSPAPIRepository();
         }
 
-        public List<Employee> GetAllEmployees()
+        public ObservableCollection<Employee> GetAllEmployees()
         {
             return repository.GetAllEmployees();
         }
@@ -28,12 +29,12 @@ namespace StrongPlate.Tests.Mocks
             return repository.GetEmployeeByID(ID);
         }
 
-        public List<Employee> GetTopSpeed()
+        public ObservableCollection<Employee> GetTopSpeed()
         {
             return repository.GetTopSpeed();
         }
 
-        public List<Employee> GetTopSteadyness()
+        public ObservableCollection<Employee> GetTopSteadyness()
         {
             return repository.GetTopSteadyness();
         }
