@@ -21,9 +21,9 @@ namespace App1.ViewModel
         private IBluetoothLE ble;
         private INavigation navigation;
         private User user = null;
-        
+
         private App1Repository db;
-        
+
 
         #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
@@ -36,24 +36,25 @@ namespace App1.ViewModel
 
         public Command LoginCommand { get; }
 
-        public LoginViewModel() {}
+        public LoginViewModel() { }
 
-        public LoginViewModel(IAdapter adapter,IBluetoothLE ble,INavigation navigation)
+        public LoginViewModel(IAdapter adapter, IBluetoothLE ble, INavigation navigation)
         {
             this.adapter = adapter;
             this.ble = ble;
             this.navigation = navigation;
             db = new App1Repository();
-            
-            LoginCommand = new Command(FastLogin);
+
+            LoginCommand = new Command(Login);
         }
 
-        private async void WaitGetUsers(int id)
+        private async Task WaitGetUser(int id)
         {
-            user =  await db.GetUserById(id);
+            user = await db.GetUserById(id);
         }
 
-        public string getSha256(string data) {
+        public string getSha256(string data)
+        {
             byte[] byteData = Encoding.UTF8.GetBytes(data);
             var hasher = WinRTCrypto.HashAlgorithmProvider.OpenAlgorithm(HashAlgorithm.Sha256);
             byte[] hash = hasher.HashData(byteData);
@@ -70,35 +71,35 @@ namespace App1.ViewModel
 
         private async void Login()
         {
-            WaitGetUsers(_id);
+            await WaitGetUser(_id);
             Debug.WriteLine("Name " + _id + " Pass " + _password);
             if (user != null)
             {
-                
-                    if (user.Id == _id)
-                    {
-                        
-                        string password = getSha256(_password);
-                        if (user.Password == password)
-                        {
-                            await navigation.PushAsync(new ConnectSensorPage(adapter, ble)
-                            {
-                                Title = "StrongPlate"
-                            });
-                        }
-                        else
-                        {
-                            _loginStatus = "Wrong password!";
-                            onPropertyChanged(nameof(LoginStatus));
 
-                        }
+                if (user.Id == _id)
+                {
+
+                    string password = getSha256(_password);
+                    if (user.Password == password)
+                    {
+                        await navigation.PushAsync(new ConnectSensorPage(adapter, ble)
+                        {
+                            Title = "StrongPlate"
+                        });
                     }
                     else
                     {
-                        _loginStatus = "Username not found!";
+                        _loginStatus = "Wrong password!";
                         onPropertyChanged(nameof(LoginStatus));
+
                     }
-                
+                }
+                else
+                {
+                    _loginStatus = "Username not found!";
+                    onPropertyChanged(nameof(LoginStatus));
+                }
+
             }
             else
             {
@@ -106,7 +107,7 @@ namespace App1.ViewModel
                 _loginStatus = "Wait for good internet connection";
                 onPropertyChanged(nameof(LoginStatus));
             }
-            
+
         }
 
         private string _loginStatus;
@@ -142,14 +143,5 @@ namespace App1.ViewModel
                 onPropertyChanged(nameof(Password));
             }
         }
-
-        public ImageSource LogoImage
-        {
-            get
-            {
-                return ImageSource.FromFile("Assets/strongplate.png");
-            }
-        }
-
-    }  
+    }
 }

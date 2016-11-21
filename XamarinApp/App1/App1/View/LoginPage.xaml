@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <Label Text="ID" Grid.Row="0" Grid.Column="0"  />
         <Label Text="Password" Grid.Row="1" Grid.Column="0"  />
-        <Entry Text="{Binding Path=Username, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"  />
+        <Entry Text="{Binding Path=Id, Mode=TwoWay}" Grid.Row="0" Grid.Column="1"  />
         <Entry Text="{Binding Path=Password, Mode=TwoWay}" IsPassword="true" Grid.Row="1" Grid.Column="1"  />
 
       </Grid >

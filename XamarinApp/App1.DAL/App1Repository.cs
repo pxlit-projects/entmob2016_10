@@ -18,7 +18,7 @@ namespace App1.DAL
 
         public async Task<User> GetUserById(int id)
         {
-            var url = baseUri + "User/getUserById/{id}";
+            var url = baseUri + "User/getUserById/" + id;
 
             string json = await JsonApiClientGetRequest(url);
             if (json != null)
