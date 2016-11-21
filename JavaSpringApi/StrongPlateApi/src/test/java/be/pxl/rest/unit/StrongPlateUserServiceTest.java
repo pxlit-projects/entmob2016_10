@@ -17,6 +17,7 @@ import static org.mockito.Mockito.when;
 
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.constraints.AssertTrue;
 import java.util.ArrayList;
@@ -27,9 +28,8 @@ import java.util.List;
  * Created by pieterswennen on 08/11/2016.
  */
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @DirtiesContext
-
 public class StrongPlateUserServiceTest {
 
     @InjectMocks

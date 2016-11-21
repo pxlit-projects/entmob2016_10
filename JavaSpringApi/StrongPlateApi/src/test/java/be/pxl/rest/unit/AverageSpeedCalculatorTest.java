@@ -5,8 +5,6 @@ import be.pxl.rest.repository.AverageSpeedCalculator;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
@@ -15,7 +13,6 @@ import java.util.List;
 /**
  * Created by Pieter on 20/11/2016.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 public class AverageSpeedCalculatorTest {
     private List<Plate> plateListAv;
     private LocalDateTime[] creationTime;
@@ -45,8 +42,6 @@ public class AverageSpeedCalculatorTest {
     @Test
     public void calculateAverageTest() {
         double average = averageSpeedCalculator.CalculateAverageSpeed(plateListAv);
-
-
         Assert.assertEquals(22.5, average, 0.1);
     }
 
