@@ -7,17 +7,11 @@ using Windows.UI.Xaml.Data;
 
 namespace StrongPlate.App.Converter
 {
-    class NameConverter : IValueConverter
+    class SpeedConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            string nameNr = value.ToString();
-            string [] name = nameNr.Split(' ');
-<<<<<<< HEAD
-            return name[1] + " " + name[2];
-=======
-            return name[1];
->>>>>>> master
+            return value + " seconden per bestelling";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -12,6 +12,10 @@
     <UserControl.Resources>
         <converters:ImageConverter x:Key="localImageConverter"></converters:ImageConverter>
         <converters:AgeConverter x:Key="localAgeConverter"></converters:AgeConverter>
+<<<<<<< HEAD
+        <converters:SpeedConverter x:Key="localSpeedConverter"></converters:SpeedConverter>
+=======
+>>>>>>> master
     </UserControl.Resources>
 
     <RelativePanel Background="#185776">
@@ -27,13 +31,27 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
+<<<<<<< HEAD
+                        <TextBlock Text="{Binding FullName}" Foreground="White"/>
+=======
                         <TextBlock  Text="{Binding Employee.LastName}"/>
                         <TextBlock  Text="{Binding Employee.FirstName}" />
+>>>>>>> master
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
+<<<<<<< HEAD
+        <TextBlock x:Name="fullNameTitleTextBlock" RelativePanel.RightOf="employeesListView" Text="Naam: " Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="fullNameTextBlock" RelativePanel.RightOf="fullNameTitleTextBlock" RelativePanel.AlignBottomWith="fullNameTitleTextBlock" Text="{Binding SelectedEmployee.FullName}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="ageTitleTextBlock" RelativePanel.Below="fullNameTitleTextBlock" Text="Leeftijd: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="ageTextBlock" RelativePanel.RightOf="ageTitleTextBlock" RelativePanel.AlignBottomWith="ageTitleTextBlock" Text="{Binding SelectedEmployee.Age, Converter={StaticResource localAgeConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+
+        <TextBlock x:Name="speedTitleTextBlock" RelativePanel.Below="ageTitleTextBlock" Text="Gemiddelde snelheid: " Margin="10,30,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
+        <TextBlock x:Name="speedTextBlock" RelativePanel.RightOf="speedTitleTextBlock" RelativePanel.AlignBottomWith="speedTitleTextBlock" Text="{Binding SelectedEmployee.AverageSpeed, Converter={StaticResource localSpeedConverter}}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+=======
         <TextBlock x:Name="lastNameTitleTextBlock" RelativePanel.RightOf="employeesListView" Text="Naam: " Margin="10,0,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="lastNameTextBlock" RelativePanel.RightOf="lastNameTitleTextBlock" RelativePanel.AlignBottomWith="lastNameTitleTextBlock" Text="{Binding SelectedEmployee.LastName}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
         <TextBlock x:Name="firstNameTextBlock" RelativePanel.RightOf="lastNameTextBlock" RelativePanel.AlignBottomWith="lastNameTitleTextBlock" Text="{Binding SelectedEmployee.FirstName}" FontSize="20" Foreground="White"/>
@@ -43,6 +61,7 @@
 
         <TextBlock x:Name="speedTitleTextBlock" RelativePanel.Below="ageTitleTextBlock" Text="Gemiddelde snelheid: " Margin="10,30,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="speedTextBlock" RelativePanel.RightOf="speedTitleTextBlock" RelativePanel.AlignBottomWith="speedTitleTextBlock" Text="{Binding SelectedEmployee.AverageSpeed}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
+>>>>>>> master
 
         <TextBlock x:Name="steadyTitleTextBlock" RelativePanel.Below="speedTitleTextBlock" Text="Gemiddelde vastheid: " Margin="10,10,10,0" FontSize="20" FontWeight="Bold" Foreground="White"/>
         <TextBlock x:Name="steadyTextBlock" RelativePanel.RightOf="steadyTitleTextBlock" RelativePanel.AlignBottomWith="steadyTitleTextBlock" Text="{Binding SelectedEmployee.AverageSteadyness}" Margin="0,0,10,0" FontSize="20" Foreground="White"/>
@@ -87,6 +106,14 @@
                         <Setter Target="employeesListView.Height" Value="200"/>
                         <Setter Target="employeesListView.Width" Value="200"/>
 
+<<<<<<< HEAD
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="steadyButton"/>
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.Below)" Value="employeesListView"/>
+                        <Setter Target="fullNameTitleTextBlock.Margin" Value="50, 20, 10, 0"/>
+                        <Setter Target="fullNameTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="fullNameTextBlock.FontSize" Value="17"/>
+=======
                         <Setter Target="lastNameTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="steadyButton"/>
                         <Setter Target="lastNameTitleTextBlock.(RelativePanel.Below)" Value="employeesListView"/>
                         <Setter Target="lastNameTitleTextBlock.Margin" Value="50, 20, 10, 0"/>
@@ -94,6 +121,7 @@
 
                         <Setter Target="lastNameTextBlock.FontSize" Value="17"/>
                         <Setter Target="firstNameTextBlock.FontSize" Value="17"/>
+>>>>>>> master
 
                         <Setter Target="ageTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="lastNameTitleTextBlock"/>
                         <Setter Target="ageTitleTextBlock.(RelativePanel.Below)" Value="lastNameTitleTextBlock"/>
@@ -159,6 +187,14 @@
                         <Setter Target="employeesListView.Height" Value="300"/>
                         <Setter Target="employeesListView.Width" Value="150"/>
 
+<<<<<<< HEAD
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="steadyButton"/>
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.Below)" Value="employeesListView"/>
+                        <Setter Target="fullNameTitleTextBlock.Margin" Value="50, 20, 10, 0"/>
+                        <Setter Target="fullNameTitleTextBlock.FontSize" Value="17"/>
+
+                        <Setter Target="fullNameTextBlock.FontSize" Value="17"/>
+=======
                         <Setter Target="lastNameTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="steadyButton"/>
                         <Setter Target="lastNameTitleTextBlock.(RelativePanel.Below)" Value="employeesListView"/>
                         <Setter Target="lastNameTitleTextBlock.Margin" Value="50, 20, 10, 0"/>
@@ -166,6 +202,7 @@
 
                         <Setter Target="lastNameTextBlock.FontSize" Value="17"/>
                         <Setter Target="firstNameTextBlock.FontSize" Value="17"/>
+>>>>>>> master
 
                         <Setter Target="ageTitleTextBlock.(RelativePanel.AlignLeftWith)" Value="lastNameTitleTextBlock"/>
                         <Setter Target="ageTitleTextBlock.(RelativePanel.Below)" Value="lastNameTitleTextBlock"/>
@@ -203,7 +240,11 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
 
+<<<<<<< HEAD
+                        <Setter Target="fullNameTitleTextBlock.(RelativePanel.AlignTopWith)" Value="employeesListView"/>
+=======
                         <Setter Target="lastNameTitleTextBlock.(RelativePanel.AlignTopWith)" Value="employeesListView"/>
+>>>>>>> master
                         <Setter Target="ageTitleTextBlock.(RelativePanel.RightOf)" Value="employeesListView"/>
                         <Setter Target="speedTitleTextBlock.(RelativePanel.RightOf)" Value="employeesListView"/>
                         <Setter Target="steadyTitleTextBlock.(RelativePanel.RightOf)" Value="employeesListView"/>
