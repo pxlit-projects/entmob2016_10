@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StrongPlate.App.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,15 @@ using System.Threading.Tasks;
 using StrongPlate.Domain;
 using StrongPlate.DAL;
 
-namespace StrongPlate.App.Services
+namespace StrongPlate.Tests.Mocks
 {
-    public class SPService : IStrongPlateService
+    class MockSPService : IStrongPlateService
     {
         private IStrongPlateRepository repository;
 
-        public SPService(IStrongPlateRepository repository)
+        public MockSPService()
         {
-            this.repository = repository;
+            this.repository = new MockSPAPIRepository();
         }
 
         public List<Employee> GetAllEmployees()

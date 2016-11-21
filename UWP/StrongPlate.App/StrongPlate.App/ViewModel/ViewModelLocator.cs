@@ -11,9 +11,10 @@ namespace StrongPlate.App.ViewModel
     public class ViewModelLocator
     {
         private static IStrongPlateService strongPlateService = new SPService(new SPAPIRepository());
-        private static IFrameNavigation frameNavigationService = new FrameNavigationService();
+        private static IFrameNavigationService frameNavigationService = new FrameNavigationService();
 
         private static StrongPlateMainViewModel strongPlateMainViewModel = new StrongPlateMainViewModel(frameNavigationService, strongPlateService);
+
         public static StrongPlateMainViewModel StrongPlateMainViewModel
         {
             get { return strongPlateMainViewModel; }

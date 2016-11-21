@@ -1,15 +1,15 @@
-﻿using System;
+﻿using StrongPlate.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StrongPlate.Domain;
 using System.Net.Http;
-using Newtonsoft.Json;
 
-namespace StrongPlate.DAL
+namespace StrongPlate.Tests.Mocks
 {
-    public class SPAPIRepository : IStrongPlateRepository
+    class MockSPAPIRepository : IStrongPlateRepository
     {
         public List<Employee> GetAllEmployees()
         {

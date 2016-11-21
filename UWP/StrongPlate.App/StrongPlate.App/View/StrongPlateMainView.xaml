@@ -18,8 +18,8 @@
         <Image x:Name="logoImage" RelativePanel.AlignRightWithPanel="True" RelativePanel.AlignTopWithPanel="True" Source="ms-appx:///Images/logo.png" MaxWidth="200" MaxHeight="300" Margin="0, 20, 10, 0"/>
         <TextBlock x:Name="titleTextBlock" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignTopWithPanel="True" Text="Strong Plate" FontSize="50" Margin="20, 20, 0, 0" Foreground="#FFCA00"/>
         <TextBlock x:Name="cafeTextBlock" RelativePanel.Below="titleTextBlock" Text="PXL Pub" Margin="20, 10, 0, 0" FontSize="40" Foreground="White"/>
-        <TextBox x:Name="searchTextBox" RelativePanel.Below="titleTextBlock" Margin="30, 200, 0, 0" Height="40" Width="150" PlaceholderText="Zoeken..." FontSize="20" Foreground="White"/>
-        <Button x:Name="searchButton" RelativePanel.RightOf="searchTextBox" RelativePanel.AlignBottomWith="searchTextBox" Margin="10, 0, 0, 0" Height="40" Width="90" Content="Zoeken" FontSize="20" Foreground="White"/>
+        <TextBox x:Name="searchTextBox" RelativePanel.Below="titleTextBlock" Margin="30, 200, 0, 0" Height="40" Width="150" PlaceholderText="Zoeken..." FontSize="20" Foreground="White" Text="{Binding searchText}"/>
+        <Button x:Name="searchButton" RelativePanel.RightOf="searchTextBox" RelativePanel.AlignBottomWith="searchTextBox" Margin="10, 0, 0, 0" Height="40" Width="90" Content="Zoeken" FontSize="20" Foreground="White" Command="{Binding SearchCommand}"/>
         <Button x:Name="speedButton" RelativePanel.Below="searchTextBox" Margin="30, 100, 0, 0" Height="40" Width="250" Content="Top 5 snelste obers" FontSize="20" Command="{Binding SpeedCommand}" Foreground="White"/>
         <Button x:Name="steadyButton" RelativePanel.Below="speedButton" Margin="30, 30, 0, 0" Height="40" Width="250" Content="Top 5 met de vaste hand" FontSize="20" Command="{Binding SteadynessCommand}" Foreground="White"/>
 

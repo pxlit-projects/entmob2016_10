@@ -20,7 +20,7 @@ namespace StrongPlate.App.ViewModel
 
         private IStrongPlateService strongPlateService;
 
-        private IFrameNavigation frameNavigationService;
+        private IFrameNavigationService frameNavigationService;
 
         private List<Employee> topEmployees;
 
@@ -56,7 +56,7 @@ namespace StrongPlate.App.ViewModel
             }
         }
 
-        public StrongPlateSpeedViewModel(IFrameNavigation frameNavigationService, IStrongPlateService strongPlateService)
+        public StrongPlateSpeedViewModel(IFrameNavigationService frameNavigationService, IStrongPlateService strongPlateService)
         {
             this.strongPlateService = strongPlateService;
             this.frameNavigationService = frameNavigationService;

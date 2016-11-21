@@ -18,12 +18,13 @@ namespace StrongPlate.App.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         private IStrongPlateService strongPlateService;
-        private IFrameNavigation frameNavigationService;
+        private IFrameNavigationService frameNavigationService;
 
         private List<Employee> employees;
 
         public ICommand SpeedCommand { get; set; }
         public ICommand SteadynessCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public List<Employee> Employees
         {
@@ -47,6 +48,18 @@ namespace StrongPlate.App.ViewModel
             }
         }
 
+        private string searchText;
+
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                searchText = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private void RaisePropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (PropertyChanged != null)
@@ -55,7 +68,7 @@ namespace StrongPlate.App.ViewModel
             }
         }
 
-        public StrongPlateMainViewModel(IFrameNavigation frameNavigationService, IStrongPlateService strongPlateService)
+        public StrongPlateMainViewModel(IFrameNavigationService frameNavigationService, IStrongPlateService strongPlateService)
         {
             this.strongPlateService = strongPlateService;
             this.frameNavigationService = frameNavigationService;
@@ -73,6 +86,7 @@ namespace StrongPlate.App.ViewModel
         {
             SpeedCommand = new CustomCommand(OpenSpeedView, CanOpenView);
             SteadynessCommand = new CustomCommand(OpenSteadynessView, CanOpenView);
+            SearchCommand = new CustomCommand(SearchEmployee, CanSearch);
         }
 
         private bool CanOpenView(object obj)
@@ -90,6 +104,32 @@ namespace StrongPlate.App.ViewModel
         {
             Messenger.Default.Send<List<Employee>>(strongPlateService.GetTopSteadyness());
             frameNavigationService.NavigateToFrame(typeof(StrongPlateSteadynessView));
+        }
+
+        private bool CanSearch(object obj)
+        {
+            return true;
+        }
+
+        private void SearchEmployee(object obj)
+        {
+            if (searchText != null)
+            {
+
+                List<Employee> searchedEmployees = new List<Employee>();
+                foreach (Employee e in employees)
+                {
+                    if (e.LastName.Contains(searchText) || e.FirstName.Contains(searchText))
+                        searchedEmployees.Add(e);
+                }
+
+                employees = searchedEmployees;
+                selectedEmployee = employees.First();
+            }
+            else
+            {
+                LoadData();
+            }
         }
     }
 }

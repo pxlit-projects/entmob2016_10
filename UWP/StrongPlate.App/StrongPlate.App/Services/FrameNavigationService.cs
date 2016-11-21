@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace StrongPlate.App.Services
 {
-    public class FrameNavigationService : IFrameNavigation
+    public class FrameNavigationService : IFrameNavigationService
     {
         Frame currentFrame = (Frame) Window.Current.Content;
         public void NavigateToFrame(Type frameType)
