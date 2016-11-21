@@ -3,6 +3,9 @@ using App1.ViewModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using App1.Domain;
+using Xamarin.Forms;
+using Moq;
+using Plugin.BLE.Abstractions.Contracts;
 
 namespace App1.Tests.ViewModel
 {
@@ -12,11 +15,25 @@ namespace App1.Tests.ViewModel
 
         private LoginViewModel loginViewModel;
         private List<User> users;
+        private Mock<INavigation> nav;
+        private Mock<IAdapter> adapter;
+        private Mock<IBluetoothLE> ble;
 
         [TestInitialize]
         public async void Initialize()
         {
-            
+            nav = new Mock<INavigation>();
+            adapter = new Mock<IAdapter>();
+            ble = new Mock<IBluetoothLE>();
+        }
+
+        [TestMethod]
+        public void TestIfNavigationIsWorking()
+        {
+            //Nog niet af!
+            nav.Setup(n => n.PushAsync(new ConnectSensorPage(adapter.Object, ble.Object)));
+
+            Assert.AreEqual(1, nav.Object.NavigationStack.Count);
         }
 
         [TestMethod]
