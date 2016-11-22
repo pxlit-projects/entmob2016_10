@@ -38,7 +38,7 @@ namespace StrongPlate.DAL
             {
                 ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
                 Employee employee = new Employee();
-                employee.FullName = "Verbind met de API (API aanzetten)";
+                employee.FullName = "Verbind met de API! (API aanzetten)";
                 employees.Add(employee);
                 return employees;
             }
@@ -77,7 +77,7 @@ namespace StrongPlate.DAL
             catch(Exception ex)
             {
                 Employee employee = new Employee();
-                employee.FullName = "Verbind met de API (API aanzetten)";
+                employee.FullName = "Verbind met de API! (API aanzetten)";
                 return employee;
             }
         }
