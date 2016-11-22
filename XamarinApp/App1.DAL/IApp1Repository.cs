@@ -9,8 +9,11 @@ namespace App1.DAL
 {
     public interface IApp1Repository
     {
+        Task<bool> PostSetData(Plate plate);
         Task<string> JsonApiClientGetRequest(string baseUri);
         Task<User> GetUserById(string id);
         Task<List<User>> GetUsers();
+
+        
     }
 }

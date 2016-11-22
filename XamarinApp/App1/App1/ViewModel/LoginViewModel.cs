@@ -62,13 +62,7 @@ namespace App1.ViewModel
             return BitConverter.ToString(hash).Replace("-", "").ToLower();
         }
 
-        private async void FastLogin()
-        {
-            await navigation.PushAsync(new ConnectSensorPage(adapter, ble)
-            {
-                Title = "StrongPlate"
-            });
-        }
+        
 
         private async void Login()
         {
