@@ -72,7 +72,7 @@ namespace App1.ViewModel
                     string password = getSha256(_password);
                     if (user.Password == password)
                     {
-                        await navigation.PushAsync(new ConnectSensorPage(adapter, ble,database)
+                        await navigation.PushAsync(new ConnectSensorPage(adapter, ble, database)
                         {
                             Title = "StrongPlate"
                         });

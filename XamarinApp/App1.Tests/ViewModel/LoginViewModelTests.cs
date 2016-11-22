@@ -45,6 +45,7 @@ namespace App1.Tests.ViewModel
         public void TestCommandAndLoginStatusFail()
         {
             Plate plate = new Plate();
+            
             loginViewModel = new LoginViewModel(adapter.Object, ble.Object, nav.Object, database.Object);
             loginViewModel.LoginCommand.Execute(null);
             

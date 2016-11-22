@@ -1,4 +1,5 @@
-﻿using App1.Services;
+﻿using App1.Domain;
+using App1.Services;
 using App1.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
@@ -128,7 +129,28 @@ namespace App1.Tests.ViewModel
             string ExpectedBleState = "BLE is off. Turn it on!";
 
             Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+        }
 
+        [TestMethod]
+        public void TestDeviceListSetter()
+        {
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
+            DeviceItem device = null;
+            deviceViewModel.DeviceList.Add(device);
+            deviceViewModel.DeviceList.Add(device);
+
+            Assert.IsTrue(deviceViewModel.DeviceList.Count == 2);
+        }
+
+        [TestMethod]
+        public void TestCommandExecute()
+        {
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
+            DeviceItem device = null;
+            deviceViewModel.DeviceList.Add(device);
+            deviceViewModel.StartScanCommand.Execute(null);
+
+            Assert.IsTrue(deviceViewModel.DeviceList.Count == 0);
         }
 
     }

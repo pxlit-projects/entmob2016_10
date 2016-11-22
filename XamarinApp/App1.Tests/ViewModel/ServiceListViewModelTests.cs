@@ -13,6 +13,8 @@ namespace App1.Tests.ViewModel
 
         private ServiceListViewModel serviceListViewModel;
         private Gyroscope gyro;
+        private Magnetometer magne;
+        private Accelerometer acc;
         private Mock<IStrongPlateDataService> database;
         
 
@@ -21,7 +23,9 @@ namespace App1.Tests.ViewModel
         {
             database = new Mock<IStrongPlateDataService>();
             serviceListViewModel = new ServiceListViewModel(database.Object);
-            gyro = new Gyroscope();           
+            gyro = new Gyroscope();
+            magne = new Magnetometer();
+            acc = new Accelerometer();
         }
 
         [TestMethod]
@@ -34,6 +38,30 @@ namespace App1.Tests.ViewModel
             serviceListViewModel.Gyro = gyro;
 
             Assert.AreEqual(5, serviceListViewModel.Gyro.X);
+        }
+
+        [TestMethod]
+        public void TestValueMagneSetter()
+        {
+            //arrange
+            magne.X = 58;
+            magne.Y = 66.216;
+            magne.Z = -18;
+            serviceListViewModel.Mag = magne;
+
+            Assert.AreEqual(-18, serviceListViewModel.Mag.Z);
+        }
+
+        [TestMethod]
+        public void TestValueAccSetter()
+        {
+            //arrange
+            acc.X = 85.27;
+            acc.Y = -6992.6;
+            acc.Z = 812.5121;
+            serviceListViewModel.Acc = acc;
+
+            Assert.AreEqual(-6992.6, serviceListViewModel.Acc.Y);
         }
 
     }
