@@ -1,7 +1,6 @@
 ﻿using App1.DAL;
 using App1.Domain;
 using App1.Services;
-using Java.Util;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
@@ -19,7 +18,6 @@ namespace App1.ViewModel
         private IDevice device;
         private StrongPlateDataService database;
         private List<Plate> Plates;
-        private Timer apiTimer;
         #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
 
