@@ -17,7 +17,7 @@ namespace App1.ViewModel
     public class ServiceListViewModel : INotifyPropertyChanged
     {
         private IDevice device;
-        private App1Repository database;
+        private StrongPlateDataService database;
         private List<Plate> Plates;
         private Timer apiTimer;
         #region PropertyChangedEvent

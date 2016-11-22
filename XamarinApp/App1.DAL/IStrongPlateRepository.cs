@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace App1.DAL
 {
-    public interface IApp1Repository
+    public interface IStrongPlateRepository
     {
         Task<bool> PostSetData(Plate plate);
         Task<string> JsonApiClientGetRequest(string baseUri);

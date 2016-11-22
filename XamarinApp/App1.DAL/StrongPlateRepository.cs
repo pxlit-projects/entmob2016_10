@@ -12,7 +12,7 @@ using System.IO;
 
 namespace App1.DAL
 {
-    public class App1Repository : IApp1Repository
+    public class StrongPlateRepository : IStrongPlateRepository
     {
 
         private string username = "1";

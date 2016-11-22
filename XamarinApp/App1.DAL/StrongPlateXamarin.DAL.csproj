@@ -41,8 +41,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App1Repository.cs" />
-    <Compile Include="IApp1Repository.cs" />
+    <Compile Include="StrongPlateRepository.cs" />
+    <Compile Include="IStrongPlateRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -40,7 +40,9 @@
     </Compile>
     <Compile Include="Converter\RoundConverter.cs" />
     <Compile Include="Converter\StringFormatConverter.cs" />
+    <Compile Include="Services\IStrongPlateDataService.cs" />
     <Compile Include="Services\MovementService.cs" />
+    <Compile Include="Services\StrongPlateDataService.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="View\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>

@@ -12,6 +12,8 @@ using System.ComponentModel;
 using PCLCrypto;
 using App1.Domain;
 using App1.DAL;
+using App1.Services;
+
 namespace App1.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
@@ -21,7 +23,7 @@ namespace App1.ViewModel
         private INavigation navigation;
         private User user = null;
 
-        private App1Repository database;
+        private StrongPlateDataService database;
 
 
         #region PropertyChangedEvent
@@ -42,14 +44,14 @@ namespace App1.ViewModel
             this.adapter = adapter;
             this.ble = ble;
             this.navigation = navigation;
-            database = new App1Repository();
+            database = new StrongPlateDataService();
 
             LoginCommand = new Command(Login);
         }
 
         private async Task WaitGetUser(string id)
         {
-            user = await database.GetUserById(id);
+            user = await database.GetUserDetail(id);
         }
 
         public string getSha256(string data)
