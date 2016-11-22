@@ -56,6 +56,7 @@ namespace App1.ViewModel
                 _acc = new Accelerometer();
                 _mag = new Magnetometer();
                 Plates = new List<Plate>();
+                database = new StrongPlateDataService();
                 dataCharacteristic.ValueUpdated += (o, args) =>
                 {                   
                     byte[] bytes = args.Characteristic.Value;
@@ -93,47 +94,30 @@ namespace App1.ViewModel
             });
         }
 
-        private void PostPlateData()
+        private  void PostPlateData()
         {
-            var minutes = TimeSpan.FromSeconds(30);
+            var minutes = TimeSpan.FromSeconds(10);
 
             Device.StartTimer(minutes, () =>
             {
-                Task.Factory.StartNew(async () =>
-                {
-                    await updateDatabase();                    
-                });
-                return false;
+                     updateDatabase();                    
+                
+                return true;
             });
         }
+ 
 
         private async Task updateDatabase()
         {
             if (Plates.Any()) {
-                List<Plate> secondPlates = new List<Plate>();
-                for (int i = 0; i < Plates.Count; i++)
-                {
-                    secondPlates.Add(Plates[i]);
-                }
+                List<Plate> secondPlates = new List<Plate>(Plates);
                 Plates.Clear();
                 for (int i = 0; i < secondPlates.Count; i++)
                 {
-                    await database.PostSetData(secondPlates[i]);
+                    database.PostSetData(secondPlates[i]);
                 }
-
             }
         }
-
-        /*private async void updatebase() {
-
-            await UpdateDatabase();
-        }
-
-        private async Task<bool> UpdateDatabase()
-        {
-            
-            //return await database.PostSetData(plate);
-        }*/
 
         private void SetGyro(byte[] bytes) {
             _gyro.X = MovementService.Gyro(bytes, "x");

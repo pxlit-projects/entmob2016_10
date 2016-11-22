@@ -32,11 +32,11 @@ namespace App1.Domain
         public double AccZ { get; set; }
 
 
-        [JsonProperty("xUT")]
+        [JsonProperty("xUt")]
         public double MagneX { get; set; }
-        [JsonProperty("yUT")]
+        [JsonProperty("yUt")]
         public double MagneY { get; set; }
-        [JsonProperty("zUT")]
+        [JsonProperty("zUt")]
         public double MagneZ { get; set; }
 
 
