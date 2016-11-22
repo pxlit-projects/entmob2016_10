@@ -14,9 +14,13 @@ namespace App1.DAL
 {
     public class App1Repository : IApp1Repository
     {
+<<<<<<< HEAD
         private string username = "1";
         private string password = "secret";
         private string baseUri = "http://192.168.43.253:8090/";
+=======
+        private string baseUri = "http://192.168.1.5:8090/";
+>>>>>>> origin/master
         private User user;
         private List<User> users;
 
