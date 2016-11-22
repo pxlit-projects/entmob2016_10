@@ -59,7 +59,7 @@ namespace StrongPlate.App.ViewModel
         {
             this.strongPlateService = strongPlateService;
             this.frameNavigationService = frameNavigationService;
-            //LoadData();
+            LoadData(); // Doet hetzelfde als de Messenger, maar werkt beter met de tests
             LoadCommands();
 
             Messenger.Default.Register<ObservableCollection<Employee>>(this, OnEmployeesReceived);
@@ -71,11 +71,11 @@ namespace StrongPlate.App.ViewModel
             selectedEmployee = topEmployees.First();
         }
 
-        /*private void LoadData()
+        private void LoadData()
         {
-            topEmployees = new List<Employee>(strongPlateService.GetTopSteadyness());
+            topEmployees = new ObservableCollection<Employee>(strongPlateService.GetTopSteadyness());
             selectedEmployee = topEmployees.First();
-        }*/
+        }
 
         private void LoadCommands()
         {
