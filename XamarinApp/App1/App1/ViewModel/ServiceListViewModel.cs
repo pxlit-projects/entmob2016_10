@@ -94,12 +94,11 @@ namespace App1.ViewModel
 
         private  void PostPlateData()
         {
-            var minutes = TimeSpan.FromSeconds(10);
+            var minutes = TimeSpan.FromSeconds(30);
 
             Device.StartTimer(minutes, () =>
             {
-                     updateDatabase();                    
-                
+                updateDatabase();                     
                 return true;
             });
         }
@@ -112,7 +111,7 @@ namespace App1.ViewModel
                 Plates.Clear();
                 for (int i = 0; i < secondPlates.Count; i++)
                 {
-                    database.PostSetData(secondPlates[i]);
+                    await database.PostSetData(secondPlates[i]);
                 }
             }
         }
