@@ -12,6 +12,7 @@ using System.ComponentModel;
 using PCLCrypto;
 using App1.Domain;
 using App1.DAL;
+using Java.Lang;
 
 namespace App1.ViewModel
 {
@@ -48,7 +49,7 @@ namespace App1.ViewModel
             LoginCommand = new Command(Login);
         }
 
-        private async Task WaitGetUser(int id)
+        private async Task WaitGetUser(string id)
         {
             user = await database.GetUserById(id);
         }
@@ -75,7 +76,7 @@ namespace App1.ViewModel
             if (user != null)
             {
 
-                if (user.Id == _id)
+                if (user.Id == Integer.ParseInt(_id))
                 {
 
                     string password = getSha256(_password);
@@ -120,9 +121,9 @@ namespace App1.ViewModel
             }
         }
 
-        private int _id;
+        private string _id;
 
-        public int Id
+        public string Id
         {
             get { return _id; }
             set

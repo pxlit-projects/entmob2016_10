@@ -10,7 +10,7 @@ namespace App1.DAL
     public interface IApp1Repository
     {
         Task<string> JsonApiClientGetRequest(string baseUri);
-        Task<User> GetUserById(int id);
+        Task<User> GetUserById(string id);
         Task<List<User>> GetUsers();
     }
 }

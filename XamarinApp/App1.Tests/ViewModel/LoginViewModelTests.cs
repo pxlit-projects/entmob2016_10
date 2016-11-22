@@ -28,36 +28,12 @@ namespace App1.Tests.ViewModel
         }
 
         [TestMethod]
-        public void TestIfNavigationIsWorking()
-        {
-            //Nog niet af!
-            nav.Setup(n => n.PushAsync(new ConnectSensorPage(adapter.Object, ble.Object)));
-
-            Assert.AreEqual(1, nav.Object.NavigationStack.Count);
-        }
-
-        [TestMethod]
         public void TestIfReturnedSha256IsRightLength()
         {
             loginViewModel = new LoginViewModel();
             string data = "Hello";
             string result = loginViewModel.getSha256(data);
             Assert.AreEqual(64, result.Length);
-        }
-
-
-        [TestMethod]
-        public void TestIfListOfUsersIsReturned()
-        {
-            //arrange
-            loginViewModel = new LoginViewModel();
-
-            //action
-            
-            
-
-            //test
-            CollectionAssert.AllItemsAreInstancesOfType(users, typeof(User));
         }
     }
 }

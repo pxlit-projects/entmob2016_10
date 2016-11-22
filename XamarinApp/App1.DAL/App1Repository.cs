@@ -16,7 +16,7 @@ namespace App1.DAL
         private User user;
         private List<User> users;
 
-        public async Task<User> GetUserById(int id)
+        public async Task<User> GetUserById(string id)
         {
             var url = baseUri + "User/getUserById/" + id;
 

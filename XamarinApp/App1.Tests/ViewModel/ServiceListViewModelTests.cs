@@ -12,6 +12,7 @@ namespace App1.Tests.ViewModel
 
         private ServiceListViewModel serviceListViewModel;
         private Gyroscope gyro;
+        
 
         [TestInitialize]
         public void Init()
@@ -28,10 +29,8 @@ namespace App1.Tests.ViewModel
             gyro.X = 5;
             serviceListViewModel.Gyro = gyro;
 
-            //actual
-            double expectedX = 5;
 
-            Assert.AreEqual(expectedX, serviceListViewModel.Gyro.X);
+            Assert.AreEqual(5, serviceListViewModel.Gyro.X);
 
         }
 
