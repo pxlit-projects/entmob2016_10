@@ -1,4 +1,5 @@
-﻿using App1.ViewModel;
+﻿using App1.Services;
+using App1.ViewModel;
 using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
@@ -14,10 +15,10 @@ namespace App1.View
 {
     public partial class ServiceListPage : ContentPage
     {
-        public ServiceListPage()
+        public ServiceListPage(IStrongPlateDataService database)
         {
             InitializeComponent();
-            BindingContext = new ServiceListViewModel();
+            BindingContext = new ServiceListViewModel(database);
 
         }
     }

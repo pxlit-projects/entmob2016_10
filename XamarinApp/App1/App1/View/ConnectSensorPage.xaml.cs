@@ -1,4 +1,5 @@
-﻿using App1.ViewModel;
+﻿using App1.Services;
+using App1.ViewModel;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,10 @@ namespace App1
 {
     public partial class ConnectSensorPage : ContentPage
     {
-        public ConnectSensorPage(IAdapter adapter,IBluetoothLE ble)
+        public ConnectSensorPage(IAdapter adapter,IBluetoothLE ble,IStrongPlateDataService database)
         {
             InitializeComponent();
-            DeviceViewModel deviceViewModel = new DeviceViewModel(adapter, ble, this.Navigation);
+            DeviceViewModel deviceViewModel = new DeviceViewModel(adapter, ble, this.Navigation, database);
             BindingContext = deviceViewModel;
 
         }

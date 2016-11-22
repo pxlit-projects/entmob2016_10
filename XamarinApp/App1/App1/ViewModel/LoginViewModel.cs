@@ -22,8 +22,7 @@ namespace App1.ViewModel
         private IBluetoothLE ble;
         private INavigation navigation;
         private User user = null;
-
-        private StrongPlateDataService database;
+        private IStrongPlateDataService database;
 
 
         #region PropertyChangedEvent
@@ -39,12 +38,12 @@ namespace App1.ViewModel
 
         
 
-        public LoginViewModel(IAdapter adapter, IBluetoothLE ble, INavigation navigation)
+        public LoginViewModel(IAdapter adapter, IBluetoothLE ble, INavigation navigation,IStrongPlateDataService database)
         {
             this.adapter = adapter;
             this.ble = ble;
             this.navigation = navigation;
-            database = new StrongPlateDataService();
+            this.database = database;
             LoginCommand = new Command(Login);
         }
 
@@ -68,14 +67,12 @@ namespace App1.ViewModel
             await WaitGetUser(_id);
             if (user != null)
             {
-
                 if (user.Id == Convert.ToInt32(_id))
                 {
-
                     string password = getSha256(_password);
                     if (user.Password == password)
                     {
-                        await navigation.PushAsync(new ConnectSensorPage(adapter, ble)
+                        await navigation.PushAsync(new ConnectSensorPage(adapter, ble,database)
                         {
                             Title = "StrongPlate"
                         });
@@ -84,7 +81,6 @@ namespace App1.ViewModel
                     {
                         _loginStatus = "Wrong password!";
                         onPropertyChanged(nameof(LoginStatus));
-
                     }
                 }
                 else
@@ -92,15 +88,12 @@ namespace App1.ViewModel
                     _loginStatus = "Username not found!";
                     onPropertyChanged(nameof(LoginStatus));
                 }
-
             }
             else
             {
-
                 _loginStatus = "Wait for good internet connection";
                 onPropertyChanged(nameof(LoginStatus));
             }
-
         }
 
         private string _loginStatus;
@@ -126,7 +119,6 @@ namespace App1.ViewModel
         }
 
         private string _password;
-
         public string Password
         {
             get { return _password; }

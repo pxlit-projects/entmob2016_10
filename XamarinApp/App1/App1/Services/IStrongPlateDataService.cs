@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace App1.Services
 {
-    interface IStrongPlateDataService
+   public interface IStrongPlateDataService
     {
         Task<User> GetUserDetail(string id);
         Task<List<User>> GetAllUsers();

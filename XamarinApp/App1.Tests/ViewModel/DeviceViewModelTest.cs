@@ -1,4 +1,5 @@
-﻿using App1.ViewModel;
+﻿using App1.Services;
+using App1.ViewModel;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Plugin.BLE;
@@ -21,6 +22,7 @@ namespace App1.Tests.ViewModel
         private Mock<IAdapter> adapter;
         private Mock<IBluetoothLE> ble;
         private Mock<INavigation> navigation;
+        private Mock<IStrongPlateDataService> database;
 
 
         [TestInitialize]
@@ -29,6 +31,7 @@ namespace App1.Tests.ViewModel
             adapter = new Mock<IAdapter>();
             ble = new Mock<IBluetoothLE>();
             navigation = new Mock<INavigation>();
+            database = new Mock<IStrongPlateDataService>();
         }
 
 
@@ -37,7 +40,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange
             ble.Setup(c => c.State).Returns(BluetoothState.Unavailable);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "BLE is not available on this device.";
@@ -51,7 +54,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange 
             ble.Setup(c => c.State).Returns(BluetoothState.On);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "BLE is on.";
@@ -65,7 +68,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange 
             ble.Setup(c => c.State).Returns(BluetoothState.Unknown);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "Unknown BLE state.";
@@ -79,7 +82,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange 
             ble.Setup(c => c.State).Returns(BluetoothState.Unauthorized);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "You are not allowed to use BLE.";
@@ -93,7 +96,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange 
             ble.Setup(c => c.State).Returns(BluetoothState.TurningOn);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "BLE is warming up, please wait.";
@@ -106,7 +109,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange 
             ble.Setup(c => c.State).Returns(BluetoothState.TurningOff);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "BLE is turning off. That's sad!";
@@ -119,7 +122,7 @@ namespace App1.Tests.ViewModel
         {
             //Arrange 
             ble.Setup(c => c.State).Returns(BluetoothState.Off);
-            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object, database.Object);
 
             //Actual
             string ExpectedBleState = "BLE is off. Turn it on!";

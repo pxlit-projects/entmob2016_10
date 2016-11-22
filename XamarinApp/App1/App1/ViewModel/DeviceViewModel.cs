@@ -1,4 +1,5 @@
 ﻿using App1.Domain;
+using App1.Services;
 using App1.View;
 using Plugin.BLE.Abstractions.Contracts;
 using Plugin.BLE.Abstractions.EventArgs;
@@ -19,6 +20,7 @@ namespace App1.ViewModel
         private IAdapter adapter;
         private string _bleStatus;
         private ObservableCollection<DeviceItem> _deviceList = new ObservableCollection<DeviceItem>();
+        private IStrongPlateDataService database;
 
         public Command StartScanCommand { get; }
 
@@ -30,11 +32,12 @@ namespace App1.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
         #endregion
-        public DeviceViewModel(IAdapter adapter, IBluetoothLE ble,INavigation navigation)
+        public DeviceViewModel(IAdapter adapter, IBluetoothLE ble,INavigation navigation, IStrongPlateDataService database)
         {
             this.ble = ble;
             this.adapter = adapter;
             this.navigation = navigation;
+            this.database = database;
             _bleStatus = GetStateText();
             ble.StateChanged += OnStateChanged;
             StartScanCommand = new Command(StartScan);
@@ -85,7 +88,7 @@ namespace App1.ViewModel
                     MessagingCenter.Send(device, "connectdevice");
                 });
                 await adapter.StopScanningForDevicesAsync();
-                await navigation.PushAsync(new ServiceListPage()
+                await navigation.PushAsync(new ServiceListPage(database)
                 {
                     Title = "StrongPlate"
                 });

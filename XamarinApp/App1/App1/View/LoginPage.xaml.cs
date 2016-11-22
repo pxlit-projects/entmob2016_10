@@ -14,10 +14,10 @@ namespace App1.View
     public partial class LoginPage : ContentPage
     {
 
-        public LoginPage(IAdapter adapter, IBluetoothLE ble)
+        public LoginPage(IAdapter adapter, IBluetoothLE ble,IStrongPlateDataService database)
         {
             InitializeComponent();
-            BindingContext = new LoginViewModel(adapter,ble,Navigation);
+            BindingContext = new LoginViewModel(adapter,ble,Navigation,database);
         }
     }
 }

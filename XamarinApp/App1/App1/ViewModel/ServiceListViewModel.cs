@@ -16,8 +16,8 @@ namespace App1.ViewModel
     public class ServiceListViewModel : INotifyPropertyChanged
     {
         private IDevice device;
-        private StrongPlateDataService database;
         private List<Plate> Plates;
+        private IStrongPlateDataService database;
         #region PropertyChangedEvent
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -26,8 +26,9 @@ namespace App1.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
         #endregion
-        public ServiceListViewModel()
-        {           
+        public ServiceListViewModel(IStrongPlateDataService database)
+        {
+            this.database = database;
             MessagingCenter.Subscribe<DeviceItem>(this, "connectdevice", (arg) =>
             {
                 device = arg.Device;

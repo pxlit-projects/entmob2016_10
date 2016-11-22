@@ -16,10 +16,11 @@ namespace App1
     {
         IAdapter adapter = CrossBluetoothLE.Current.Adapter;
         IBluetoothLE ble = CrossBluetoothLE.Current;
+        IStrongPlateDataService database = new StrongPlateDataService();
         public App()
         {
             InitializeComponent();
-            NavigationPage navigation = new NavigationPage(new LoginPage(adapter, ble)
+            NavigationPage navigation = new NavigationPage(new LoginPage(adapter, ble,database)
             {
                 Title = "StrongPlate"
             });

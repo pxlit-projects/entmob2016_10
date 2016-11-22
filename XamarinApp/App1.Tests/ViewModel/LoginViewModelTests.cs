@@ -6,6 +6,7 @@ using App1.Domain;
 using Xamarin.Forms;
 using Moq;
 using Plugin.BLE.Abstractions.Contracts;
+using App1.Services;
 
 namespace App1.Tests.ViewModel
 {
@@ -19,7 +20,7 @@ namespace App1.Tests.ViewModel
         private Mock<IAdapter> adapter;
         private Mock<IBluetoothLE> ble;
         private Mock<Command> command;
-        private Mock<Task> task;
+        private Mock<IStrongPlateDataService> database;
 
         [TestInitialize]
         public async void Initialize()
@@ -28,26 +29,26 @@ namespace App1.Tests.ViewModel
             adapter = new Mock<IAdapter>();
             ble = new Mock<IBluetoothLE>();
             command = new Mock<Command>();
-            task = new Mock<Task>();
+            database = new Mock<IStrongPlateDataService>();
         }
 
         [TestMethod]
         public void TestIfReturnedSha256IsRightLength()
         {
-            loginViewModel = new LoginViewModel(adapter.Object,ble.Object,nav.Object);
+            loginViewModel = new LoginViewModel(adapter.Object,ble.Object,nav.Object,database.Object);
             string data = "Hello";
             string result = loginViewModel.getSha256(data);
             Assert.AreEqual(64, result.Length);
         }
 
         [TestMethod]
-        public void TestCommand()
+        public void TestCommandAndLoginStatusFail()
         {
-            loginViewModel = new LoginViewModel(adapter.Object, ble.Object, nav.Object);
+            Plate plate = new Plate();
+            loginViewModel = new LoginViewModel(adapter.Object, ble.Object, nav.Object, database.Object);
             loginViewModel.LoginCommand.Execute(null);
             
-            Assert.AreEqual(null, loginViewModel.LoginStatus);
+            Assert.AreEqual("Wait for good internet connection", loginViewModel.LoginStatus);
         }
-
     }
 }

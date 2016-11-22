@@ -135,10 +135,13 @@
     <Compile Include="ViewModel\DeviceViewModelTest.cs" />
     <Compile Include="ViewModel\LoginViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\MockNavigation.cs" />
     <Compile Include="ViewModel\ServiceListViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\App1.DAL\StrongPlateXamarin.DAL.csproj">
+      <Project>{C4B45F86-2947-4730-AF18-B48273B2D163}</Project>
+      <Name>StrongPlateXamarin.DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\App1.Domain\StrongPlateXamarin.Domain.csproj">
       <Project>{63D8DD03-25EC-4E71-9FA1-B54827BCB907}</Project>
       <Name>StrongPlateXamarin.Domain</Name>
