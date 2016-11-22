@@ -173,9 +173,9 @@
     <AndroidResource Include="Resources\values\styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\App1\App1.csproj">
-      <Project>{231295c7-7649-4650-a2df-40dd57f157cd}</Project>
-      <Name>App1</Name>
+    <ProjectReference Include="..\App1\StrongPlateXamarin.csproj">
+      <Project>{D4588AB4-9BBA-4060-826E-1E451BA4C35C}</Project>
+      <Name>StrongPlateXamarin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

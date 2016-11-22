@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1", "App1\App1\App1.csproj", "{D4588AB4-9BBA-4060-826E-1E451BA4C35C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrongPlateXamarin", "App1\App1\StrongPlateXamarin.csproj", "{D4588AB4-9BBA-4060-826E-1E451BA4C35C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Droid", "App1\App1.Droid\App1.Droid.csproj", "{A919C881-02A9-4293-92D2-84F72675A8A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrongPlateXamarin.Droid", "App1\App1.Droid\StrongPlateXamarin.Droid.csproj", "{A919C881-02A9-4293-92D2-84F72675A8A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Tests", "App1.Tests\App1.Tests.csproj", "{03DC3A61-1ED4-42B9-A384-2A9DE34F93C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrongPlateXamarin.Tests", "App1.Tests\StrongPlateXamarin.Tests.csproj", "{03DC3A61-1ED4-42B9-A384-2A9DE34F93C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.Domain", "App1.Domain\App1.Domain.csproj", "{63D8DD03-25EC-4E71-9FA1-B54827BCB907}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrongPlateXamarin.Domain", "App1.Domain\StrongPlateXamarin.Domain.csproj", "{63D8DD03-25EC-4E71-9FA1-B54827BCB907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1.DAL", "App1.DAL\App1.DAL.csproj", "{C4B45F86-2947-4730-AF18-B48273B2D163}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StrongPlateXamarin.DAL", "App1.DAL\StrongPlateXamarin.DAL.csproj", "{C4B45F86-2947-4730-AF18-B48273B2D163}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -138,13 +138,13 @@
     <Compile Include="ViewModel\ServiceListViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\App1.Domain\App1.Domain.csproj">
+    <ProjectReference Include="..\App1.Domain\StrongPlateXamarin.Domain.csproj">
       <Project>{63D8DD03-25EC-4E71-9FA1-B54827BCB907}</Project>
-      <Name>App1.Domain</Name>
+      <Name>StrongPlateXamarin.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\App1\App1\App1.csproj">
+    <ProjectReference Include="..\App1\App1\StrongPlateXamarin.csproj">
       <Project>{d4588ab4-9bba-4060-826e-1e451ba4c35c}</Project>
-      <Name>App1</Name>
+      <Name>StrongPlateXamarin</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
