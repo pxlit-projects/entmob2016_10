@@ -12,8 +12,6 @@ using System.ComponentModel;
 using PCLCrypto;
 using App1.Domain;
 using App1.DAL;
-using Java.Lang;
-
 namespace App1.ViewModel
 {
     public class LoginViewModel : INotifyPropertyChanged
@@ -70,7 +68,7 @@ namespace App1.ViewModel
             if (user != null)
             {
 
-                if (user.Id == Integer.ParseInt(_id))
+                if (user.Id == Convert.ToInt32(_id))
                 {
 
                     string password = getSha256(_password);

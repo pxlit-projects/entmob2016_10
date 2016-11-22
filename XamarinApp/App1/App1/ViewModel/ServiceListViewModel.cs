@@ -34,7 +34,7 @@ namespace App1.ViewModel
             {
                 device = arg.Device;
                 GetServices();
-                //PostPlateData();
+                PostPlateData();
             });
             MessagingCenter.Send("true", "senddevice");
         }
@@ -93,19 +93,23 @@ namespace App1.ViewModel
             });
         }
 
-        private async void PostPlateData()
+        private void PostPlateData()
         {
-            
-            await Task.Factory.StartNew(async () =>
+            var minutes = TimeSpan.FromSeconds(30);
+
+            Device.StartTimer(minutes, () =>
             {
-                await updateDatabase();
+                Task.Factory.StartNew(async () =>
+                {
+                    await updateDatabase();                    
+                });
+                return false;
             });
-            await Task.Delay(30000);
         }
 
         private async Task updateDatabase()
         {
-            if (!Plates.Any()) {
+            if (Plates.Any()) {
                 List<Plate> secondPlates = new List<Plate>();
                 for (int i = 0; i < Plates.Count; i++)
                 {
