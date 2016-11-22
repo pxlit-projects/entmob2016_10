@@ -56,26 +56,53 @@ namespace StrongPlate.Tests.Mocks
         {
             List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSpeed).ToList();
             ObservableCollection<Employee> top = new ObservableCollection<Employee>();
-            for (int i = 0; i < 5; i++)
+            if (ordered.Count < 5)
             {
-                top.Add(ordered.ElementAt(i));
-                top.ElementAt(i).LastName = i + 1 + ". " + top.ElementAt(i).LastName;
+                for (int i = 0; i < ordered.Count; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
+
+                return top;
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
+
+                return top;
             }
 
-            return top;
         }
 
         public ObservableCollection<Employee> GetTopSteadyness()
         {
             List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSteadyness).ToList();
             ObservableCollection<Employee> top = new ObservableCollection<Employee>();
-            for (int i = 0; i < 5; i++)
+            if (ordered.Count < 5)
             {
-                top.Add(ordered.ElementAt(i));
-                top.ElementAt(i).LastName = i + 1 + ". " + top.ElementAt(i).LastName;
-            }
+                for (int i = 0; i < ordered.Count; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
 
-            return top;
+                return top;
+            }
+            else
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    top.Add(ordered.ElementAt(i));
+                    top.ElementAt(i).FullName = i + 1 + ". " + top.ElementAt(i).FullName;
+                }
+
+                return top;
+            }
         }
     }
 }
