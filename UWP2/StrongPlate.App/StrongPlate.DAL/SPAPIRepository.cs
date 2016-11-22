@@ -8,7 +8,6 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Collections.ObjectModel;
-using Windows.UI.Popups;
 
 namespace StrongPlate.DAL
 {
@@ -37,12 +36,11 @@ namespace StrongPlate.DAL
             }
             catch(Exception ex)
             {
-                MessageDialog dialog = new MessageDialog("Verbind met de API en herstart!");
                 ObservableCollection<Employee> employees = new ObservableCollection<Employee>();
-                Employee employee = new Employee();              
+                Employee employee = new Employee();
+                employee.FullName = "Verbind met de API (API aanzetten)";
                 employees.Add(employee);
                 return employees;
-
             }
         }
 
@@ -78,8 +76,8 @@ namespace StrongPlate.DAL
             }
             catch(Exception ex)
             {
-                MessageDialog dialog = new MessageDialog("Verbind met de API en herstart!");
                 Employee employee = new Employee();
+                employee.FullName = "Verbind met de API (API aanzetten)";
                 return employee;
             }
         }
