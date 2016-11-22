@@ -38,7 +38,7 @@ namespace App1.DAL
 
             HttpResponseMessage response = null;
             response = await client.PostAsync(uri, content);
-            Debug.WriteLine("Content ERRROR ss= " + await response.Content.ReadAsStringAsync() + " *******************");
+            Debug.WriteLine("Api message: " + await response.Content.ReadAsStringAsync() + " *******************");
             return response.IsSuccessStatusCode;
         }
         public async Task<User> GetUserById(string id)
