@@ -12,8 +12,7 @@ namespace StrongPlate.App.Converter
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             string nameNr = value.ToString();
-            string [] name = nameNr.Split(' ');
-            return name[1] + " " + name[2];
+            return nameNr.Substring(3);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
