@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+﻿//using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using StrongPlate.App.Services;
 using StrongPlate.App.ViewModel;
 using StrongPlate.Domain;
@@ -9,10 +9,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace StrongPlate.Tests
 {
-    [TestClass]
+    //[TestClass]
     public class StrongPlateSpeedViewModelTest
     {
         private IStrongPlateService strongPlateService;
@@ -24,26 +25,34 @@ namespace StrongPlate.Tests
             return new StrongPlateSpeedViewModel(frameNavigationService, strongPlateService);
         }
 
-        [TestInitialize]
+        //[TestInitialize]
         public void Init()
         {
             strongPlateService = new MockSPService();
             frameNavigationService = new MockFrameNavigationService();
         }
 
-        [TestMethod]
+        //[TestMethod]
+        [Fact]
         public void GetTopSpeedEmployees()
         {
+            Init();
+
             // Arrange
-            ObservableCollection<Employee> employees;
             ObservableCollection<Employee> expectedEmployees = strongPlateService.GetTopSpeed();
+
 
             // Act
             StrongPlateSpeedViewModel viewModel = GetViewModel();
-            employees = viewModel.TopEmployees;
+            ObservableCollection<Employee> employees = viewModel.TopEmployees;
 
             // Assert
-            Assert.AreEqual(employees, expectedEmployees);
+            Assert.Equal(expectedEmployees.Count, employees.Count);
+
+            for (int i = 0; i < employees.Count; i++)
+            {
+                Assert.Equal(expectedEmployees.ElementAt(i).LastName, employees.ElementAt(i).LastName);
+            }
         }
     }
 }
