@@ -8,8 +8,8 @@
     <ProjectGuid>{D4588AB4-9BBA-4060-826E-1E451BA4C35C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>App1</RootNamespace>
-    <AssemblyName>App1</AssemblyName>
+    <RootNamespace>StrongPlateXamarin</RootNamespace>
+    <AssemblyName>StrongPlateXamarin</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
