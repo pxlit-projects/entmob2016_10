@@ -12,7 +12,6 @@ namespace App1.DAL
 {
     public class App1Repository : IApp1Repository
     {
-        private string baseUri = "http://192.168.43.253:8090/";
         private User user;
         private List<User> users;
 
