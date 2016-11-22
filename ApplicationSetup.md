@@ -37,13 +37,13 @@ Niet aangeraden, het gaat dan in de background runnen, kunt dan gaan zoeken met 
 **Soms slechte beeld kwaliteit ma is meestal na 2 seconden weg
 ***Om de 30 minuten reclame, ma zolang zit ge hopelijk niet binnen 
 
-##UWP app
+##6) UWP app
 Deze kan gewoon gerunt worden aangezien het op de zelfde pc draait als de api
 
-##Sensortag
+##7) Sensortag
 Aanzetten en verbinden via bluetooth met de telefoon
 
-##Xamarin app
+##8) Xamarin app
 Deze zou ge op voorhand 1 keer moeten deployen op het toestel
 droid project > rechtemuis > deploy > dan staat er normaal bij het play teken voor het project te runnen uw device tussen
 klikken en bidden
