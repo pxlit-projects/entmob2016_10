@@ -27,7 +27,7 @@ namespace StrongPlate.Tests
         //[TestInitialize]
         public void Init()
         {
-            strongPlateService = new MockSPService();
+            strongPlateService = new MockSPService(new MockSPAPIRepository());
             frameNavigationService = new MockFrameNavigationService();
         }
 

@@ -30,6 +30,18 @@ namespace StrongPlate.Domain
         }
 
         public double averageSteadyness;
+
+        public Employee(int id, string lastName, string firstName, string fullName, int age, bool gender, string password)
+        {
+            this.ID = id;
+            this.LastName = lastName;
+            this.FirstName = firstName;
+            this.FullName = fullName;
+            this.Age = age;
+            this.Gender = gender;
+            this.Password = password;
+        }
+
         public double AverageSteadyness
         {
             get { return averageSteadyness; }

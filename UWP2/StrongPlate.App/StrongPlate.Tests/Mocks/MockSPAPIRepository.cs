@@ -14,47 +14,29 @@ namespace StrongPlate.Tests.Mocks
 {
     class MockSPAPIRepository : IStrongPlateRepository
     {
+        private ObservableCollection<Employee> Employees;
+
+        public MockSPAPIRepository()
+        {
+            Employees = new ObservableCollection<Employee>();
+            Employees.Add(new Employee(1, "Boss", "The", "The Boss", 20, true, "sha265"));
+            Employees.Add(new Employee(2, "Ober", "The", "The Ober", 18, true, "sha265"));
+            Employees.Add(new Employee(3, "Ober", "The", "The Ober", 19, true, "sha265"));
+
+        }
         public ObservableCollection<Employee> GetAllEmployees()
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("1:secret")));
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress.AbsoluteUri).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<ObservableCollection<Employee>>(result);
-            }
-            else
-            {
-                return null;
-            }
+            return Employees;
         }
 
         public Employee GetEmployeeByID(int ID)
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:8090/User/getUsers");
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes("1:secret")));
-            HttpResponseMessage response = client.GetAsync(client.BaseAddress.AbsoluteUri).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var result = response.Content.ReadAsStringAsync().Result;
-                return JsonConvert.DeserializeObject<Employee>(result);
-            }
-            else
-            {
-                return null;
-            }
+            return (Employee)Employees.Where(r => r.ID == ID);
         }
 
         public ObservableCollection<Employee> GetTopSpeed()
         {
-            List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSpeed).ToList();
+            List<Employee> ordered = Employees.OrderBy(e => e.AverageSpeed).ToList();
             ObservableCollection<Employee> top = new ObservableCollection<Employee>();
             if (ordered.Count < 5)
             {
@@ -81,7 +63,7 @@ namespace StrongPlate.Tests.Mocks
 
         public ObservableCollection<Employee> GetTopSteadyness()
         {
-            List<Employee> ordered = GetAllEmployees().OrderBy(e => e.AverageSteadyness).ToList();
+            List<Employee> ordered = Employees.OrderBy(e => e.AverageSteadyness).ToList();
             ObservableCollection<Employee> top = new ObservableCollection<Employee>();
             if (ordered.Count < 5)
             {

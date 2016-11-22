@@ -14,9 +14,9 @@ namespace StrongPlate.Tests.Mocks
     {
         private IStrongPlateRepository repository;
 
-        public MockSPService()
+        public MockSPService(IStrongPlateRepository spRepository)
         {
-            this.repository = new MockSPAPIRepository();
+            this.repository = spRepository;
         }
 
         public ObservableCollection<Employee> GetAllEmployees()
