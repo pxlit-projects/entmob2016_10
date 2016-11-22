@@ -37,7 +37,7 @@ namespace App1.ViewModel
 
         public Command LoginCommand { get; }
 
-        public LoginViewModel() { }
+        
 
         public LoginViewModel(IAdapter adapter, IBluetoothLE ble, INavigation navigation)
         {
@@ -45,7 +45,6 @@ namespace App1.ViewModel
             this.ble = ble;
             this.navigation = navigation;
             database = new StrongPlateDataService();
-
             LoginCommand = new Command(Login);
         }
 

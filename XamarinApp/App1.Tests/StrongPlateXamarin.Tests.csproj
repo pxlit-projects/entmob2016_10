@@ -135,6 +135,7 @@
     <Compile Include="ViewModel\DeviceViewModelTest.cs" />
     <Compile Include="ViewModel\LoginViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\MockNavigation.cs" />
     <Compile Include="ViewModel\ServiceListViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>

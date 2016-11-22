@@ -1,4 +1,5 @@
-﻿using App1.ViewModel;
+﻿using App1.Services;
+using App1.ViewModel;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;

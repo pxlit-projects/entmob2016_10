@@ -18,6 +18,8 @@ namespace App1.Tests.ViewModel
         private Mock<INavigation> nav;
         private Mock<IAdapter> adapter;
         private Mock<IBluetoothLE> ble;
+        private Mock<Command> command;
+        private Mock<Task> task;
 
         [TestInitialize]
         public async void Initialize()
@@ -25,15 +27,27 @@ namespace App1.Tests.ViewModel
             nav = new Mock<INavigation>();
             adapter = new Mock<IAdapter>();
             ble = new Mock<IBluetoothLE>();
+            command = new Mock<Command>();
+            task = new Mock<Task>();
         }
 
         [TestMethod]
         public void TestIfReturnedSha256IsRightLength()
         {
-            loginViewModel = new LoginViewModel();
+            loginViewModel = new LoginViewModel(adapter.Object,ble.Object,nav.Object);
             string data = "Hello";
             string result = loginViewModel.getSha256(data);
             Assert.AreEqual(64, result.Length);
         }
+
+        [TestMethod]
+        public void TestCommand()
+        {
+            loginViewModel = new LoginViewModel(adapter.Object, ble.Object, nav.Object);
+            loginViewModel.LoginCommand.Execute(null);
+            
+            Assert.AreEqual(null, loginViewModel.LoginStatus);
+        }
+
     }
 }
