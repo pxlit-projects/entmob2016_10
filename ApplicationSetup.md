@@ -11,7 +11,7 @@ https://chrome.google.com/webstore/detail/vysor/gidgenkbbabolejbgbpnhbimgjbffefm
 -
 ##1) Mobilehotspot
 Op android toestel: settings > more > mobile network sharing/tethering&portable hotspot
-Met pc verbinden, en het IP adres veranderen naar 192.168.1.5 (als dit bereikbaar is via hotspot, anders moet ge een ander pakken, pas ip dan wel aan in xamarin app)
+Met pc verbinden, en het IP adres veranderen op de pc naar 192.168.1.5 (als dit bereikbaar is via hotspot, anders moet ge een ander pakken, pas ip dan wel aan in xamarin app)
 
 ##2) ActiveMq
 Commandline naar de map apache-activemq-5.14.1 > commando: "bin\activemq start"
