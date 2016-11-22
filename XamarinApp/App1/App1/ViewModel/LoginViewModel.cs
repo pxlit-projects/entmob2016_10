@@ -22,7 +22,7 @@ namespace App1.ViewModel
         private INavigation navigation;
         private User user = null;
 
-        private App1Repository db;
+        private App1Repository database;
 
 
         #region PropertyChangedEvent
@@ -43,14 +43,14 @@ namespace App1.ViewModel
             this.adapter = adapter;
             this.ble = ble;
             this.navigation = navigation;
-            db = new App1Repository();
+            database = new App1Repository();
 
             LoginCommand = new Command(Login);
         }
 
         private async Task WaitGetUser(int id)
         {
-            user = await db.GetUserById(id);
+            user = await database.GetUserById(id);
         }
 
         public string getSha256(string data)
@@ -72,7 +72,6 @@ namespace App1.ViewModel
         private async void Login()
         {
             await WaitGetUser(_id);
-            Debug.WriteLine("Name " + _id + " Pass " + _password);
             if (user != null)
             {
 

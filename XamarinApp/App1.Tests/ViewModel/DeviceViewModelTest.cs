@@ -33,7 +33,7 @@ namespace App1.Tests.ViewModel
 
 
         [TestMethod]
-        public void TestBLEStateIsNotAvailable()
+        public void TestBLEStateIsUnavailable()
         {
             //Arrange
             ble.Setup(c => c.State).Returns(BluetoothState.Unavailable);
@@ -55,6 +55,74 @@ namespace App1.Tests.ViewModel
 
             //Actual
             string ExpectedBleState = "BLE is on.";
+
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+
+        }
+
+        [TestMethod]
+        public void TestBLEStateIsUnknown()
+        {
+            //Arrange 
+            ble.Setup(c => c.State).Returns(BluetoothState.Unknown);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+
+            //Actual
+            string ExpectedBleState = "Unknown BLE state.";
+
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+
+        }
+
+        [TestMethod]
+        public void TestBLEStateIsUnauthorized()
+        {
+            //Arrange 
+            ble.Setup(c => c.State).Returns(BluetoothState.Unauthorized);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+
+            //Actual
+            string ExpectedBleState = "You are not allowed to use BLE.";
+
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+
+        }
+
+        [TestMethod]
+        public void TestBLEStateIsTurningOn()
+        {
+            //Arrange 
+            ble.Setup(c => c.State).Returns(BluetoothState.TurningOn);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+
+            //Actual
+            string ExpectedBleState = "BLE is warming up, please wait.";
+
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+
+        }
+        [TestMethod]
+        public void TestBLEStateIsTurningOff()
+        {
+            //Arrange 
+            ble.Setup(c => c.State).Returns(BluetoothState.TurningOff);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+
+            //Actual
+            string ExpectedBleState = "BLE is turning off. That's sad!";
+
+            Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
+
+        }
+        [TestMethod]
+        public void TestBLEStateIsOff()
+        {
+            //Arrange 
+            ble.Setup(c => c.State).Returns(BluetoothState.Off);
+            deviceViewModel = new DeviceViewModel(adapter.Object, ble.Object, navigation.Object);
+
+            //Actual
+            string ExpectedBleState = "BLE is off. Turn it on!";
 
             Assert.AreEqual(ExpectedBleState, deviceViewModel.BleStatus);
 

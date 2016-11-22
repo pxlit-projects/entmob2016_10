@@ -163,9 +163,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\..\App1.DAL\StrongPlateXamarin.DAL.csproj">
       <Project>{c4b45f86-2947-4730-af18-b48273b2d163}</Project>
